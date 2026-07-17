@@ -9,18 +9,16 @@ from googleapiclient.http import MediaIoBaseDownload
 creds_json = json.loads(os.environ['DRIVE_CREDENTIALS'])
 creds = Credentials.from_service_account_info(creds_json)
 service = build('drive', 'v3', credentials=creds)
-
 root_folder_id = os.environ['FOLDER_ID']
 
 def process_folder_contents(folder_id):
     """Deep searches the connected folder ID for real files and follows shortcuts cleanly"""
     query = f"'{folder_id}' in parents and trashed = false"
-    
     try:
         results = service.files().list(
             q=query, 
-            fields="files(id, name, mimeType, shortcutDetails)",
-            supportsAllDrives=True,
+            fields="files(id, name, mimeType, shortcutDetails)", 
+            supportsAllDrives=True, 
             includeItemsFromAllDrives=True
         ).execute()
         items = results.get('files', [])
@@ -32,7 +30,7 @@ def process_folder_contents(folder_id):
         file_id = item['id']
         file_name = item['name']
         mime_type = item['mimeType']
-        
+
         # 🎯 Resolve folder or file shortcuts safely
         if mime_type == 'application/vnd.google-apps.shortcut':
             shortcut = item.get('shortcutDetails', {})
@@ -60,15 +58,14 @@ def process_folder_contents(folder_id):
 
         # 📂 FILE TYPE STRUCTURE CLASSIFICATION RULES
         image_extensions = ('.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp')
-        
         if file_name.lower().endswith(image_extensions):
-            subfolder = "images/"
+            subfolder = "images"
         elif 'waiver' in file_name.lower():
-            subfolder = "documents/ride-waivers/"
+            subfolder = os.path.join("documents", "ride-waivers")
         elif 'application' in file_name.lower():
-            subfolder = "documents/membership-applications/"
+            subfolder = os.path.join("documents", "membership-applications")
         else:
-            subfolder = "documents/event-requests/"
+            subfolder = os.path.join("documents", "event-requests")
 
         is_exportable = False
         export_mime = ""
@@ -90,22 +87,25 @@ def process_folder_contents(folder_id):
             local_path = os.path.join(subfolder, file_name)
 
         # 3. Securely synchronize files down to repository tracks
-        if not os.path.exists(local_path):
-            os.makedirs(os.path.dirname(local_path), exist_ok=True)
-            try:
-                if is_exportable:
-                    request = service.files().export_media(fileId=file_id, mimeType=export_mime)
-                else:
-                    request = service.files().get_media(fileId=file_id)
-                    
-                fh = io.FileIO(local_path, 'wb')
+        dir_name = os.path.dirname(local_path)
+        if dir_name and not os.path.exists(dir_name):
+            os.makedirs(dir_name, exist_ok=True)
+
+        try:
+            if is_exportable:
+                request = service.files().export_media(fileId=file_id, mimeType=export_mime)
+            else:
+                request = service.files().get_media(fileId=file_id)
+                
+            with io.FileIO(local_path, 'wb') as fh:
                 downloader = MediaIoBaseDownload(fh, request)
                 done = False
                 while not done:
                     status, done = downloader.next_chunk()
-                print(f"Successfully synchronized file: {file_name} into {subfolder}")
-            except Exception as file_error:
-                print(f"Skipping protected file resource {file_name}: {file_error}")
+            print(f"Successfully synchronized file: {file_name} into {subfolder}")
+        except Exception as file_error:
+            print(f"Skipping protected file resource {file_name}: {file_error}")
 
-# Kickstart the deep recursive synchronization sweep
-process_folder_contents(root_folder_id)
+if __name__ == "__main__":
+    # Kickstart the deep recursive synchronization sweep
+    process_folder_contents(root_folder_id)
