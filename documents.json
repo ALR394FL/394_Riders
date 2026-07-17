@@ -3,6 +3,20 @@
   ],
   "ride-waivers": [
     {
+      "path": "documents/ride-waivers/Florida-Waiver-1-30-23.pdf",
+      "title": "Florida Waiver 1 30 23",
+      "type": "PDF",
+      "label": "Ride Liability Waiver"
+    }
+,
+    {
+      "path": "documents/ride-waivers/Waiver-Liability-Signature-Page-for-Events.pdf",
+      "title": "Waiver Liability Signature Page For Events",
+      "type": "PDF",
+      "label": "Ride Liability Waiver"
+    }
+,
+    {
       "path": "documents/ride-waivers/waiver.txt",
       "title": "Waiver",
       "type": "TXT",
@@ -10,5 +24,11 @@
     }
   ],
   "event-requests": [
+    {
+      "path": "documents/event-requests/Copy of 1_Working-American-Legion-Riders-Manual-02-09-23.pdf",
+      "title": "Copy Of 1 Working American Legion Riders Manual 02 09 23",
+      "type": "PDF",
+      "label": "Community Support Request"
+    }
   ]
 }
