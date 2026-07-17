@@ -15,13 +15,6 @@
       "type": "PDF",
       "label": "Ride Liability Waiver"
     }
-,
-    {
-      "path": "documents/ride-waivers/waiver.txt",
-      "title": "Waiver",
-      "type": "TXT",
-      "label": "Ride Liability Waiver"
-    }
   ],
   "event-requests": [
     {
