@@ -3,13 +3,6 @@
   ],
   "ride-waivers": [
     {
-      "path": "documents/ride-waivers/atc subsystem.pdf",
-      "title": "Atc Subsystem",
-      "type": "PDF",
-      "label": "Ride Liability Waiver"
-    }
-,
-    {
       "path": "documents/ride-waivers/waiver.txt",
       "title": "Waiver",
       "type": "TXT",
