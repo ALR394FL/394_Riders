@@ -26,7 +26,7 @@ def determine_subfolder(file_name, is_image):
             "logo": "logos",
             "banner": "banners",
             "poster": "posters",
-            "avatar": "avatars",
+            "leader": "leadership",
             "event": "event-media",
             "gallery": "gallery-assets"
         }
