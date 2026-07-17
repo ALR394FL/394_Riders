@@ -12,8 +12,8 @@ service = build('drive', 'v3', credentials=creds)
 
 root_folder_id = os.environ['FOLDER_ID']
 
-def process_folder_contents(folder_id):
-    """Scans a folder ID and downloads all files, routing images to images/ and text files to documents/"""
+def process_folder_contents(folder_id, current_folder_name=""):
+    """Scans folders recursively, tracking subfolder names to apply image/document sorting logic"""
     query = f"'{folder_id}' in parents and trashed = false"
     results = service.files().list(q=query, fields="files(id, name, mimeType, shortcutDetails)").execute()
     items = results.get('files', [])
@@ -23,33 +23,41 @@ def process_folder_contents(folder_id):
         file_name = item['name']
         mime_type = item['mimeType']
         
-        # Check if item is a Shortcut
+        # Handle Folder and File Shortcuts smoothly
         if mime_type == 'application/vnd.google-apps.shortcut':
             shortcut_details = item.get('shortcutDetails', {})
             target_id = shortcut_details.get('targetId')
             target_mime = shortcut_details.get('targetMimeType')
             
-            # If shortcut points to a folder, dive inside recursively
             if target_mime == 'application/vnd.google-apps.folder':
-                print(f"Opening folder shortcut path: {file_name}")
-                process_folder_contents(target_id)
+                print(f"Opening folder shortcut: {file_name}")
+                process_folder_contents(target_id, current_folder_name=file_name)
                 continue
             else:
-                # If shortcut points to a file, swap targets
                 file_id = target_id
                 mime_type = target_mime
 
-        # Skip folders completely (they are traversed recursively instead)
+        # Traverse physical subfolders recursively
         if mime_type == 'application/vnd.google-apps.folder':
-            process_folder_contents(file_id)
+            print(f"Diving into subfolder: {file_name}")
+            process_folder_contents(file_id, current_folder_name=file_name)
             continue
 
-        # 🎯 FIX: Detect Image Extensions first and send them to your web assets folder
+        # 🎯 ADVANCED SORTING: Determine destination based on file extension & subfolder name
         image_extensions = ('.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp')
-        if file_name.lower().endswith(image_extensions):
-            subfolder = "images/"
         
-        # 📂 Standard Document Keywords Sorting
+        if file_name.lower().endswith(image_extensions):
+            # If the image sits inside a folder with 'roster' or 'leadership' in its name
+            if 'leadership' in current_folder_name.lower() or 'roster' in current_folder_name.lower():
+                subfolder = "images/leadership/"
+            # If the image sits inside an event gallery folder
+            elif 'event' in current_folder_name.lower() or 'gallery' in current_folder_name.lower():
+                subfolder = "images/events/"
+            # Standard fallback folder for main design elements
+            else:
+                subfolder = "images/"
+                
+        # 📂 Document Keywords Sorting
         elif 'waiver' in file_name.lower():
             subfolder = "documents/ride-waivers/"
         elif 'application' in file_name.lower():
@@ -94,7 +102,7 @@ def process_folder_contents(folder_id):
                 done = False
                 while not done:
                     status, done = downloader.next_chunk()
-                print(f"Successfully synchronized: {file_name}")
+                print(f"Successfully synchronized: {file_name} into {subfolder}")
             except Exception as e:
                 print(f"Error downloading {file_name}: {e}")
 
