@@ -13,7 +13,7 @@ service = build('drive', 'v3', credentials=creds)
 root_folder_id = os.environ['FOLDER_ID']
 
 def process_folder_contents(folder_id, current_folder_name=""):
-    """Scans folders recursively, tracking subfolder names to apply image/document sorting logic"""
+    """Scans folders recursively, identifying loose files and traversing shortcut directories"""
     query = f"'{folder_id}' in parents and trashed = false"
     results = service.files().list(q=query, fields="files(id, name, mimeType, shortcutDetails)").execute()
     items = results.get('files', [])
@@ -43,26 +43,25 @@ def process_folder_contents(folder_id, current_folder_name=""):
             process_folder_contents(file_id, current_folder_name=file_name)
             continue
 
-        # 🎯 ADVANCED SORTING: Determine destination based on file extension & subfolder name
+        # 🎯 FILE ARCHITECTURE SORTING LOGIC
         image_extensions = ('.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp')
         
         if file_name.lower().endswith(image_extensions):
-            # If the image sits inside a folder with 'roster' or 'leadership' in its name
+            # Sort images based on the subfolder they live in
             if 'leadership' in current_folder_name.lower() or 'roster' in current_folder_name.lower():
                 subfolder = "images/leadership/"
-            # If the image sits inside an event gallery folder
             elif 'event' in current_folder_name.lower() or 'gallery' in current_folder_name.lower():
                 subfolder = "images/events/"
-            # Standard fallback folder for main design elements
             else:
                 subfolder = "images/"
                 
-        # 📂 Document Keywords Sorting
+        # Sort documents based on filename keywords
         elif 'waiver' in file_name.lower():
             subfolder = "documents/ride-waivers/"
         elif 'application' in file_name.lower():
             subfolder = "documents/membership-applications/"
         else:
+            # Fallback path for any loose unassigned documents
             subfolder = "documents/event-requests/"
 
         is_exportable = False
