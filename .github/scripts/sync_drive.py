@@ -11,6 +11,54 @@ creds = Credentials.from_service_account_info(creds_json)
 service = build('drive', 'v3', credentials=creds)
 root_folder_id = os.environ['FOLDER_ID']
 
+def determine_subfolder(file_name, is_image):
+    """
+    Sorts files first by type (images vs documents), 
+    then checks for specific keywords in the filename.
+    """
+    name_lower = file_name.lower()
+    
+    # 🖼️ LAYER 1: IF THE FILE IS AN IMAGE
+    if is_image:
+        # Define image-specific keywords and their target subfolders
+        # Format: "keyword": "subfolder_name"
+        image_keywords = {
+            "logo": "logos",
+            "banner": "banners",
+            "poster": "posters",
+            "avatar": "avatars",
+            "event": "event-media",
+            "gallery": "gallery-assets"
+        }
+        
+        for keyword, folder in image_keywords.items():
+            if keyword in name_lower:
+                return os.path.join("images", folder)
+                
+        # Default fallback for images with no matching keywords
+        return os.path.join("images", "uncategorized")
+
+    # 📄 LAYER 2: IF THE FILE IS A DOCUMENT
+    else:
+        # Define document-specific keywords and their target subfolders
+        document_keywords = {
+            "waiver": "ride-waivers",
+            "application": "membership-applications",
+            "request": "event-requests",
+            "invoice": "financials",
+            "receipt": "financials",
+            "minutes": "meeting-minutes",
+            "agenda": "meeting-agendas"
+        }
+        
+        for keyword, folder in document_keywords.items():
+            if keyword in name_lower:
+                return os.path.join("documents", folder)
+                
+        # Default fallback for documents with no matching keywords
+        return os.path.join("documents", "uncategorized")
+
+
 def process_folder_contents(folder_id):
     """Deep searches the connected folder ID for real files and follows shortcuts cleanly"""
     query = f"'{folder_id}' in parents and trashed = false"
@@ -37,13 +85,11 @@ def process_folder_contents(folder_id):
             target_id = shortcut.get('targetId')
             target_mime = shortcut.get('targetMimeType')
             
-            # If shortcut points to a folder, step inside it recursively
             if target_mime == 'application/vnd.google-apps.folder':
                 print(f"Following shortcut folder link: {file_name}")
                 process_folder_contents(target_id)
                 continue
             else:
-                # If shortcut points to a file, swap target properties
                 file_id = target_id
                 mime_type = target_mime
 
@@ -56,16 +102,12 @@ def process_folder_contents(folder_id):
         if not file_name:
             continue
 
-        # 📂 FILE TYPE STRUCTURE CLASSIFICATION RULES
+        # Check if the file is an image by its extension
         image_extensions = ('.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp')
-        if file_name.lower().endswith(image_extensions):
-            subfolder = "images"
-        elif 'waiver' in file_name.lower():
-            subfolder = os.path.join("documents", "ride-waivers")
-        elif 'application' in file_name.lower():
-            subfolder = os.path.join("documents", "membership-applications")
-        else:
-            subfolder = os.path.join("documents", "event-requests")
+        is_image = file_name.lower().endswith(image_extensions)
+        
+        # 📂 ROUTE FILE BY TYPE AND KEYWORDS
+        subfolder = determine_subfolder(file_name, is_image)
 
         is_exportable = False
         export_mime = ""
@@ -107,5 +149,4 @@ def process_folder_contents(folder_id):
             print(f"Skipping protected file resource {file_name}: {file_error}")
 
 if __name__ == "__main__":
-    # Kickstart the deep recursive synchronization sweep
     process_folder_contents(root_folder_id)
