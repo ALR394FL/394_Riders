@@ -1,0 +1,33 @@
+name: Sync Google Drive Documents
+on:
+  schedule:
+    - cron: '0 * * * *' # Automatically runs every single hour
+  workflow_dispatch: # Allows you to manually trigger a sync with one click
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install Google API Client
+        run: pip install google-auth-oauthlib google-api-python-client
+
+      - name: Run Sync Script
+        env:
+          DRIVE_CREDENTIALS: ${{ secrets.DRIVE_CREDENTIALS }}
+          FOLDER_ID: 'YOUR_GOOGLE_DRIVE_FOLDER_ID_HERE'
+        run: python .github/scripts/sync_drive.py
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name 'Drive Sync Bot'
+          git config --global user.email 'bot@github.com'
+          git add documents/
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-sync documents from Google Drive" && git push)
