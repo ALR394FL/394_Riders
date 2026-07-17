@@ -1,18 +1,18 @@
 // Centralized Chapter 394 Calendar Stream
 const CHAPTER_EVENTS = [
   {
-    day: "THU",
+    day: "TUE",
     time: "Monthly",
     tag: "MEETING",
     title: "Chapter 394 Riders Meeting",
-    details: "Meeting date and time to be confirmed • American Legion Post 394 • Palm Bay"
+    details: "Meeting 7PM • American Legion Post 394 • Palm Bay"
   },
   {
     day: "SAT",
-    time: "TBA",
+    time: "9:00",
     tag: "RIDE",
-    title: "Chapter Breakfast Ride",
-    details: "Meet time and KSU to be announced • Starting point: Post 394"
+    title: "Back To School Ride Vero Post 39",
+    details: "Meet time / KSU  8:45 / 9:00 • Starting point: Post 394"
   },
   {
     day: "SUN",
