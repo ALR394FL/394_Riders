@@ -1,12 +1,12 @@
-name: Auto-Generate Photos JSON List
+name: Auto-Generate Categorized Photos JSON List
 
 on:
   push:
     paths:
-      - 'images/**' # Triggers only when files are added/changed in the images folder
+      - 'images/**' # Wakes up when a photo is uploaded to any subfolder
 
 permissions:
-  contents: write # Allows GitHub Actions to commit the new JSON file back to your repo
+  contents: write
 
 jobs:
   build-json:
@@ -15,43 +15,64 @@ jobs:
       - name: Checkout Code Base
         uses: actions/checkout@v4
 
-      - name: Scan Directory and Build JSON Store
+      - name: Scan Categorized Folders and Build JSON
         run: |
-          echo "[" > photos.json
-          first=true
+          echo "{" > photos.json
           
-          # Loop through image assets (jpg, jpeg, png, webp)
-          for file in images/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}; do
-            # Skip if no match is found by the system wildcard
-            [ -e "$file" ] || continue
+          # Explicitly list your 6 layout categories
+          categories=("chapter-rides" "community-service" "the-open-road" "chapter-meetings" "veteran-escorts" "fundraisers")
+          cat_count=${#categories[@]}
+          
+          for ((i=0; i<cat_count; i++)); do
+            cat_slug="${categories[$i]}"
             
-            # Extract only the filename from the folder path
-            filename=$(basename "$file")
+            # Format clean, human-readable titles for the JSON dictionary
+            case "$cat_slug" in
+              "chapter-rides") cat_title="Chapter rides" ;;
+              "community-service") cat_title="Community service" ;;
+              "the-open-road") cat_title="The open road" ;;
+              "chapter-meetings") cat_title="Chapter meetings" ;;
+              "veteran-escorts") cat_title="Veteran escorts" ;;
+              "fundraisers") cat_title="Fundraisers" ;;
+            esac
             
-            # Create readable human titles from filenames (e.g. "coastal-ride" becomes "Coastal Ride")
-            clean_title=$(echo "${filename%.*}" | sed 's/[-_]/ /g' | awk '{for(i=1;i<=NF;i++)sub(/./,toupper(substr($i,1,1)),$i)}1')
+            echo "  \"$cat_slug\": [" >> photos.json
             
-            if [ "$first" = true ]; then
-              first=false
+            first_file=true
+            # Loop over standard image assets inside the specific subfolder
+            for file in images/$cat_slug/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}; do
+              [ -e "$file" ] || continue
+              
+              filename=$(basename "$file")
+              # Turns "memorial_day_ride.png" into "Memorial Day Ride" for captions
+              clean_caption=$(echo "${filename%.*}" | sed 's/[-_]/ /g' | awk '{for(i=1;i<=NF;i++)sub(/./,toupper(substr($i,1,1)),$i)}1')
+              
+              if [ "$first_file" = true ]; then
+                first_file=false
+              else
+                echo "," >> photos.json
+              fi
+              
+              echo "    {" >> photos.json
+              echo "      \"path\": \"images/$cat_slug/$filename\"," >> photos.json
+              echo "      \"title\": \"$cat_title\"," >> photos.json
+              echo "      \"caption\": \"$clean_caption\"" >> photos.json
+              echo "    }" >> photos.json
+            done
+            
+            # Close the current category array line bracket
+            if [ $i -lt $((cat_count - 1)) ]; then
+              echo "  ]," >> photos.json
             else
-              echo "," >> photos.json
+              echo "  ]" >> photos.json
             fi
-            
-            # Format JSON string block entries securely
-            echo "  {" >> photos.json
-            echo "    \"filename\": \"$filename\"," >> photos.json
-            echo "    \"title\": \"$clean_title\"," >> photos.json
-            echo "    \"caption\": \"Chapter photograph entry\"" >> photos.json
-            echo "  }" >> photos.json
           done
           
-          echo "]" >> photos.json
+          echo "}" >> photos.json
 
       - name: Commit and Push Changes back to Repository
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@://github.com"
           git add photos.json
-          
-          # Only commit if changes were actually generated
-          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: auto-update photo gallery catalog [skip ci]" && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: update nested category galleries [skip ci]" && git push)
