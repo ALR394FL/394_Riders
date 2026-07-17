@@ -1,4 +1,5 @@
 name: Sync Google Drive Documents
+
 on:
   schedule:
     - cron: '0 * * * *' # Automatically runs every single hour
@@ -7,27 +8,41 @@ on:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # Grants explicit permission for GitHub Actions to push code
+
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4.2.2 # Bypasses the Node 20 deprecation warning
+        uses: actions/checkout@v4.2.2 # Bypasses Node 20 deprecation warnings
 
       - name: Set up Python
-        uses: actions/setup-python@v5.4.0 # Bypasses the Node 20 deprecation warning
+        uses: actions/setup-python@v5.4.0 # Bypasses Node 20 deprecation warnings
         with:
           python-version: '3.10'
 
       - name: Install Google API Client
-        run: pip install google-auth-oauthlib google-api-python-client
+        run: |
+          python -m pip install --upgrade pip
+          pip install google-auth google-api-python-client
 
       - name: Run Sync Script
         env:
           DRIVE_CREDENTIALS: ${{ secrets.DRIVE_CREDENTIALS }}
-          FOLDER_ID: '1B3qd5KGoPkSb-X5aUIJHaDBlqOCz87Qh' # Replace this text with your actual ID string
+          FOLDER_ID: '1B3qd5KGoPkSb-X5aUIJHaDBlqOCz87Qh'
         run: python .github/scripts/sync_drive.py
 
       - name: Commit and Push Changes
         run: |
           git config --global user.name 'Drive Sync Bot'
           git config --global user.email 'bot@github.com'
-          git add documents/
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-sync documents from Google Drive" && git push)
+          
+          # Stage both sorted directory pathways
+          git add documents/ images/
+          
+          # Safely check for changes before attempting a commit to prevent empty-run errors
+          if ! git diff --cached --quiet; then
+            git commit -m "Auto-sync and categorize media/documents from Google Drive"
+            git push
+          else
+            echo "No new document or image updates found in Drive folder."
+          fi
