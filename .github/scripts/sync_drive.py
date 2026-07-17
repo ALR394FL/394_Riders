@@ -13,7 +13,7 @@ service = build('drive', 'v3', credentials=creds)
 root_folder_id = os.environ['FOLDER_ID']
 
 def process_folder_contents(folder_id):
-    """Scans a folder ID and downloads all valid binary or cloud editor documents"""
+    """Scans a folder ID and downloads all files, routing images to images/ and text files to documents/"""
     query = f"'{folder_id}' in parents and trashed = false"
     results = service.files().list(q=query, fields="files(id, name, mimeType, shortcutDetails)").execute()
     items = results.get('files', [])
@@ -23,13 +23,13 @@ def process_folder_contents(folder_id):
         file_name = item['name']
         mime_type = item['mimeType']
         
-        # 🎯 Check if item is a Shortcut
+        # Check if item is a Shortcut
         if mime_type == 'application/vnd.google-apps.shortcut':
             shortcut_details = item.get('shortcutDetails', {})
             target_id = shortcut_details.get('targetId')
             target_mime = shortcut_details.get('targetMimeType')
             
-            # If shortcut points to a folder, dive inside it recursively
+            # If shortcut points to a folder, dive inside recursively
             if target_mime == 'application/vnd.google-apps.folder':
                 print(f"Opening folder shortcut path: {file_name}")
                 process_folder_contents(target_id)
@@ -44,8 +44,13 @@ def process_folder_contents(folder_id):
             process_folder_contents(file_id)
             continue
 
-        # 📂 2. Assign sorting folders based on filename keywords
-        if 'waiver' in file_name.lower():
+        # 🎯 FIX: Detect Image Extensions first and send them to your web assets folder
+        image_extensions = ('.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp')
+        if file_name.lower().endswith(image_extensions):
+            subfolder = "images/"
+        
+        # 📂 Standard Document Keywords Sorting
+        elif 'waiver' in file_name.lower():
             subfolder = "documents/ride-waivers/"
         elif 'application' in file_name.lower():
             subfolder = "documents/membership-applications/"
@@ -75,7 +80,7 @@ def process_folder_contents(folder_id):
         else:
             local_path = os.path.join(subfolder, file_name)
 
-        # 3. Securely download the actual file asset
+        # 3. Securely download the actual asset
         if not os.path.exists(local_path):
             os.makedirs(os.path.dirname(local_path), exist_ok=True)
             try:
