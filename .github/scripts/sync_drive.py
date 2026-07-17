@@ -10,34 +10,55 @@ creds_json = json.loads(os.environ['DRIVE_CREDENTIALS'])
 creds = Credentials.from_service_account_info(creds_json)
 service = build('drive', 'v3', credentials=creds)
 
-def sync_all_accessible_files():
-    """Bypasses nested shortcut folder visibility walls by searching for all accessible files globally"""
-    # 🎯 FORCE GLOBAL SWEEP: Finds all valid files shared with this account, skipping structural folder nodes completely
-    query = "mimeType != 'application/vnd.google-apps.folder' and mimeType != 'application/vnd.google-apps.shortcut' and trashed = false"
+root_folder_id = os.environ['FOLDER_ID']
+
+def process_folder_contents(folder_id):
+    """Deep searches the connected folder ID for real files and follows shortcuts cleanly"""
+    query = f"'{folder_id}' in parents and trashed = false"
     
     try:
         results = service.files().list(
             q=query, 
-            fields="files(id, name, mimeType)",
+            fields="files(id, name, mimeType, shortcutDetails)",
             supportsAllDrives=True,
             includeItemsFromAllDrives=True
         ).execute()
         items = results.get('files', [])
     except Exception as e:
-        print(f"Global API access error: {e}")
+        print(f"Skipping folder access restriction on ID {folder_id}: {e}")
         return
-
-    print(f"Discovered {len(items)} total synchronization candidates across shared nodes.")
 
     for item in items:
         file_id = item['id']
         file_name = item['name']
         mime_type = item['mimeType']
+        
+        # 🎯 Resolve folder or file shortcuts safely
+        if mime_type == 'application/vnd.google-apps.shortcut':
+            shortcut = item.get('shortcutDetails', {})
+            target_id = shortcut.get('targetId')
+            target_mime = shortcut.get('targetMimeType')
+            
+            # If shortcut points to a folder, step inside it recursively
+            if target_mime == 'application/vnd.google-apps.folder':
+                print(f"Following shortcut folder link: {file_name}")
+                process_folder_contents(target_id)
+                continue
+            else:
+                # If shortcut points to a file, swap target properties
+                file_id = target_id
+                mime_type = target_mime
+
+        # If it's a real subfolder directory node, step inside it recursively
+        if mime_type == 'application/vnd.google-apps.folder':
+            print(f"Stepping inside subfolder: {file_name}")
+            process_folder_contents(file_id)
+            continue
 
         if not file_name:
             continue
 
-        # 📂 FILE ARCHITECTURE ROUTING
+        # 📂 FILE TYPE STRUCTURE CLASSIFICATION RULES
         image_extensions = ('.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp')
         
         if file_name.lower().endswith(image_extensions):
@@ -53,7 +74,7 @@ def sync_all_accessible_files():
         export_mime = ""
         extension = ""
 
-        # Map native cloud formats smoothly
+        # Map cloud workplace native documents smoothly
         if mime_type == 'application/vnd.google-apps.document':
             is_exportable = True
             export_mime = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
@@ -68,7 +89,7 @@ def sync_all_accessible_files():
         else:
             local_path = os.path.join(subfolder, file_name)
 
-        # 3. Synchronize data payload streams into repository files
+        # 3. Securely synchronize files down to repository tracks
         if not os.path.exists(local_path):
             os.makedirs(os.path.dirname(local_path), exist_ok=True)
             try:
@@ -84,7 +105,7 @@ def sync_all_accessible_files():
                     status, done = downloader.next_chunk()
                 print(f"Successfully synchronized file: {file_name} into {subfolder}")
             except Exception as file_error:
-                print(f"Skipping unauthorized file {file_name}: {file_error}")
+                print(f"Skipping protected file resource {file_name}: {file_error}")
 
-# Execute the search
-sync_all_accessible_files()
+# Kickstart the deep recursive synchronization sweep
+process_folder_contents(root_folder_id)
