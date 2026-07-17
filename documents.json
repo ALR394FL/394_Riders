@@ -1,0 +1,14 @@
+{
+  "membership-applications": [
+  ],
+  "ride-waivers": [
+    {
+      "path": "documents/ride-waivers/atc subsystem.pdf",
+      "title": "Atc Subsystem",
+      "type": "PDF",
+      "label": "Ride Liability Waiver"
+    }
+  ],
+  "event-requests": [
+  ]
+}
