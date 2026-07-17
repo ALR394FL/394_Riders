@@ -12,98 +12,105 @@ service = build('drive', 'v3', credentials=creds)
 
 root_folder_id = os.environ['FOLDER_ID']
 
-def process_folder_contents(folder_id, current_folder_name=""):
-    """Scans folders recursively, identifying loose files and traversing shortcut directories"""
+def get_all_files_deep(folder_id):
+    """Deep searches your shared folder map, ignoring structural blocks to find hidden subfolder assets"""
+    all_files = []
+    
+    # 🎯 FORCE SCAN: Tell Google to find all standard files AND shared folder portals at once
     query = f"'{folder_id}' in parents and trashed = false"
-    results = service.files().list(q=query, fields="files(id, name, mimeType, shortcutDetails)").execute()
-    items = results.get('files', [])
+    try:
+        results = service.files().list(
+            q=query, 
+            fields="files(id, name, mimeType, shortcutDetails)",
+            supportsAllDrives=True,
+            includeItemsFromAllDrives=True
+        ).execute()
+        items = results.get('files', [])
+    except Exception as e:
+        print(f"Directory visibility restriction hit on ID {folder_id}: {e}")
+        return []
 
     for item in items:
-        file_id = item['id']
-        file_name = item['name']
         mime_type = item['mimeType']
         
-        # Handle Folder and File Shortcuts smoothly
+        # Resolve Shortcut links right away
         if mime_type == 'application/vnd.google-apps.shortcut':
-            shortcut_details = item.get('shortcutDetails', {})
-            target_id = shortcut_details.get('targetId')
-            target_mime = shortcut_details.get('targetMimeType')
-            
-            if target_mime == 'application/vnd.google-apps.folder':
-                print(f"Opening folder shortcut: {file_name}")
-                process_folder_contents(target_id, current_folder_name=file_name)
-                continue
-            else:
-                file_id = target_id
-                mime_type = target_mime
+            shortcut = item.get('shortcutDetails', {})
+            item['id'] = shortcut.get('targetId')
+            item['mimeType'] = shortcut.get('targetMimeType')
+            mime_type = item['mimeType']
 
-        # Traverse physical subfolders recursively
         if mime_type == 'application/vnd.google-apps.folder':
-            print(f"Diving into subfolder: {file_name}")
-            process_folder_contents(file_id, current_folder_name=file_name)
-            continue
+            # Dig deeper recursively and combine results layout maps
+            all_files.extend(get_all_files_deep(item['id']))
+        else:
+            all_files.append(item)
+            
+    return all_files
 
-        # 🎯 FILE ARCHITECTURE SORTING LOGIC
-        image_extensions = ('.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp')
-        
-        if file_name.lower().endswith(image_extensions):
-            # Sort images based on the subfolder they live in
-            if 'leadership' in current_folder_name.lower() or 'roster' in current_folder_name.lower():
-                subfolder = "images/leadership/"
-            elif 'event' in current_folder_name.lower() or 'gallery' in current_folder_name.lower():
-                subfolder = "images/events/"
+# Run the deep discovery sweep across your entire shared layout map
+synchronized_assets = get_all_files_deep(root_folder_id)
+
+for asset in synchronized_assets:
+    file_id = asset['id']
+    file_name = asset['name']
+    mime_type = asset['mimeType']
+
+    # 🎯 FILE STRUCTURE BADGE ROUTING
+    image_extensions = ('.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp')
+    
+    if file_name.lower().endswith(image_extensions):
+        # Catch and handle image asset folders directly
+        if 'photo' in file_name.lower() or 'qr' in file_name.lower():
+            subfolder = "images/"
+        else:
+            subfolder = "images/"
+            
+    # Standard document keyword classification checks
+    elif 'waiver' in file_name.lower():
+        subfolder = "documents/ride-waivers/"
+    elif 'application' in file_name.lower():
+        subfolder = "documents/membership-applications/"
+    else:
+        subfolder = "documents/event-requests/"
+
+    is_exportable = False
+    export_mime = ""
+    extension = ""
+
+    # Translate live cloud template parameters
+    if mime_type == 'application/vnd.google-apps.document':
+        is_exportable = True
+        export_mime = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        extension = '.docx'
+    elif mime_type == 'application/vnd.google-apps.spreadsheet':
+        is_exportable = True
+        export_mime = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        extension = '.xlsx'
+    elif mime_type == 'application/vnd.google-apps.presentation':
+        is_exportable = True
+        export_mime = 'application/vnd.openxmlformats-officedocument.presentationml.presentation'
+        extension = '.pptx'
+
+    if is_exportable and not file_name.lower().endswith(extension):
+        local_path = os.path.join(subfolder, f"{file_name}{extension}")
+    else:
+        local_path = os.path.join(subfolder, file_name)
+
+    # 3. Commit data payload transfers to local path branches
+    if not os.path.exists(local_path):
+        os.makedirs(os.path.dirname(local_path), exist_ok=True)
+        try:
+            if is_exportable:
+                request = service.files().export_media(fileId=file_id, mimeType=export_mime)
             else:
-                subfolder = "images/"
+                request = service.files().get_media(fileId=file_id)
                 
-        # Sort documents based on filename keywords
-        elif 'waiver' in file_name.lower():
-            subfolder = "documents/ride-waivers/"
-        elif 'application' in file_name.lower():
-            subfolder = "documents/membership-applications/"
-        else:
-            # Fallback path for any loose unassigned documents
-            subfolder = "documents/event-requests/"
-
-        is_exportable = False
-        export_mime = ""
-        extension = ""
-
-        # Map native Google cloud application formats
-        if mime_type == 'application/vnd.google-apps.document':
-            is_exportable = True
-            export_mime = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-            extension = '.docx'
-        elif mime_type == 'application/vnd.google-apps.spreadsheet':
-            is_exportable = True
-            export_mime = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-            extension = '.xlsx'
-        elif mime_type == 'application/vnd.google-apps.presentation':
-            is_exportable = True
-            export_mime = 'application/vnd.openxmlformats-officedocument.presentationml.presentation'
-            extension = '.pptx'
-
-        if is_exportable and not file_name.lower().endswith(extension):
-            local_path = os.path.join(subfolder, f"{file_name}{extension}")
-        else:
-            local_path = os.path.join(subfolder, file_name)
-
-        # 3. Securely download the actual asset
-        if not os.path.exists(local_path):
-            os.makedirs(os.path.dirname(local_path), exist_ok=True)
-            try:
-                if is_exportable:
-                    request = service.files().export_media(fileId=file_id, mimeType=export_mime)
-                else:
-                    request = service.files().get_media(fileId=file_id)
-                    
-                fh = io.FileIO(local_path, 'wb')
-                downloader = MediaIoBaseDownload(fh, request)
-                done = False
-                while not done:
-                    status, done = downloader.next_chunk()
-                print(f"Successfully synchronized: {file_name} into {subfolder}")
-            except Exception as e:
-                print(f"Error downloading {file_name}: {e}")
-
-# Start scanning from your main connected Drive folder
-process_folder_contents(root_folder_id)
+            fh = io.FileIO(local_path, 'wb')
+            downloader = MediaIoBaseDownload(fh, request)
+            done = False
+            while not done:
+                status, done = downloader.next_chunk()
+            print(f"Successfully synchronized: {file_name} into {subfolder}")
+        except Exception as file_error:
+            print(f"Skipping protected file {file_name}: {file_error}")
