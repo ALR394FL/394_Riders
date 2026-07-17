@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.2 # Bypasses the Node 20 deprecation warning
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v5.4.0 # Bypasses the Node 20 deprecation warning
         with:
           python-version: '3.10'
 
@@ -22,7 +22,7 @@ jobs:
       - name: Run Sync Script
         env:
           DRIVE_CREDENTIALS: ${{ secrets.DRIVE_CREDENTIALS }}
-          FOLDER_ID: 'YOUR_GOOGLE_DRIVE_FOLDER_ID_HERE'
+          FOLDER_ID: '1B3qd5KGoPkSb-X5aUIJHaDBlqOCz87Qh' # Replace this text with your actual ID string
         run: python .github/scripts/sync_drive.py
 
       - name: Commit and Push Changes
