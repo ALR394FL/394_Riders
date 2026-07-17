@@ -1,0 +1,57 @@
+name: Auto-Generate Photos JSON List
+
+on:
+  push:
+    paths:
+      - 'images/**' # Triggers only when files are added/changed in the images folder
+
+permissions:
+  contents: write # Allows GitHub Actions to commit the new JSON file back to your repo
+
+jobs:
+  build-json:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code Base
+        uses: actions/checkout@v4
+
+      - name: Scan Directory and Build JSON Store
+        run: |
+          echo "[" > photos.json
+          first=true
+          
+          # Loop through image assets (jpg, jpeg, png, webp)
+          for file in images/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}; do
+            # Skip if no match is found by the system wildcard
+            [ -e "$file" ] || continue
+            
+            # Extract only the filename from the folder path
+            filename=$(basename "$file")
+            
+            # Create readable human titles from filenames (e.g. "coastal-ride" becomes "Coastal Ride")
+            clean_title=$(echo "${filename%.*}" | sed 's/[-_]/ /g' | awk '{for(i=1;i<=NF;i++)sub(/./,toupper(substr($i,1,1)),$i)}1')
+            
+            if [ "$first" = true ]; then
+              first=false
+            else
+              echo "," >> photos.json
+            fi
+            
+            # Format JSON string block entries securely
+            echo "  {" >> photos.json
+            echo "    \"filename\": \"$filename\"," >> photos.json
+            echo "    \"title\": \"$clean_title\"," >> photos.json
+            echo "    \"caption\": \"Chapter photograph entry\"" >> photos.json
+            echo "  }" >> photos.json
+          done
+          
+          echo "]" >> photos.json
+
+      - name: Commit and Push Changes back to Repository
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@://github.com"
+          git add photos.json
+          
+          # Only commit if changes were actually generated
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: auto-update photo gallery catalog [skip ci]" && git push)
