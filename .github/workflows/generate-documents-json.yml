@@ -3,7 +3,7 @@ name: Auto-Generate Categorized Documents JSON List
 on:
   push:
     paths:
-      - 'documents/**' # Triggers automatically when any document is uploaded or modified
+      - 'documents/**'
 
 permissions:
   contents: write
@@ -17,11 +17,11 @@ jobs:
 
       - name: Scan Folders and Build Documents JSON
         run: |
+          shopt -s nullglob
           echo "{" > documents.json
           
-          # Map folder paths to human-readable document types
-          folders=("membership-applications" "ride-waivers" "event-requests" "financials" "meeting-minutes" "meeting-agendas")
-
+          # ADDED: "uncategorized" to the array
+          folders=("membership-applications" "ride-waivers" "event-requests" "financials" "meeting-minutes" "meeting-agendas" "uncategorized")
           fold_count=${#folders[@]}
           
           for ((i=0; i<fold_count; i++)); do
@@ -29,25 +29,21 @@ jobs:
             
             case "$fold_slug" in
               "membership-applications") label="Membership Form" ;;
-              "ride-waivers") label="Ride Liability Waiver" ;;
-              "event-requests") label="Community Support Request" ;;
-              "financials") label="Finance" ;;
-              "minutes") label="meeting-minutes" ;;
-              "agendas") label="meeting-agendas" ;;
+              "ride-waivers")            label="Ride Liability Waiver" ;;
+              "event-requests")          label="Community Support Request" ;;
+              "financials")              label="Finance" ;;
+              "meeting-minutes")         label="Meeting Minutes" ;;
+              "meeting-agendas")         label="Meeting Agendas" ;;
+              "uncategorized")           label="General / Uncategorized" ;;
             esac
             
             echo "  \"$fold_slug\": [" >> documents.json
-            
             first_file=true
-            # Scan for common document formats (pdf, docx, txt)
+            
             for file in documents/$fold_slug/*.{pdf,docx,txt,PDF,DOCX,TXT}; do
-              [ -e "$file" ] || continue
-              
               filename=$(basename "$file")
               ext="${filename##*.}"
               ext_upper=$(echo "$ext" | tr '[:lower:]' '[:upper:]')
-              
-              # Generate a clean title out of the file name (e.g. "chapter-394-waiver" becomes "Chapter 394 Waiver")
               clean_title=$(echo "${filename%.*}" | sed 's/[-_]/ /g' | awk '{for(i=1;i<=NF;i++)sub(/./,toupper(substr($i,1,1)),$i)}1')
               
               if [ "$first_file" = true ]; then
@@ -61,21 +57,21 @@ jobs:
               echo "      \"title\": \"$clean_title\"," >> documents.json
               echo "      \"type\": \"$ext_upper\"," >> documents.json
               echo "      \"label\": \"$label\"" >> documents.json
-              echo "    }" >> documents.json
+              echo -n "    }" >> documents.json
             done
             
+            echo "" >> documents.json
             if [ $i -lt $((fold_count - 1)) ]; then
               echo "  ]," >> documents.json
             else
               echo "  ]" >> documents.json
             fi
           done
-          
           echo "}" >> documents.json
 
       - name: Commit and Push Changes back to Repository
         run: |
           git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@://github.com"
+          git config --global user.email "41898282+github-actions[bot]@://github.com"
           git add documents.json
           git diff --quiet && git diff --staged --quiet || (git commit -m "chore: auto-catalog document downloads [skip ci]" && git push)
