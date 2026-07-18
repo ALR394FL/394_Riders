@@ -28,7 +28,9 @@ def determine_subfolder(file_name, is_image):
             "fundraiser": "fundraisers",
             "leader": "leadership",
             "officer": "leadership",
-            "event": "fundraisers"
+            "event": "fundraisers",
+            "community": "community-service",
+            "road": "the-open-road"
         }
         
         for keyword, folder in image_keywords.items():
