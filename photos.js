@@ -1,18 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const galleryGrid = document.querySelector(".gallery-grid");
   if (!galleryGrid) return;
-
-  galleryGrid.innerHTML = "";
-
-  // Order categories are injected sequentially to match your original grid
-  const categoryOrder = [
-    "chapter-rides",
-    "community-service",
-    "the-open-road",
-    "chapter-meetings",
-    "veteran-escorts",
-    "fundraisers"
-  ];
+  galleryGrid.innerHTML = ""; 
 
   fetch("photos.json")
     .then(response => {
@@ -20,26 +9,29 @@ document.addEventListener("DOMContentLoaded", () => {
       return response.json();
     })
     .then(data => {
+      // Extract both variables directly from the dynamic JSON layout
+      const categoryOrder = data.categoryOrder || [];
+      const albums = data.albums || {};
+      
       let isFirstImage = true;
 
       categoryOrder.forEach(slug => {
-        const photos = data[slug] || [];
+        // Read directly from the albums sub-object
+        const photos = albums[slug] || [];
 
         if (photos.length > 0) {
-          // Loop over files found in active folder locations
           photos.forEach(photo => {
             const card = document.createElement("figure");
             
-            // Your exact original design rule: force the absolute first image to layout wide
             if (isFirstImage) {
               card.className = "gallery-card wide";
-              isFirstImage = false; 
+              isFirstImage = false;
             } else {
               card.className = "gallery-card";
             }
 
             card.innerHTML = `
-              <img src="${photo.path}" alt="${photo.title}"/>
+              <img src="${photo.path}" alt="${photo.title}" loading="lazy"/>
               <figcaption>
                 <strong>${photo.title}</strong>
                 <span>${photo.caption}</span>
@@ -48,8 +40,8 @@ document.addEventListener("DOMContentLoaded", () => {
             galleryGrid.appendChild(card);
           });
         } else {
-          // Fallback Block: If folder is empty, inject the grey template layout placeholder
-          let fallbackTitle = slug.replace("-", " ").replace(/\b\w/g, c => c.toUpperCase());
+          // Fallback Block: Auto-converts slugs to Title Case text titles
+          let fallbackTitle = slug.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
           const card = document.createElement("figure");
           card.className = "gallery-card";
           card.innerHTML = `
