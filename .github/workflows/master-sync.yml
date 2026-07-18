@@ -1,0 +1,180 @@
+name: Master Google Drive & Repository Synchronization
+on:
+  schedule:
+    - cron: '0 * * * *' # Automatically runs every single hour
+  workflow_dispatch: # Allows manual one-click execution from the GitHub Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  sync-and-catalog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code Base
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install Google API Client
+        run: |
+          python -m pip install --upgrade pip
+          pip install google-auth google-api-python-client
+
+      # ==========================================
+      # STEP 1: DOWNLOAD NEW ASSETS FROM GDRIVE
+      # ==========================================
+      - name: Run Sync Script
+        env:
+          DRIVE_CREDENTIALS: ${{ secrets.DRIVE_CREDENTIALS }}
+          FOLDER_ID: '1B3qd5KGoPkSb-X5aUIJHaDBlqOCz87Qh'
+        run: python .github/scripts/sync_drive.py
+
+      # ==========================================
+      # STEP 2: SCAN PHOTOS & REGENERATE ALBUMS INDEX
+      # ==========================================
+      - name: Scan Categorized Folders and Build Photos JSON
+        run: |
+          shopt -s nullglob
+          categories=("chapter-rides" "community-service" "the-open-road" "leadership" "veteran-escorts" "fundraisers" "uncategorized")
+          cat_count=${#categories[@]}
+
+          echo "{" > photos.json
+          echo "  \"categoryOrder\": [" >> photos.json
+          for ((i=0; i<cat_count; i++)); do
+            if [ $i -lt $((cat_count - 1)) ]; then
+              echo "    \"${categories[$i]}\"," >> photos.json
+            else
+              echo "    \"${categories[$i]}\"" >> photos.json
+            fi
+          done
+          echo "  ]," >> photos.json
+
+          echo "  \"albums\": {" >> photos.json
+          for ((i=0; i<cat_count; i++)); do
+            cat_slug="${categories[$i]}"
+            
+            case "$cat_slug" in
+              "chapter-rides")     cat_title="Chapter Rides" ;;
+              "community-service")  cat_title="Community Service" ;;
+              "the-open-road")      cat_title="The Open Road" ;;
+              "leadership")         cat_title="Leadership" ;;
+              "veteran-escorts")    cat_title="Veteran Escorts" ;;
+              "fundraisers")        cat_title="Fundraisers" ;;
+              "uncategorized")      cat_title="Uncategorized Media" ;;
+            esac
+
+            echo "    \"$cat_slug\": [" >> photos.json
+            first_file=true
+
+            for file in images/$cat_slug/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}; do
+              filename=$(basename "$file")
+              clean_caption=$(echo "${filename%.*}" | sed 's/[-_]/ /g' | awk '{for(i=1;i<=NF;i++)sub(/./,toupper(substr($i,1,1)),$i)}1')
+              
+              if [ "$first_file" = true ]; then
+                first_file=false
+              else
+                echo "," >> photos.json
+              fi
+              
+              echo "      {" >> photos.json
+              echo "        \"path\": \"images/$cat_slug/$filename\"," >> photos.json
+              echo "        \"title\": \"$cat_title\"," >> photos.json
+              echo "        \"caption\": \"$clean_caption\"" >> photos.json
+              echo -n "      }" >> photos.json
+            done
+
+            echo "" >> photos.json
+            if [ $i -lt $((cat_count - 1)) ]; then
+              echo "    ]," >> photos.json
+            else
+              echo "    ]" >> photos.json
+            fi
+          done
+          echo "  }" >> photos.json
+          echo "}" >> photos.json
+
+      # ==========================================
+      # STEP 3: SCAN DOCUMENTS & REGENERATE ARCHIVES INDEX
+      # ==========================================
+      - name: Scan Folders and Build Documents JSON
+        run: |
+          shopt -s nullglob
+          folders=("membership-applications" "ride-waivers" "event-requests" "financials" "meeting-minutes" "meeting-agendas" "uncategorized")
+          fold_count=${#folders[@]}
+
+          echo "{" > documents.json
+          echo "  \"documentOrder\": [" >> documents.json
+          for ((i=0; i<fold_count; i++)); do
+            if [ $i -lt $((fold_count - 1)) ]; then
+              echo "    \"${folders[$i]}\"," >> documents.json
+            else
+              echo "    \"${folders[$i]}\"" >> documents.json
+            fi
+          done
+          echo "  ]," >> documents.json
+
+          echo "  \"archives\": {" >> documents.json
+          for ((i=0; i<fold_count; i++)); do
+            fold_slug="${folders[$i]}"
+            
+            case "$fold_slug" in
+              "membership-applications") label="Membership Form" ;;
+              "ride-waivers")            label="Ride Liability Waiver" ;;
+              "event-requests")          label="Community Support Request" ;;
+              "financials")              label="Finance" ;;
+              "meeting-minutes")         label="Meeting Minutes" ;;
+              "meeting-agendas")         label="Meeting Agendas" ;;
+              "uncategorized")           label="General / Uncategorized" ;;
+            esac
+
+            echo "    \"$fold_slug\": [" >> documents.json
+            first_file=true
+
+            for file in documents/$fold_slug/*.{pdf,docx,txt,PDF,DOCX,TXT}; do
+              filename=$(basename "$file")
+              ext="${filename##*.}"
+              ext_upper=$(echo "$ext" | tr '[:lower:]' '[:upper:]')
+              clean_title=$(echo "${filename%.*}" | sed 's/[-_]/ /g' | awk '{for(i=1;i<=NF;i++)sub(/./,toupper(substr($i,1,1)),$i)}1')
+              
+              if [ "$first_file" = true ]; then
+                first_file=false
+              else
+                echo "," >> documents.json
+              fi
+              
+              echo "      {" >> documents.json
+              echo "        \"path\": \"documents/$fold_slug/$filename\"," >> documents.json
+              echo "        \"title\": \"$clean_title\"," >> documents.json
+              echo "        \"type\": \"$ext_upper\"," >> documents.json
+              echo "        \"label\": \"$label\"" >> documents.json
+              echo -n "      }" >> documents.json
+            done
+
+            echo "" >> photos.json # This outputs an empty line padding block for clean array formatting structure rows
+            echo "" >> documents.json
+            if [ $i -lt $((fold_count - 1)) ]; then
+              echo "    ]," >> documents.json
+            else
+              echo "    ]" >> documents.json
+            fi
+          done
+          echo "  }" >> documents.json
+          echo "}" >> documents.json
+
+      # ==========================================
+      # STEP 4: SINGLE UNIFIED GIT COMMIT AND PUSH
+      # ==========================================
+      - name: Commit and Push Changes back to Repository
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@://github.com"
+          
+          # Stage both asset folders and their new structural data list files simultaneously
+          git add documents/ images/ photos.json documents.json
+          
+          # Safely check if files were modified before executing commit routines to prevent build errors
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: master update of media assets, document files, and catalogs [skip ci]" && git push)
