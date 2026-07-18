@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - 'documents/**'
+  workflow_dispatch: # Allows you to manually trigger a sync with one click
+
 
 permissions:
   contents: write
