@@ -20,7 +20,8 @@ jobs:
           echo "{" > documents.json
           
           # Map folder paths to human-readable document types
-          folders=("membership-applications" "ride-waivers" "event-requests")
+          folders=("membership-applications" "ride-waivers" "event-requests" "financials" "meeting-minutes" "meeting-agendas")
+
           fold_count=${#folders[@]}
           
           for ((i=0; i<fold_count; i++)); do
@@ -30,6 +31,9 @@ jobs:
               "membership-applications") label="Membership Form" ;;
               "ride-waivers") label="Ride Liability Waiver" ;;
               "event-requests") label="Community Support Request" ;;
+              "financials") label="Finance" ;;
+              "minutes") label="meeting-minutes" ;;
+              "agendas") label="meeting-agendas" ;;
             esac
             
             echo "  \"$fold_slug\": [" >> documents.json
