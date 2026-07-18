@@ -23,12 +23,12 @@ def determine_subfolder(file_name, is_image):
         # Define image-specific keywords and their target subfolders
         # Format: "keyword": "subfolder_name"
         image_keywords = {
-            "logo": "logos",
-            "banner": "banners",
-            "poster": "posters",
+            "ride": "chapter-rides",
+            "escort": "veteran-escorts",
+            "fundraiser": "fundraisers",
             "leader": "leadership",
-            "event": "event-media",
-            "gallery": "gallery-assets"
+            "officer": "leadership",
+            "event": "fundraisers"
         }
         
         for keyword, folder in image_keywords.items():
