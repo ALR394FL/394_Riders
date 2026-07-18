@@ -19,8 +19,8 @@ jobs:
         run: |
           echo "{" > photos.json
           
-          # Explicitly list your 6 layout categories
-          categories=("chapter-rides" "community-service" "the-open-road" "chapter-meetings" "veteran-escorts" "fundraisers")
+          # Explicitly list your layout categories
+          categories=("chapter-rides" "community-service" "the-open-road" "leadership" "veteran-escorts" "fundraisers")
           cat_count=${#categories[@]}
           
           for ((i=0; i<cat_count; i++)); do
