@@ -1,14 +1,41 @@
 {
   "chapter-rides": [
+
   ],
   "community-service": [
+
   ],
   "the-open-road": [
+
   ],
-  "chapter-meetings": [
+  "leadership": [
+
   ],
   "veteran-escorts": [
+
   ],
   "fundraisers": [
+    {
+      "path": "images/fundraisers/event.jpg",
+      "title": "Fundraisers",
+      "caption": "Event"
+    },
+    {
+      "path": "images/fundraisers/events-QR-Code-For-Miles.png",
+      "title": "Fundraisers",
+      "caption": "Events QR Code For Miles"
+    }
+  ],
+  "uncategorized": [
+    {
+      "path": "images/uncategorized/QR Code For Miles.png",
+      "title": "Uncategorized Media",
+      "caption": "QR Code For Miles"
+    },
+    {
+      "path": "images/uncategorized/new miles qrcode.png",
+      "title": "Uncategorized Media",
+      "caption": "New Miles Qrcode"
+    }
   ]
 }
