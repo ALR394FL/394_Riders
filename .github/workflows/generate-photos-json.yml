@@ -3,7 +3,7 @@ name: Auto-Generate Categorized Photos JSON List
 on:
   push:
     paths:
-      - 'images/**' # Wakes up when a photo is uploaded to any subfolder
+      - 'images/**'
 
 permissions:
   contents: write
@@ -17,34 +17,31 @@ jobs:
 
       - name: Scan Categorized Folders and Build JSON
         run: |
+          shopt -s nullglob
           echo "{" > photos.json
           
-          # Explicitly list your layout categories
-          categories=("chapter-rides" "community-service" "the-open-road" "leadership" "veteran-escorts" "fundraisers")
+          # ADDED: "uncategorized" to the array
+          categories=("chapter-rides" "community-service" "the-open-road" "leadership" "veteran-escorts" "fundraisers" "uncategorized")
           cat_count=${#categories[@]}
           
           for ((i=0; i<cat_count; i++)); do
             cat_slug="${categories[$i]}"
             
-            # Format clean, human-readable titles for the JSON dictionary
             case "$cat_slug" in
-              "chapter-rides") cat_title="Chapter rides" ;;
-              "community-service") cat_title="Community service" ;;
-              "the-open-road") cat_title="The open road" ;;
-              "chapter-meetings") cat_title="Chapter meetings" ;;
-              "veteran-escorts") cat_title="Veteran escorts" ;;
-              "fundraisers") cat_title="Fundraisers" ;;
+              "chapter-rides")     cat_title="Chapter Rides" ;;
+              "community-service") cat_title="Community Service" ;;
+              "the-open-road")     cat_title="The Open Road" ;;
+              "leadership")        cat_title="Leadership" ;;
+              "veteran-escorts")   cat_title="Veteran Escorts" ;;
+              "fundraisers")       cat_title="Fundraisers" ;;
+              "uncategorized")     cat_title="Uncategorized Media" ;;
             esac
             
             echo "  \"$cat_slug\": [" >> photos.json
-            
             first_file=true
-            # Loop over standard image assets inside the specific subfolder
+            
             for file in images/$cat_slug/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}; do
-              [ -e "$file" ] || continue
-              
               filename=$(basename "$file")
-              # Turns "memorial_day_ride.png" into "Memorial Day Ride" for captions
               clean_caption=$(echo "${filename%.*}" | sed 's/[-_]/ /g' | awk '{for(i=1;i<=NF;i++)sub(/./,toupper(substr($i,1,1)),$i)}1')
               
               if [ "$first_file" = true ]; then
@@ -57,22 +54,21 @@ jobs:
               echo "      \"path\": \"images/$cat_slug/$filename\"," >> photos.json
               echo "      \"title\": \"$cat_title\"," >> photos.json
               echo "      \"caption\": \"$clean_caption\"" >> photos.json
-              echo "    }" >> photos.json
+              echo -n "    }" >> photos.json
             done
             
-            # Close the current category array line bracket
+            echo "" >> photos.json
             if [ $i -lt $((cat_count - 1)) ]; then
               echo "  ]," >> photos.json
             else
               echo "  ]" >> photos.json
             fi
           done
-          
           echo "}" >> photos.json
 
       - name: Commit and Push Changes back to Repository
         run: |
           git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@://github.com"
+          git config --global user.email "41898282+github-actions[bot]@://github.com"
           git add photos.json
           git diff --quiet && git diff --staged --quiet || (git commit -m "chore: update nested category galleries [skip ci]" && git push)
