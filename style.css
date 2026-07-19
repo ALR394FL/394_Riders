@@ -1466,3 +1466,73 @@ footer {
     grid-template-columns: 50px 1fr;
     gap: 16px;
   }
+
+/* Container holding all officer cards */
+.lead-grid {
+  display: grid;
+  /* Automatically columns based on viewport, capped between 240px and 280px wide */
+  grid-template-columns: repeat(auto-fit, minmax(240px, 280px));
+  gap: 2.5rem 2rem;
+  justify-content: center; /* Centers cards nicely if a row isn't full */
+  padding: 2rem 0;
+}
+
+/* Individual Card Styling */
+.leader-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  padding: 1.25rem; /* Clean layout spacing padding */
+}
+
+/* Bounding Portrait Area (Handles both your text fallback and future images) */
+.leader-photo {
+  width: 100%;
+  aspect-ratio: 3 / 4; /* Hard-locks a vertical portrait shape */
+  background-color: #cbd5e1; /* Visual placeholder fallback tint */
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #64748b;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+/* 📸 Ready Rule: Drop in images later without changing anything else */
+.leader-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Crops headshots beautifully without stretching them */
+  object-position: top center; /* Focuses layout tracking on the person's face */
+}
+
+/* Metadata formatting for your text labels */
+.leader-card .tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #b91c1c; /* Crimson accent text */
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.leader-card h2 {
+  font-size: 1.25rem;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.3;
+}
+
+.leader-card p {
+  font-size: 0.9rem;
+  color: #475569;
+  line-height: 1.5;
+  margin: 0;
+}
