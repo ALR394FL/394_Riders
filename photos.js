@@ -10,36 +10,37 @@ document.addEventListener("DOMContentLoaded", () => {
       return response.json();
     })
     .then(data => {
-      let cleanAlbums = {};
+      // TARGET ACCORDING TO YOUR NEW SCHEMATIC: Pull variables straight from the unified JSON structures
 
-      // 🔍 SMART AUTO-DETECTOR: Check if the JSON is using the old format or the new format
-      if (data.albums && data.categoryOrder) {
-        // OLD DATA FORMAT: Extract the nested image folder dictionary directly
-        cleanAlbums = data.albums;
-      } else {
-        // NEW AUTOMATED DATA FORMAT: The entire JSON file is already our album list
-        cleanAlbums = data;
-      }
+																							  
+      const categoryOrder = data.categoryOrder || [];
+																			   
+      const albums = data.albums || {};
+			  
+																					
+						   
+	   
 
       let isFirstImage = true;
 
-      // Iterate only through valid photo collections
-      Object.entries(cleanAlbums).forEach(([slug, photos]) => {
+      // Loop through your categories in the exact order specified by your array list tracking keys
+      categoryOrder.forEach(slug => {
+        const photosArray = albums[slug] || [];
         
-        // 🛡️ CRITICAL SAFETY SKIP: Ignore old system helper keys so they never create blank cards
-        if (slug === "categoryOrder" || slug === "albums") return;
-        
-        // Skip over anything that isn't a list of items
-        if (!Array.isArray(photos)) return;
+																																		 
+																  
+		
+														
+										   
 
-        // Auto-convert folder slug text into clean title text (e.g. "chapter-rides" -> "Chapter Rides")
+        // Formats a clean human-readable title out of the folder slug name (e.g. "chapter-rides" -> "Chapter Rides")
         let fallbackTitle = slug.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
 
-        if (photos.length > 0) {
-          // 1. Build exactly ONE figure card frame per category collection block
+        if (photosArray.length > 0) {
+          // 1. Build exactly ONE figure card frame per folder category collection block
           const groupCard = document.createElement("figure");
           
-																					
+																	 
           if (isFirstImage) {
             groupCard.className = "gallery-card wide";
             isFirstImage = false;
@@ -47,13 +48,13 @@ document.addEventListener("DOMContentLoaded", () => {
             groupCard.className = "gallery-card";
           }
 
-          // Safely target the title property from the first image object, or use our clean fallback string
-          const humanTitle = photos[0].title || fallbackTitle;
+          // FIXED: Use the first item's title property safely, or default cleanly to our formatted fallbackTitle string
+          const humanTitle = photosArray[0].title || fallbackTitle;
 
           groupCard.innerHTML = `
             <figcaption>
               <strong>${humanTitle}</strong>
-              <span>Collection contains ${photos.length} item(s)</span>
+              <span>Collection contains ${photosArray.length} item(s)</span>
             </figcaption>
             <!-- 📦 Sub-grid placeholder frame to loop matching image blocks safely -->
             <div class="photo-stack"></div>
@@ -64,15 +65,15 @@ document.addEventListener("DOMContentLoaded", () => {
           // Select the inner image frame wrapper we just created inside this specific block
           const photoStack = groupCard.querySelector(".photo-stack");
 
-          // 2. INNER LOOP: Iterate over all photos inside this specific album array
-          photos.forEach(photo => {
+          // 2. INNER LOOP: Iterate over all photos inside this specific album array block
+          photosArray.forEach(photo => {
             if (!photo.path) return;
 
             const imgElement = document.createElement("img");
             imgElement.src = photo.path;
-            // Gracefully default to the image caption, title layout, or clean folder metadata text
-            imgElement.alt = photo.caption || photo.title || fallbackTitle;
-            imgElement.title = photo.caption || photo.title || ""; // Browser text tooltip on hover
+            // Aligns layout descriptions cleanly to your custom schema keys
+            imgElement.alt = photo.caption || humanTitle;
+            imgElement.title = photo.caption || ""; // Displays caption text cleanly on browser hover tooltip
             imgElement.loading = "lazy";
 
             // Drop the image item node smoothly inside its parent category card track frame
