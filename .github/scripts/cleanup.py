@@ -143,7 +143,7 @@ def map_active_drive_files(folder_id):
 
 def purge_orphaned_github_files(github_folder_path):
     """Scans a repository subfolder on GitHub and deletes files missing from Drive map"""
-    url = f"https://github.com/{REPO}/contents/{github_folder_path}"
+    url = f"https://github.com/{REPO}/{github_folder_path}"
     headers = {
         "Authorization": f"token {GITHUB_TOKEN}",
         "Accept": "application/vnd.github.v3+json"
