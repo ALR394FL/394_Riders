@@ -43,10 +43,14 @@ def determine_subfolder(file_name, is_image):
         return os.path.join("documents", "uncategorized")
 
 def map_active_drive_files(folder_id):
-    """Recursively builds a map of active file paths, ignoring 'Archive'"""
+    """
+    Recursively builds a map of active file paths, resolving shortcuts 
+    and scanning their targets just like your primary sync script.
+    """
     page_token = None
     while True:
-        query = f"'{folder_id}' in parents and trashed = false and name != 'Archive'"
+        # Step 1: Get contents of the current folder context
+        query = f"'{folder_id}' in parents and trashed = false"
         try:
             results = service.files().list(
                 q=query,
@@ -58,40 +62,54 @@ def map_active_drive_files(folder_id):
             ).execute()
             items = results.get('files', [])
         except Exception as e:
-            print(f"Skipping folder check on ID {folder_id}: {e}")
+            print(f"Skipping folder access restriction on ID {folder_id}: {e}")
             return
 
         for item in items:
+            file_id = item.get('id')
             file_name = item.get('name')
             mime_type = item.get('mimeType')
 
+            # 🎯 SAFEGUARD: Completely skip the Archive folder node
             if file_name == 'Archive':
-                continue
-
-            # Follow Shortcuts safely
-            if mime_type == 'application/vnd.google-apps.shortcut':
-                shortcut = item.get('shortcutDetails', {})
-                target_mime = shortcut.get('targetMimeType')
-                if target_mime == 'application/vnd.google-apps.folder':
-                    map_active_drive_files(shortcut.get('targetId'))
-                    continue
-                else:
-                    mime_type = target_mime
-
-            # Deep step into normal Subfolders
-            if mime_type == 'application/vnd.google-apps.folder':
-                map_active_drive_files(item['id'])
+                print("Safety: Skipping Archive directory mapping.")
                 continue
 
             if not file_name:
                 continue
 
-            # Route file paths exactly how they drop into GitHub
+            # 🎯 RESOLVE SHORTCUTS: 
+            if mime_type == 'application/vnd.google-apps.shortcut':
+                shortcut = item.get('shortcutDetails', {})
+                target_id = shortcut.get('targetId')
+                target_mime = shortcut.get('targetMimeType')
+                
+                if file_name == 'Archive':
+                    continue
+
+                if target_mime == 'application/vnd.google-apps.folder':
+                    print(f"Following shortcut folder link: {file_name}")
+                    map_active_drive_files(target_id)
+                    continue # Safe now because file routing logic happens down inside the recursive call
+                else:
+                    file_id = target_id
+                    mime_type = target_mime
+
+            # 🎯 RECURSE SUBFOLDERS: If it's a real subfolder directory node, step inside it recursively
+            if mime_type == 'application/vnd.google-apps.folder':
+                print(f"Stepping inside subfolder: {file_name}")
+                map_active_drive_files(file_id)
+						
+
+							 
+                continue
+
+            # 🎯 ROUTE VALID FILES: This mirrors your exact file extension routing logic
             image_extensions = ('.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp')
             is_image = file_name.lower().endswith(image_extensions)
             subfolder = determine_subfolder(file_name, is_image)
 
-            # Match extensions for workspace files
+            # Map cloud workplace native documents smoothly
             extension = ""
             if mime_type == 'application/vnd.google-apps.document':
                 extension = '.docx'
@@ -105,9 +123,12 @@ def map_active_drive_files(folder_id):
             else:
                 local_path = os.path.join(subfolder, file_name)
 
-            # Convert windows slashes to universal URL paths for the GitHub API comparison
-            active_drive_paths.add(local_path.replace("\\", "/"))
+            # Standardize path structure for the GitHub API comparison checks
+            clean_path = local_path.replace("\\", "/")
+            active_drive_paths.add(clean_path)
+            print(f"Mapped active file path: {clean_path}")
 
+        # Handle Pagination tracking
         page_token = results.get('nextPageToken')
         if not page_token:
             break
