@@ -55,11 +55,10 @@ def determine_subfolder(file_name, is_image):
 def process_folder_contents(folder_id):
     """Deep searches the connected folder ID for real files and follows shortcuts cleanly with full pagination Support"""
     page_token = None
-    
     while True:
-        query = f"'{folder_id}' in parents and trashed = false"
+        # UPDATED: Explicitly tell Google Drive API to ignore any item named Archive at the query level
+        query = f"'{folder_id}' in parents and trashed = false and name != 'Archive'"
         try:
-            # FIXED: Added support for pageToken and adjusted pageSize to maximize batches
             results = service.files().list(
                 q=query,
                 fields="nextPageToken, files(id, name, mimeType, shortcutDetails)",
@@ -78,11 +77,22 @@ def process_folder_contents(folder_id):
             file_name = item['name']
             mime_type = item['mimeType']
 
+            # 🎯 SAFEGUARD: If somehow a folder named Archive slips through, ignore it completely
+            if file_name == 'Archive':
+                print(f"Safety: Skipping Archive folder completely.")
+                continue
+
             # 🎯 Resolve folder or file shortcuts safely
             if mime_type == 'application/vnd.google-apps.shortcut':
                 shortcut = item.get('shortcutDetails', {})
                 target_id = shortcut.get('targetId')
                 target_mime = shortcut.get('targetMimeType')
+                
+                # SAFEGUARD: If the shortcut points to an Archive folder, do not follow it
+                if file_name == 'Archive':
+                    print(f"Safety: Skipping shortcut pointing to Archive.")
+                    continue
+
                 if target_mime == 'application/vnd.google-apps.folder':
                     print(f"Following shortcut folder link: {file_name}")
                     process_folder_contents(target_id)
