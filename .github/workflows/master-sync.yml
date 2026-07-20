@@ -30,7 +30,7 @@ jobs:
       - name: Run Sync Script
         env:
           DRIVE_CREDENTIALS: ${{ secrets.DRIVE_CREDENTIALS }}
-          FOLDER_ID: '1B3qd5KGoPkSb-X5aUIJHaDBlqOCz87Qh'
+          FOLDER_ID: ${{ secrets.FOLDER_ID }} # <-- This line passes the secret into the python script
         run: python .github/scripts/sync_drive.py
 
       # ==========================================
