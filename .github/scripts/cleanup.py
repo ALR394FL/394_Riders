@@ -167,7 +167,7 @@ def purge_orphaned_github_files(github_folder_path):
         if github_file_path not in active_drive_paths:
             print(f"File missing from active Drive (archived). Deleting from GitHub: {github_file_path}")
             
-            delete_url = f"https://github.com{REPO}/contents/{github_file_path}"
+            delete_url = f"https://api.github.com/{REPO}/contents/{github_file_path}"
             delete_payload = {
                 "message": f"chore: manual cleanup removing expired asset ({item['name']})",
                 "sha": item['sha']
