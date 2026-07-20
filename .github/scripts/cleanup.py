@@ -83,14 +83,19 @@ def map_active_drive_files(folder_id):
                 shortcut = item.get('shortcutDetails', {})
                 target_id = shortcut.get('targetId')
                 target_mime = shortcut.get('targetMimeType')
-                
+    
+                # NEW SAFEGUARD: If the shortcut target ID is missing, skip it completely
+                if not target_id:
+                    print(f"Warning: Shortcut '{file_name}' has an unresolvable or broken target ID. Skipping.")
+                    continue
+
                 if file_name == 'Archive':
                     continue
 
                 if target_mime == 'application/vnd.google-apps.folder':
-                    print(f"Following shortcut folder link: {file_name}")
+                    print(f"Following shortcut folder link: {file_name} (ID: {target_id})")
                     map_active_drive_files(target_id)
-                    continue # Safe now because file routing logic happens down inside the recursive call
+                    continue 
                 else:
                     file_id = target_id
                     mime_type = target_mime
