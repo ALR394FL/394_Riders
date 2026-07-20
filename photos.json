@@ -25,6 +25,11 @@
         "caption": "Leader Bill Draper"
       },
       {
+        "path": "images/leadership/leader_david-luzader.jpg",
+        "title": "Leadership",
+        "caption": "Leader David Luzader"
+      },
+      {
         "path": "images/leadership/leader_frank-scianimanico.jpg",
         "title": "Leadership",
         "caption": "Leader Frank Scianimanico"
@@ -35,12 +40,17 @@
         "caption": "Leader Jay Cherland"
       },
       {
-        "path": "images/leadership/leader_david-luzader.jpg",
+        "path": "images/leadership/leader_jon-scannell.jpg",
+        "title": "Leadership",
+        "caption": "Leader Jon Scannell"
+      },
+      {
+        "path": "images/leadership/leader_david-luzader.jpeg",
         "title": "Leadership",
         "caption": "Leader David Luzader"
       },
       {
-        "path": "images/leadership/leader_jon-scannell.jpg",
+        "path": "images/leadership/leader_jon-scannell.jpeg",
         "title": "Leadership",
         "caption": "Leader Jon Scannell"
       }
