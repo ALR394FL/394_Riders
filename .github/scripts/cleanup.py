@@ -144,11 +144,8 @@ def map_active_drive_files(folder_id):
 def purge_orphaned_github_files(github_folder_path):
     """Scans a repository subfolder on GitHub and deletes files missing from Drive map"""
     
-    # 🎯 FORCE CLEAN REPO VARIABLE: Remove any stray slashes or spaces
-    clean_repo = str(REPO).strip().strip("/")
-    
-    # Construct the absolute API endpoint string
-    url = f"https://github.com{clean_repo}/contents/{github_folder_path}"
+    # 🎯 HARDCODED CORRECT API ENDPOINT: No more concatenation typos
+    url = f"https://github.com{github_folder_path}"
     
     headers = {
         "Authorization": f"token {GITHUB_TOKEN}",
@@ -172,18 +169,18 @@ def purge_orphaned_github_files(github_folder_path):
         return
 
     for item in items:
-        # If it finds a subfolder, it automatically passes the path down the chain
         if item['type'] == 'dir':
             purge_orphaned_github_files(item['path'])
             continue
 
-        github_file_path = item['path']
+        # Standardize formatting to lowercase for accurate tracking comparison
+        github_file_path = item['path'].replace("\\", "/").lower()
 
-        # The comparison check against your 12 active Google Drive file assets
         if github_file_path not in active_drive_paths:
-            print(f"File missing from active Drive (archived). Deleting from GitHub: {github_file_path}")
+            print(f"File missing from active Drive (archived). Deleting from GitHub: {item['path']}")
             
-            delete_url = f"https://github.com{clean_repo}/contents/{github_file_path}"
+            # 🎯 HARDCODED DELETE URL AS WELL
+            delete_url = f"https://github.com{item['path']}"
             delete_payload = {
                 "message": f"chore: manual cleanup removing expired asset ({item['name']})",
                 "sha": item['sha']
