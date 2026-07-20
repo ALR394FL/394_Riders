@@ -1,7 +1,7 @@
 name: Master Google Drive & Repository Synchronization
 on:
   schedule:
-    - cron: '57 * * * *' # Automatically runs every single hour
+    - cron: '23 */6 * * *' # Automatically runs every single hour
   workflow_dispatch: # Allows manual one-click execution from the GitHub Actions tab
 
 permissions:
