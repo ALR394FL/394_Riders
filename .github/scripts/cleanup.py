@@ -4,19 +4,14 @@ import requests
 from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
 
-# 1. Configuration & Authentication Validation
+# 1. Configuration & Authentication
 GITHUB_TOKEN = os.environ.get('GITHUB_TOKEN')
-REPO = os.environ.get('GITHUB_REPOSITORY')  
-
-# Clean up raw environment variables to remove any trailing hidden spaces or quotes
 raw_folder_id = os.environ.get('FOLDER_ID', '')
 root_folder_id = raw_folder_id.strip().strip("'").strip('"')
 
 if not root_folder_id:
     print("FATAL ERROR: The FOLDER_ID environment secret is completely blank or missing!")
     exit(1)
-
-print(f"DEBUG: Successfully read FOLDER_ID from environment. Value length is {len(root_folder_id)} chars.")
 
 DRIVE_CREDENTIALS = json.loads(os.environ['DRIVE_CREDENTIALS'])
 creds = Credentials.from_service_account_info(DRIVE_CREDENTIALS)
@@ -53,9 +48,7 @@ def determine_subfolder(file_name, is_image):
 
 def map_active_drive_files(folder_id):
     """Recursively builds a map of active file paths, ignoring 'Archive'"""
-    # HARD SAFEGUARD: If something tries to pass an empty string, intercept it immediately
     if not folder_id or not str(folder_id).strip():
-        print("Warning: Intercepted an attempted call with an empty Folder ID. Aborting this folder branch execution.")
         return
 
     page_token = None
@@ -81,25 +74,21 @@ def map_active_drive_files(folder_id):
             mime_type = item.get('mimeType')
 
             if file_name == 'Archive':
-                print("Safety: Skipping Archive directory mapping.")
                 continue
 
             if not file_name:
                 continue
 
-            # 🎯 RESOLVE SHORTCUTS Safely
+            # RESOLVE SHORTCUTS Safely
             if mime_type == 'application/vnd.google-apps.shortcut':
                 shortcut = item.get('shortcutDetails', {})
                 target_id = shortcut.get('targetId')
                 target_mime = shortcut.get('targetMimeType')
                 
-                # Check for empty string target pointers
                 if not target_id or not str(target_id).strip():
-                    print(f"Warning: Shortcut '{file_name}' has an unresolvable target ID. Skipping.")
                     continue
 
                 if target_mime == 'application/vnd.google-apps.folder':
-                    print(f"Following shortcut folder link: {file_name} (Target ID: {target_id})")
                     map_active_drive_files(target_id)
                     continue 
                 else:
@@ -110,7 +99,6 @@ def map_active_drive_files(folder_id):
             if mime_type == 'application/vnd.google-apps.folder':
                 if not file_id or not str(file_id).strip():
                     continue
-                print(f"Stepping inside subfolder: {file_name} (ID: {file_id})")
                 map_active_drive_files(file_id)
                 continue
 
@@ -119,7 +107,7 @@ def map_active_drive_files(folder_id):
             is_image = file_name.lower().endswith(image_extensions)
             subfolder = determine_subfolder(file_name, is_image)
 
-            # Match extensions for workspace files
+            # Match extensions for workplace files
             extension = ""
             if mime_type == 'application/vnd.google-apps.document':
                 extension = '.docx'
@@ -133,9 +121,9 @@ def map_active_drive_files(folder_id):
             else:
                 local_path = os.path.join(subfolder, file_name)
 
-            clean_path = local_path.replace("\\", "/")
+            # Standardize formatting to lowercase for accurate tracking comparison
+            clean_path = local_path.replace("\\", "/").lower()
             active_drive_paths.add(clean_path)
-            print(f"Mapped active file path: {clean_path}")
 
         page_token = results.get('nextPageToken')
         if not page_token:
@@ -144,7 +132,7 @@ def map_active_drive_files(folder_id):
 def purge_orphaned_github_files(github_folder_path):
     """Scans a repository subfolder on GitHub and deletes files missing from Drive map"""
     
-    # 🎯 HARDCODED CORRECT API ENDPOINT: No more concatenation typos
+    # 🎯 100% HARDCODED ABSOLUTE URL: No environment variables can break this string concatenation
     url = f"https://github.com{github_folder_path}"
     
     headers = {
@@ -160,26 +148,30 @@ def purge_orphaned_github_files(github_folder_path):
         print(f"Network error connecting to GitHub: {network_error}")
         return
 
+    # Handle case where directory doesn't exist yet on GitHub
     if response.status_code != 200:
-        print(f"Skipping path '{github_folder_path}' (API Status: {response.status_code})")
+        print(f"Skipping folder path '{github_folder_path}' (Status Code: {response.status_code})")
         return 
 
     items = response.json()
     if not isinstance(items, list):
         return
 
+    print(f"Successfully loaded '{github_folder_path}' folder content from GitHub. Auditing files...")
+
     for item in items:
+        # If it finds a subfolder directory, automatically recurse into it using GitHub's exact casing
         if item['type'] == 'dir':
             purge_orphaned_github_files(item['path'])
             continue
 
-        # Standardize formatting to lowercase for accurate tracking comparison
-        github_file_path = item['path'].replace("\\", "/").lower()
+        # Convert the current file's path to lowercase for comparison
+        github_file_path_lower = item['path'].replace("\\", "/").lower()
 
-        if github_file_path not in active_drive_paths:
+        # 🎯 THE PURGE COMPARE: If it is on GitHub but missing from active Drive tracking, destroy it
+        if github_file_path_lower not in active_drive_paths:
             print(f"File missing from active Drive (archived). Deleting from GitHub: {item['path']}")
             
-            # 🎯 HARDCODED DELETE URL AS WELL
             delete_url = f"https://github.com{item['path']}"
             delete_payload = {
                 "message": f"chore: manual cleanup removing expired asset ({item['name']})",
@@ -193,14 +185,17 @@ def purge_orphaned_github_files(github_folder_path):
                 print(f"Failed to delete {item['name']}: {del_response.text}")
 
 if __name__ == "__main__":
-    print(f"Booting file mapping scanner using Root Folder ID: '{root_folder_id}'")
+    print("Building fresh layout map from active Google Drive directories...")
     map_active_drive_files(root_folder_id)
     
     if len(active_drive_paths) == 0:
         print("Safety Abort: Google Drive scanner returned 0 files. Script stopped to prevent wiping repository.")
         exit(1)
         
-    print(f"Tracking {len(active_drive_paths)} valid assets. Cross-referencing GitHub repository targets...")
+    print(f"Tracking {len(active_drive_paths)} valid active assets. Cross-referencing GitHub repository...")
+    
+    # 🎯 SIMPLIFIED CLEAN TARGETS: Run directly against your main repository directories
+    # Note: If your folders on GitHub are capitalized, change these to "Images" and "Documents"
     purge_orphaned_github_files("images")
     purge_orphaned_github_files("documents")
     print("Manual cleanup cycle complete.")
