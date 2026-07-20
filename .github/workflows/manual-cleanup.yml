@@ -25,4 +25,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DRIVE_CREDENTIALS: ${{ secrets.DRIVE_CREDENTIALS }}
           FOLDER_ID: ${{ secrets.FOLDER_ID }}
+          GITHUB_REPOSITORY: ${{ github.repository }} # Provided automatically by GitHub
         run: python .github/scripts/cleanup.py
