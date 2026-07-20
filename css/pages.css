@@ -921,8 +921,8 @@ footer {
 .leader-photo img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Crops headshots beautifully without stretching them */
-  object-position: top center; /* Focuses layout tracking on the person's face */
+  object-fit: contain; /* Shrinks the whole image to fit inside without cropping */
+   /* Remove object-position top center so the image centers naturally inside the box */
 }
 
 /* Metadata formatting for your text labels */
