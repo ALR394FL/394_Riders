@@ -19,7 +19,31 @@
 
     ],
     "leadership": [
-
+      {
+        "path": "images/leadership/leader_bill-draper.jpg",
+        "title": "Leadership",
+        "caption": "Leader Bill Draper"
+      },
+      {
+        "path": "images/leadership/leader_frank-scianimanico.jpg",
+        "title": "Leadership",
+        "caption": "Leader Frank Scianimanico"
+      },
+      {
+        "path": "images/leadership/leader_jay-cherland.jpg",
+        "title": "Leadership",
+        "caption": "Leader Jay Cherland"
+      },
+      {
+        "path": "images/leadership/leader_david-luzader.jpeg",
+        "title": "Leadership",
+        "caption": "Leader David Luzader"
+      },
+      {
+        "path": "images/leadership/leader_jon-scannell.jpeg",
+        "title": "Leadership",
+        "caption": "Leader Jon Scannell"
+      }
     ],
     "veteran-escorts": [
 
