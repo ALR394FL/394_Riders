@@ -143,48 +143,31 @@ def map_active_drive_files(folder_id):
 
 def purge_orphaned_github_files(github_folder_path):
     """Scans a repository subfolder on GitHub and deletes files missing from Drive map"""
-    
-    # 🎯 FIX 1: The target base address is plain text. No string vars can smash it.
-    if github_folder_path == "images" or github_folder_path.startswith("images/"):
-        url = f"https://github.com{github_folder_path}"
-    elif github_folder_path == "documents" or github_folder_path.startswith("documents/"):
-        url = f"https://github.com{github_folder_path}"
-    else:
-        # Fallback just in case a raw item subpath is generated recursively
-        url = f"https://github.com{github_folder_path}"
-    
+    url = f"https://github.com/{REPO}/{github_folder_path}"
     headers = {
         "Authorization": f"token {GITHUB_TOKEN}",
         "Accept": "application/vnd.github.v3+json"
     }
     
-    print(f"Connecting to GitHub API Directory: {url}")
     response = requests.get(url, headers=headers)
-    
     if response.status_code != 200:
-        print(f"Notice: Path '{github_folder_path}' skipped or empty. (Status: {response.status_code})")
-        return
+        return 
 
     items = response.json()
     if not isinstance(items, list):
         return
 
     for item in items:
-        # Recursive folders follow GitHub's own real paths down the tree
         if item['type'] == 'dir':
             purge_orphaned_github_files(item['path'])
             continue
 
-        # Convert path target to lowercase for accurate tracking verification evaluations
-        github_file_path_lower = item['path'].replace("\\", "/").lower()
+        github_file_path = item['path']
 
-        if github_file_path_lower not in active_drive_paths:
-            print(f"File missing from active Drive (archived). Deleting from GitHub: {item['path']}")
+        if github_file_path not in active_drive_paths:
+            print(f"File missing from active Drive (archived). Deleting from GitHub: {github_file_path}")
             
-            # 🎯 FIX 2: Absolute plain text delete destination string tracker link 
-            # This completely cuts out the broken variables causing the "github.com/images" skip
-            delete_url = f"https://github.com{item['path']}"
-            
+            delete_url = f"https://github.com{REPO}/contents/{github_file_path}"
             delete_payload = {
                 "message": f"chore: manual cleanup removing expired asset ({item['name']})",
                 "sha": item['sha']
