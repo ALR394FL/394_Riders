@@ -148,7 +148,7 @@ def purge_orphaned_github_files(github_folder_path):
         "Authorization": f"token {GITHUB_TOKEN}",
         "Accept": "application/vnd.github.v3+json"
     }
-    
+    print(url)
     response = requests.get(url, headers=headers)
     if response.status_code != 200:
         return 
