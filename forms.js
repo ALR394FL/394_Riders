@@ -1,10 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
   // Fetch your dynamic documents payload file
-								  
-
-														 
-									
-
   fetch("documents.json")
     .then(response => {
       if (!response.ok) throw new Error("Failed to load documents dataset");
@@ -12,48 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .then(data => {
       renderGroupedDocuments(data);
-													 
-										   
-
-									 
-																		
-										  
-
-							  
-																			   
-							   
-														  
-									   
-							 
-												
-				   
-									 
-																			 
-														   
-					
-																																																   
-			  
-												
-			 
-				
-																					  
-																						  
-																
-		  
-															   
-											
-								   
-																		   
-				 
-									
-																																
-							
-				  
-																																												 
-			
-													  
-		 
-		 
     })
     .catch(error => {
       console.error("Error building document groups:", error);
