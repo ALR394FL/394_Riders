@@ -39,42 +39,45 @@ document.addEventListener("DOMContentLoaded", () => {
           const gridContainer = groupSection.querySelector(".thumbnail-grid");
 
           // Build thumbnail grids side-by-side
-          docs.forEach(doc => {
-            const itemElement = document.createElement("div");
-            itemElement.className = "document-item";
-            itemElement.style.cssText = "display: flex; flex-direction: column; align-items: center; text-align: center;";
+docs.forEach(doc => {
+  const itemElement = document.createElement("div");
+  itemElement.className = "document-item";
+  
+  // Clean structural layouts for item cards
+  itemElement.style.cssText = "display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 10px;";
 
-            // Clean filename characters to resolve local thumbnail mapping paths
-            const thumbnailPath = `images/thumbnails/${doc.title}.jpg`;
-
-            itemElement.innerHTML = `
-  <div style="display: block; width: 100%; max-width: 130px; aspect-ratio: 3 / 4; border: 1px solid #dcdcdc; border-radius: 6px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); position: relative;">
-    
-    <!-- 🌟 The Live Document Embed instead of an image tag -->
-    <embed src="${doc.path}#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" style="width: 100%; height: 100%; border: none; pointer-events: none;">
-    
-    <!-- Transparent absolute link box so clicking the card triggers a clean full-screen download -->
-    <a href="${doc.path}" target="_blank" download="${doc.title}.${doc.type.toLowerCase()}" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 10;"></a>
-  </div>
-  <span style="margin-top: 8px; font-size: 0.85rem; color: #555; word-break: break-word; font-family: sans-serif; font-weight: bold;">
-    ${doc.title}
-  </span>
-`;
-itemElement.innerHTML = `
-              <a href="${doc.path}" target="_blank" download="${doc.title}.${doc.type.toLowerCase()}" style="display: block; width: 100%; max-width: 130px; aspect-ratio: 3 / 4; border: 1px solid #dcdcdc; border-radius: 6px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: transform 0.2s;">
-                <img src="${thumbnailPath}" alt="${doc.title} Preview" onerror="this.src='images/thumbnails/default-doc-icon.png';" style="width: 100%; height: 100%; object-fit: cover;">
-              </a>
-              <span style="margin-top: 8px; font-size: 0.85rem; color: #555; word-break: break-word; font-family: sans-serif; font-weight: bold;">
-                ${doc.title}
-              </span>
-              <small style="font-size: 0.75rem; color: #888; margin-top: 2px;">
-                ${doc.type} • ${doc.label}
-              </small>
-            `;
-
-            gridContainer.appendChild(itemElement);
-          });
-
+           itemElement.innerHTML = `
+             <!-- Bounding visual card frame with strict width & aspect ratios -->
+             <div style="display: block; width: 130px; height: 170px; border: 1px solid #dcdcdc; border-radius: 6px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); position: relative; background: #ffffff;">
+               
+               <!-- 🌟 The Live Inline Document Viewer Engine Embed with strict dimensions -->
+               <embed src="${doc.path}#toolbar=0&navpanes=0&scrollbar=0&view=FitH" 
+                      type="application/pdf" 
+                      width="130" 
+                      height="170" 
+                      style="width: 100%; height: 100%; border: none; pointer-events: none; display: block;">
+               
+               <!-- 🔒 Transparent absolute click-catcher layer over the top of the embed box -->
+               <a href="${doc.path}" 
+                  target="_blank" 
+                  download="${doc.title}.${doc.type.toLowerCase()}" 
+                  style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; display: block; cursor: pointer;"
+                  title="Click to view or download ${doc.title}">
+               </a>
+             </div>
+             
+             <!-- Document Text Labels underneath the thumbnail box frame -->
+             <span style="margin-top: 10px; font-size: 0.85rem; color: #333; word-break: break-word; font-family: sans-serif; font-weight: bold; max-width: 140px;">
+               ${doc.title}
+             </span>
+             <small style="font-size: 0.75rem; color: #888; margin-top: 2px;">
+               ${doc.type} • ${doc.label}
+             </small>
+           `;
+         
+           gridContainer.appendChild(itemElement);
+         });
+         
         } else {
           // 🔄 Exact Fallback Row Layout: Keeps your secretarial warning message if folder is empty
           groupSection.innerHTML = `
