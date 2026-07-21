@@ -151,7 +151,7 @@ def map_active_drive_files(folder_id):
 def purge_orphaned_github_files(github_folder_path):
     """Scans a repository subfolder on GitHub and deletes files missing from Drive map"""
     # ✅ FIX 1: Explicit target to the REST API url base
-    url = f"https://github.com/{REPO}/contents/{github_folder_path}"
+    url = f"https://api.github.com/repos/{REPO}/contents/{github_folder_path}"
     
     headers = {
         "Authorization": f"token {GITHUB_TOKEN}",
@@ -180,7 +180,7 @@ def purge_orphaned_github_files(github_folder_path):
             print(f"File missing from active Drive (archived). Deleting from GitHub: {github_file_path}")
             
             # ✅ FIX 2: Correct deletion URL string layout
-            delete_url = f"https://github.com/{REPO}/contents/{github_file_path}"
+            delete_url = f"https://api.github.com/repos/{REPO}/contents/{github_file_path}"
             
             print(f"DEBUG SENDING DELETE TO: {delete_url}")
             
