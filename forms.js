@@ -60,7 +60,7 @@ docs.forEach(doc => {
                <!-- 🔒 Transparent absolute click-catcher layer over the top of the embed box -->
                <a href="${doc.path}" 
                   target="_blank" 
-                  download="${doc.title}.${doc.type.toLowerCase()}" 
+              <!--download="${doc.title}.${doc.type.toLowerCase()}" -->
                   style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; display: block; cursor: pointer;"
                   title="Click to view or download ${doc.title}">
                </a>
