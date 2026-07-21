@@ -48,6 +48,19 @@ document.addEventListener("DOMContentLoaded", () => {
             const thumbnailPath = `images/thumbnails/${doc.title}.jpg`;
 
             itemElement.innerHTML = `
+  <div style="display: block; width: 100%; max-width: 130px; aspect-ratio: 3 / 4; border: 1px solid #dcdcdc; border-radius: 6px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); position: relative;">
+    
+    <!-- 🌟 The Live Document Embed instead of an image tag -->
+    <embed src="${doc.path}#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" style="width: 100%; height: 100%; border: none; pointer-events: none;">
+    
+    <!-- Transparent absolute link box so clicking the card triggers a clean full-screen download -->
+    <a href="${doc.path}" target="_blank" download="${doc.title}.${doc.type.toLowerCase()}" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 10;"></a>
+  </div>
+  <span style="margin-top: 8px; font-size: 0.85rem; color: #555; word-break: break-word; font-family: sans-serif; font-weight: bold;">
+    ${doc.title}
+  </span>
+`;
+itemElement.innerHTML = `
               <a href="${doc.path}" target="_blank" download="${doc.title}.${doc.type.toLowerCase()}" style="display: block; width: 100%; max-width: 130px; aspect-ratio: 3 / 4; border: 1px solid #dcdcdc; border-radius: 6px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: transform 0.2s;">
                 <img src="${thumbnailPath}" alt="${doc.title} Preview" onerror="this.src='images/thumbnails/default-doc-icon.png';" style="width: 100%; height: 100%; object-fit: cover;">
               </a>
