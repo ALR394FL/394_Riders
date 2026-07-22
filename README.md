@@ -4,19 +4,21 @@ An automated data pipeline that pulls photos and documents from Google Drive, ma
 
 ## 🚀 System Architecture
 
-[Google Drive Folder] ──(GitHub Actions)──► [Local Repo Storage]
-                                                   │
-                                     ┌─────────────┴─────────────┐
-                                     ▼                           ▼
-                            [Generate JSON Data]       [Auto Commit & Push]
-                                     │                           │
-                                     ▼                           ▼
-                             `photos.json`               Live Site Updates
-                             `documents.json`
+```text
+[Google Drive Folder] ──► [GitHub Actions Container] ──► [Local Repository Storage]
+                                                                 │
+                                           ┌─────────────────────┴─────────────────────┐
+                                           ▼                                           ▼
+                                 [Generate JSON Data]                        [Auto Commit & Push]
+                                           │                                           │
+                                           ▼                                           ▼
+                                   `photos.json` &                            Fresh Media Assets On
+                                  `documents.json`                              GitHub Pages Site
+```
 
-1. Syncing Engine: A Python routine authenticates with Google Drive and downloads modified or new files.
-2. Indexing Machine: Native shell commands scan the newly updated file repositories, format human-readable layout names, and compile structured array sheets (`photos.json` and `documents.json`).
-3. Static Delivery: GitHub Pages references these fresh JSON catalogs directly to build visual web albums and catalog lists on the frontend.
+1. **Syncing Engine:** A Python routine authenticates with Google Drive and downloads modified or new files.
+2. **Indexing Machine:** Native shell commands scan the newly updated file repositories, format human-readable layout names, and compile structured array sheets (`photos.json` and `documents.json`).
+3. **Static Delivery:** GitHub Pages references these fresh JSON catalogs directly to build visual web albums and catalog lists on the frontend.
 
 ---
 
