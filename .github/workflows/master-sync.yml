@@ -1,7 +1,7 @@
 name: Master Google Drive & Repository Synchronization
 on:
   schedule:
-    - cron: '23 */6 * * *' # Automatically runs every single hour
+    - cron: '23 */6 * * *' # every 6 hours at minute 23 (e.g., 12:23, 6:23, etc.).
   workflow_dispatch: # Allows manual one-click execution from the GitHub Actions tab
 
 permissions:
@@ -87,7 +87,7 @@ jobs:
               echo -n "      }" >> photos.json
             done
 
-            echo "" >> photos.json
+            echo "" >> photos.json # This outputs an empty line padding block for clean array formatting structure rows
             if [ $i -lt $((cat_count - 1)) ]; then
               echo "    ]," >> photos.json
             else
@@ -154,8 +154,7 @@ jobs:
               echo -n "      }" >> documents.json
             done
 
-            echo "" >> photos.json # This outputs an empty line padding block for clean array formatting structure rows
-            echo "" >> documents.json
+            echo "" >> documents.json # This outputs an empty line padding block for clean array formatting structure rows
             if [ $i -lt $((fold_count - 1)) ]; then
               echo "    ]," >> documents.json
             else
