@@ -64,7 +64,11 @@
 
     ],
     "fundraisers": [
-
+      {
+        "path": "images/fundraisers/ event_brevard_angels_poker_run.jpg",
+        "title": "Fundraisers",
+        "caption": "Event Brevard Angels Poker Run"
+      }
     ],
     "uncategorized": [
       {
