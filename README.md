@@ -22,6 +22,44 @@ An automated data pipeline that pulls photos and documents from Google Drive, ma
 
 ---
 
+## 📅 Integrated Google Calendar
+
+Beyond file syncing, this site features an embedded **Google Calendar** to showcase upcoming events. Because this widget functions purely on the frontend via an `<iframe>`, it does not require any background execution from your GitHub Actions workflows.
+
+### ⚙️ Calendar Connection Settings
+To update, change, or repair the live layout embed, ensure the configuration matches the parameters below:
+1. **Permissions Requirement:** The target calendar must be explicitly set to **Make available to public** inside the Google Calendar access panel.
+2. **Embed Delivery:** The widget is added to web pages using standard HTML code block injection:
+
+```html
+<div class="responsive-calendar-wrapper">
+  <iframe src="https://google.com" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+</div>
+```
+
+### 📱 Responsive Layout Styling
+Standard Google iframes maintain a static height and width, which causes them to clip or stretch uncomfortably on smartphones. To prevent this, apply this CSS wrapper to your stylesheet to force the calendar to scale elegantly across fluid viewports:
+
+```css
+.responsive-calendar-wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding-top: 75%; /* Maintains a clean 4:3 aspect ratio aspect scale box */
+}
+
+.responsive-calendar-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+```
+
+---
+
 ## 🛠️ Step-by-Step Setup Guide
 
 Follow these instructions to connect your Google Drive and securely configure the GitHub repository actions.
