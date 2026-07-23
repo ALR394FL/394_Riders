@@ -1,6 +1,6 @@
-# Google Drive to GitHub Sync & Catalog Pipeline
+# Google Drive & Calendar Sync Pipeline
 
-An automated data pipeline that pulls photos and documents from Google Drive, maps them into structured folders, dynamically rebuilds JSON indices, and commits the updates directly back to GitHub Pages.
+An automated data pipeline that pulls photos and documents from Google Drive, maps them into structured folders, dynamically rebuilds JSON indices via GitHub Actions, and displays upcoming schedules dynamically via a live Google Calendar frontend stream.
 
 ## 🚀 System Architecture
 
@@ -16,57 +16,39 @@ An automated data pipeline that pulls photos and documents from Google Drive, ma
                                   `documents.json`                              GitHub Pages Site
 ```
 
-1. **Syncing Engine:** A Python routine authenticates with Google Drive and downloads modified or new files.
-2. **Indexing Machine:** Native shell commands scan the newly updated file repositories, format human-readable layout names, and compile structured array sheets (`photos.json` and `documents.json`).
-3. **Static Delivery:** GitHub Pages references these fresh JSON catalogs directly to build visual web albums and catalog lists on the frontend.
+1. **Syncing Engine:** A Python routine authenticates with Google Drive to download modified or new files.
+2. **Indexing Machine:** Native shell commands scan updated repositories, format human-readable layout names, and compile structured array sheets (`photos.json` and `documents.json`).
+3. **Live Calendar Streaming:** A client-side JavaScript routine connects directly to the Google Calendar API to render the next 3 upcoming events dynamically on the live site using existing CSS layouts.
 
 ---
 
-## 📅 Integrated Google Calendar
+## 📅 Integrated Google Calendar Frontend
 
-Beyond file syncing, this site features an embedded **Google Calendar** to showcase upcoming events. Because this widget functions purely on the frontend via an `<iframe>`, it does not require any background execution from your GitHub Actions workflows.
+The events section is completely dynamic and reads your public Google Calendar feed automatically. Because this process runs natively inside the visitor's web browser, it does not require background execution resources from your GitHub Actions workflow routines.
 
-### ⚙️ Calendar Connection Settings
-To update, change, or repair the live layout embed, ensure the configuration matches the parameters below:
-1. **Permissions Requirement:** The target calendar must be explicitly set to **Make available to public** inside the Google Calendar access panel.
-2. **Embed Delivery:** The widget is added to web pages using standard HTML code block injection:
+### ⚙️ JavaScript Credentials Properties
+The frontend configuration variables must be stored inside **quotation marks** at the top of your webpage's script file:
 
-```html
-<div class="responsive-calendar-wrapper">
-  <iframe src="https://google.com" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
-</div>
+```javascript
+const API_KEY = 'YOUR_GOOGLE_API_KEY_HERE'; 
+const CALENDAR_ID = 'your-chapter-email@gmail.com'; // Your exact primary calendar email address
 ```
 
-### 📱 Responsive Layout Styling
-Standard Google iframes maintain a static height and width, which causes them to clip or stretch uncomfortably on smartphones. To prevent this, apply this CSS wrapper to your stylesheet to force the calendar to scale elegantly across fluid viewports:
-
-```css
-.responsive-calendar-wrapper {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  padding-top: 75%; /* Maintains a clean 4:3 aspect ratio aspect scale box */
-}
-
-.responsive-calendar-wrapper iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-```
+### 🛡️ Security Best Practices
+Because your frontend JavaScript is exposed to the public on GitHub Pages, you must secure your API key via your Google Cloud dashboard:
+1. Navigate to the **Credentials** page in Google Cloud Console.
+2. Edit your active API Key and select **Websites (HTTP referrers)** under application restrictions.
+3. Whitelist your repository layout by adding your public web link: `https://github.io*`. This completely stops third-party sites from stealing your key.
 
 ---
 
-## 🛠️ Step-by-Step Setup Guide
+## 🛠️ Step-by-Step Backend Setup Guide
 
 Follow these instructions to connect your Google Drive and securely configure the GitHub repository actions.
 
 ### Step 1: Generate Google Cloud Credentials
 1. Go to the Google Cloud Console (https://google.com).
-2. Create a new project and enable the Google Drive API.
+2. Create a new project and enable the **Google Drive API** and **Google Calendar API**.
 3. Navigate to APIs & Services > Credentials.
 4. Click Create Credentials and select Service Account.
 5. Open your new Service Account details, navigate to the Keys tab, click Add Key > Create New Key, and choose JSON.
@@ -74,7 +56,7 @@ Follow these instructions to connect your Google Drive and securely configure th
 
 ### Step 2: Configure Your Google Drive Folder
 1. Open the Google Drive folder you wish to target.
-2. Share Viewer access permissions with the unique email address of your generated Google Service Account.
+2. Share **Viewer** access permissions with the unique email address of your generated Google Service Account.
 3. Copy the unique Folder ID from your browser's URL window line (the string of characters located at the very end of the URL).
 4. *Built-in Exclusion Safeguard:* Any directory or shortcut link explicitly named `Archive` will be passed over entirely by the sync application.
 
