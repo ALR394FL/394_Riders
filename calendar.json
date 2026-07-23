@@ -1,0 +1,124 @@
+{
+  "kind": "calendar#events",
+  "etag": "\"p32vs9omolvjpa0o\"",
+  "summary": "alr394fl@gmail.com",
+  "description": "",
+  "updated": "2026-07-22T22:51:32.679Z",
+  "timeZone": "America/New_York",
+  "accessRole": "reader",
+  "defaultReminders": [],
+  "nextPageToken": "EiwKKhIoCgYI8Ly41AYSHgocChoyMjJvbjZiYWdwMWhzcWlibTJ0Zms2cjAwMsA-AQ==",
+  "items": [
+    {
+      "kind": "calendar#event",
+      "etag": "\"3569374811788254\"",
+      "id": "222on6bagp1hsqibm2tfk6r002_20260728T230000Z",
+      "status": "confirmed",
+      "htmlLink": "https://www.google.com/calendar/event?eid=MjIyb242YmFncDFoc3FpYm0ydGZrNnIwMDJfMjAyNjA3MjhUMjMwMDAwWiBhbHIzOTRmbEBt",
+      "created": "2026-07-22T02:30:05.000Z",
+      "updated": "2026-07-22T02:30:05.894Z",
+      "summary": "Rider Meeting",
+      "creator": {
+        "email": "alr394fl@gmail.com",
+        "self": true
+      },
+      "organizer": {
+        "email": "alr394fl@gmail.com",
+        "self": true
+      },
+      "start": {
+        "dateTime": "2026-07-28T19:00:00-04:00",
+        "timeZone": "America/New_York"
+      },
+      "end": {
+        "dateTime": "2026-07-28T20:00:00-04:00",
+        "timeZone": "America/New_York"
+      },
+      "recurringEventId": "222on6bagp1hsqibm2tfk6r002",
+      "originalStartTime": {
+        "dateTime": "2026-07-28T19:00:00-04:00",
+        "timeZone": "America/New_York"
+      },
+      "iCalUID": "222on6bagp1hsqibm2tfk6r002@google.com",
+      "sequence": 0,
+      "reminders": {
+        "useDefault": true
+      },
+      "eventType": "default"
+    },
+    {
+      "kind": "calendar#event",
+      "etag": "\"3569374893808670\"",
+      "id": "1tap2qkhbb40fji89dhhh2k1ec_20260818T230000Z",
+      "status": "confirmed",
+      "htmlLink": "https://www.google.com/calendar/event?eid=MXRhcDJxa2hiYjQwZmppODlkaGhoMmsxZWNfMjAyNjA4MThUMjMwMDAwWiBhbHIzOTRmbEBt",
+      "created": "2026-07-22T02:13:22.000Z",
+      "updated": "2026-07-22T02:30:46.904Z",
+      "summary": "Legionare Meeting",
+      "creator": {
+        "email": "alr394fl@gmail.com",
+        "self": true
+      },
+      "organizer": {
+        "email": "alr394fl@gmail.com",
+        "self": true
+      },
+      "start": {
+        "dateTime": "2026-08-18T19:00:00-04:00",
+        "timeZone": "America/New_York"
+      },
+      "end": {
+        "dateTime": "2026-08-18T20:00:00-04:00",
+        "timeZone": "America/New_York"
+      },
+      "recurringEventId": "1tap2qkhbb40fji89dhhh2k1ec",
+      "originalStartTime": {
+        "dateTime": "2026-08-18T19:00:00-04:00",
+        "timeZone": "America/New_York"
+      },
+      "iCalUID": "1tap2qkhbb40fji89dhhh2k1ec@google.com",
+      "sequence": 1,
+      "reminders": {
+        "useDefault": true
+      },
+      "eventType": "default"
+    },
+    {
+      "kind": "calendar#event",
+      "etag": "\"3569374811788254\"",
+      "id": "222on6bagp1hsqibm2tfk6r002_20260825T230000Z",
+      "status": "confirmed",
+      "htmlLink": "https://www.google.com/calendar/event?eid=MjIyb242YmFncDFoc3FpYm0ydGZrNnIwMDJfMjAyNjA4MjVUMjMwMDAwWiBhbHIzOTRmbEBt",
+      "created": "2026-07-22T02:30:05.000Z",
+      "updated": "2026-07-22T02:30:05.894Z",
+      "summary": "Rider Meeting",
+      "creator": {
+        "email": "alr394fl@gmail.com",
+        "self": true
+      },
+      "organizer": {
+        "email": "alr394fl@gmail.com",
+        "self": true
+      },
+      "start": {
+        "dateTime": "2026-08-25T19:00:00-04:00",
+        "timeZone": "America/New_York"
+      },
+      "end": {
+        "dateTime": "2026-08-25T20:00:00-04:00",
+        "timeZone": "America/New_York"
+      },
+      "recurringEventId": "222on6bagp1hsqibm2tfk6r002",
+      "originalStartTime": {
+        "dateTime": "2026-08-25T19:00:00-04:00",
+        "timeZone": "America/New_York"
+      },
+      "iCalUID": "222on6bagp1hsqibm2tfk6r002@google.com",
+      "sequence": 0,
+      "reminders": {
+        "useDefault": true
+      },
+      "eventType": "default"
+    }
+  ]
+}
