@@ -58,9 +58,18 @@
 
     <!-- 3. INJECTOR DRIVER SCRIPT LINK -->
     <script src="injector.js"></script>
-
-  <script src="events.js"></script>
-  <script src="script.js"></script>
+    <script src="events.js"></script>
+    <script src="script.js"></script>
+  
+<!-- Event Detail Pop-out Modal Overlay -->
+<div id="event-modal" class="modal-overlay" aria-hidden="true">
+  <div class="modal-card">
+    <button id="modal-close" class="modal-close-btn" aria-label="Close details">&times;</button>
+    <div id="modal-content">
+      <!-- JavaScript will inject detailed event data here dynamically -->
+    </div>
+  </div>
+</div>
 </body>
 </html>
 
