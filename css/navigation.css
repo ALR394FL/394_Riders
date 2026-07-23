@@ -1,0 +1,115 @@
+/* ==========================================================================
+   NAVIGATION MODULE: SHARED FOOTER CONTAINER
+   ========================================================================== */
+footer {
+  background-color: #111827; /* Dark charcoal/gray styling setup */
+  color: #9ca3af;
+  padding: 60px 0 20px 0;
+  border-top: 4px solid #b91c1c; /* Contrast brand red accent line border */
+  font-size: 0.95rem;
+}
+
+/* Base structural layout split rules */
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr repeat(3, 1fr); /* Gives the intro block more space */
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+/* Footer Category Headings */
+.footer-grid strong {
+  display: block;
+  color: #ffffff;
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Left side numeric branding circle badge mark */
+.footer-mark {
+  background: #b91c1c;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-weight: 900;
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+}
+
+.footer-grid p {
+  line-height: 1.5;
+  margin: 0;
+  max-width: 220px;
+}
+
+/* Column Item Lists Setup */
+.footer-grid div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Interactive Navigation Links formatting overrides */
+.footer-grid a {
+  color: #9ca3af;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  width: max-content;
+}
+
+.footer-grid a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.footer-grid span {
+  line-height: 1.4;
+}
+
+.footer-grid small {
+  color: #6b7280;
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+/* ==========================================================================
+   NAVIGATION MODULE: BOTTOM COPYRIGHT BAR SECTION
+   ========================================================================== */
+.footer-bottom {
+  border-top: 1px solid #1f2937;
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN BREAK ADAPTATIONS
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr); /* Drop down to a 2x2 structural column format */
+    gap: 32px;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer-grid {
+    grid-template-columns: 1fr; /* Switch to a vertical layout list configuration on mobile screens */
+    gap: 24px;
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
