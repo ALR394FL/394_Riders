@@ -2,11 +2,11 @@
    NAVIGATION MODULE: UTILITY HEADER STRIP
    ========================================================================== */
 .utility {
-  background-color: #111827; /* Dark background matching the footer */
-  color: #9ca3af;
+  background-color: var(--nav); /* #202326 */
+  color: var(--muted);          /* #a7aaac */
   font-size: 0.8rem;
   padding: 8px 0;
-  border-bottom: 1px solid #1f2937;
+  border-bottom: 1px solid var(--charcoal);
   font-family: sans-serif;
 }
 
@@ -17,7 +17,7 @@
 }
 
 .utility-links span {
-  color: #4b5563;
+  color: var(--charcoal);
   margin: 0 4px;
 }
 
@@ -25,13 +25,13 @@
    NAVIGATION MODULE: MAIN NAVIGATION HEADER ROW
    ========================================================================== */
 .site-header {
-  background-color: #ffffff;
-  border-bottom: 1px solid #e5e7eb;
+  background-color: var(--paper); /* #fff9ef */
+  border-bottom: 2px solid var(--gold); /* Your Chapter Gold Accent Line */
   padding: 16px 0;
   position: sticky;
   top: 0;
-  z-index: 9999; /* Keeps header floating safely above all content */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  z-index: 9999;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
 }
 
 .nav-wrap {
@@ -40,21 +40,20 @@
   align-items: center;
 }
 
-/* Brand Identifier Branding Logotype layout links */
 .brand {
   display: flex;
   align-items: center;
   gap: 12px;
   text-decoration: none;
-  color: #111827;
+  color: var(--ink);
   font-weight: 800;
   font-size: 1.15rem;
   line-height: 1.1;
 }
 
 .brand-mark {
-  background: #b91c1c; /* Brand Accent Red */
-  color: #ffffff;
+  background: var(--red); /* #9e2f2f */
+  color: var(--paper);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -68,7 +67,7 @@
 .brand small {
   display: block;
   font-size: 0.8rem;
-  color: #6b7280;
+  color: var(--muted);
   font-weight: 400;
   margin-top: 2px;
 }
@@ -84,20 +83,20 @@
 
 .desktop-nav a {
   text-decoration: none;
-  color: #4b5563;
+  color: var(--ink);
   font-weight: 600;
   font-size: 0.95rem;
   transition: color 0.2s ease;
 }
 
 .desktop-nav a:hover {
-  color: #b91c1c; /* Highlights brand red on focus hover states */
+  color: var(--red-bright); /* Bright interactive red text color */
 }
 
 /* Accent Header Call-to-action button */
 .nav-cta {
-  background-color: #b91c1c;
-  color: #ffffff !important;
+  background-color: var(--red); /* #9e2f2f */
+  color: var(--paper) !important;
   text-decoration: none;
   padding: 10px 18px;
   border-radius: 6px;
@@ -107,18 +106,17 @@
 }
 
 .nav-cta:hover {
-  background-color: #991b1b;
+  background-color: var(--red-bright); /* #bc3531 */
 }
 
 /* ==========================================================================
-   NAVIGATION MODULE: RESPONIVE MOBILE BURGER MENU OVERRIDES
+   NAVIGATION MODULE: RESPONSIVE MOBILE BURGER MENU OVERRIDES
    ========================================================================== */
 .mobile-menu {
-  display: none; /* Hidden by default on larger desktop monitors */
+  display: none;
   position: relative;
 }
 
-/* Hide default details disclosure browser triangle arrow icon markers */
 .mobile-menu summary {
   list-style: none;
   cursor: pointer;
@@ -128,29 +126,24 @@
   width: 24px;
   padding: 8px;
 }
-.mobile-menu summary::-webkit-details-marker {
-  display: none;
-}
+.mobile-menu summary::-webkit-details-marker { display: none; }
 
-/* Draw the 3 horizontal mobile menu bar vectors layout */
 .mobile-menu summary span {
   display: block;
   width: 24px;
   height: 3px;
-  background-color: #111827;
+  background-color: var(--ink);
   border-radius: 2px;
-  transition: transform 0.2s, opacity 0.2s;
 }
 
-/* Fly-out mobile navigation list block properties configuration */
 .mobile-menu[open] nav {
   display: flex;
   flex-direction: column;
   position: absolute;
   top: 40px;
   right: 0;
-  background-color: #ffffff;
-  border: 1px solid #e5e7eb;
+  background-color: var(--paper);
+  border: 1px solid var(--line);
   border-radius: 8px;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   padding: 12px;
@@ -160,7 +153,7 @@
 
 .mobile-menu nav a {
   text-decoration: none;
-  color: #4b5563;
+  color: var(--ink);
   font-weight: 600;
   padding: 10px 12px;
   border-radius: 4px;
@@ -168,65 +161,47 @@
 }
 
 .mobile-menu nav a:hover {
-  background-color: #f3f4f6;
-  color: #b91c1c;
+  background-color: var(--cream);
+  color: var(--red);
 }
 
-/* Make the last mobile item look like a standalone action block list row button */
 .mobile-menu nav a:last-child {
-  background-color: #fef2f2;
-  color: #b91c1c;
+  background-color: var(--cream);
+  color: var(--red);
   text-align: center;
   margin-top: 8px;
 }
-.mobile-menu nav a:last-child:hover {
-  background-color: #fee2fee2;
-}
 
-/* Responsive Adaptive Scale breakpoint hook rules */
-@media (max-width: 920px) {
-  .desktop-nav,
-  .nav-cta {
-    display: none !important; /* Drops desktop menu layout frames */
-  }
-  
-  .mobile-menu {
-    display: block !important; /* Activates the hamburger layout menu overlay item */
-  }
-}
 /* ==========================================================================
    NAVIGATION MODULE: SHARED FOOTER CONTAINER
    ========================================================================== */
 footer {
-  background-color: #111827; /* Dark charcoal/gray styling setup */
-  color: #9ca3af;
+  background-color: var(--nav); /* #202326 */
+  color: var(--muted);
   padding: 60px 0 20px 0;
-  border-top: 4px solid #b91c1c; /* Contrast brand red accent line border */
+  border-top: 4px solid var(--gold); /* Your Chapter Gold Accent Line */
   font-size: 0.95rem;
 }
 
-/* Base structural layout split rules */
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.5fr repeat(3, 1fr); /* Gives the intro block more space */
+  grid-template-columns: 1.5fr repeat(3, 1fr);
   gap: 40px;
   margin-bottom: 40px;
 }
 
-/* Footer Category Headings */
 .footer-grid strong {
   display: block;
-  color: #ffffff;
+  color: var(--paper);
   font-size: 1.1rem;
   margin-bottom: 16px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
-/* Left side numeric branding circle badge mark */
 .footer-mark {
-  background: #b91c1c;
-  color: #ffffff;
+  background: var(--red);
+  color: var(--paper);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -244,68 +219,57 @@ footer {
   max-width: 220px;
 }
 
-/* Column Item Lists Setup */
 .footer-grid div {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-/* Interactive Navigation Links formatting overrides */
 .footer-grid a {
-  color: #9ca3af;
+  color: var(--muted);
   text-decoration: none;
   transition: color 0.2s ease;
   width: max-content;
 }
 
 .footer-grid a:hover {
-  color: #ffffff;
+  color: var(--paper);
   text-decoration: underline;
 }
 
-.footer-grid span {
-  line-height: 1.4;
-}
+.footer-grid span { line-height: 1.4; }
 
 .footer-grid small {
-  color: #6b7280;
+  color: var(--muted);
   font-size: 0.8rem;
   font-style: italic;
+  opacity: 0.7;
 }
 
-/* ==========================================================================
-   NAVIGATION MODULE: BOTTOM COPYRIGHT BAR SECTION
-   ========================================================================== */
 .footer-bottom {
-  border-top: 1px solid #1f2937;
+  border-top: 1px solid var(--charcoal);
   padding-top: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 0.85rem;
-  color: #6b7280;
+  color: var(--muted);
+  opacity: 0.8;
 }
 
 /* ==========================================================================
    RESPONSIVE DESIGN BREAK ADAPTATIONS
    ========================================================================== */
+@media (max-width: 920px) {
+  .desktop-nav, .nav-cta { display: none !important; }
+  .mobile-menu { display: block !important; }
+}
+
 @media (max-width: 1024px) {
-  .footer-grid {
-    grid-template-columns: repeat(2, 1fr); /* Drop down to a 2x2 structural column format */
-    gap: 32px;
-  }
+  .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
 }
 
 @media (max-width: 640px) {
-  .footer-grid {
-    grid-template-columns: 1fr; /* Switch to a vertical layout list configuration on mobile screens */
-    gap: 24px;
-  }
-  
-  .footer-bottom {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
+  .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 10px; }
 }
