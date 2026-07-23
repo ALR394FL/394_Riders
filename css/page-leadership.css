@@ -2,154 +2,104 @@
    PAGE MODULE: LEADERSHIP HERO HEADER BANNER
    ========================================================================== */
 .page-hero {
-  background-color: var(--nav);
+  background: var(--charcoal);
   color: var(--paper);
-  padding: 60px 0;
-  text-align: left;
-  border-bottom: 2px solid var(--gold);
+  border-bottom: 3px solid var(--red);
+  padding: 75px 0 80px;
+  position: relative;
+  overflow: hidden;
 }
 
-.eyebrow {
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-weight: 700;
-  color: var(--red);
-  margin-bottom: 8px;
-  display: block;
+.page-hero:after {
+  content: "394";
+  color: #ffffff06;
+  font: 800 15rem/1 'Arial Narrow', Impact, sans-serif;
+  position: absolute;
+  bottom: -55px;
+  right: 2vw;
+  pointer-events: none;
 }
 
 .page-hero h1 {
-  font-size: 2.5rem;
-  margin: 0 0 12px 0;
-  line-height: 1.2;
+  font-family: 'Arial Narrow', Impact, sans-serif;
+  font-size: clamp(2.65rem, 12.5vw, 3.7rem);
+  line-height: .95;
+  text-transform: uppercase;
 }
 
-.page-hero p {
-  font-size: 1.1rem;
-  color: var(--cream);
-  margin: 0;
-  max-width: 600px;
-}
-
-/* ==========================================================================
-   PAGE MODULE: GLOBAL WRAPPERS & CONTAINERS
-   ========================================================================== */
-.wrap {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.section {
-  padding: 60px 0;
+.page-hero .wrap > p:last-child {
+  color: #c8c7c3;
+  max-width: 700px;
+  margin: 24px 0 0;
+  font-size: 1.15rem;
+  line-height: 1.65;
 }
 
 /* ==========================================================================
-   PAGE MODULE: OFFICER PROFILES LAYOUT DECK (.lead-grid)
+   PAGE MODULE: OFFICER PROFILE CORES (.lead-grid)
    ========================================================================== */
 .lead-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-  padding: 20px 0;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 280px));
+  gap: 2.5rem 2rem;
+  justify-content: center;
+  padding: 2rem 0;
   width: 100%;
 }
 
 .leader-card {
-  background: var(--paper);
-  border: 1px solid var(--line);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   border-radius: 8px;
-  padding: 20px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  padding: 1.25rem;
+  transition: transform 0.2s ease;
 }
-
-.leader-card:hover {
-  transform: translateY(-2px);
-  border-color: var(--gold);
-}
+.leader-card:hover { transform: translateY(-4px); }
 
 .leader-photo {
   width: 100%;
-  height: 260px;
-  border-radius: 6px;
+  aspect-ratio: 3 / 4; /* Hard-locks a vertical vertical shape aspect ratio */
+  background-color: #cbd5e1;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #64748b;
+  margin-bottom: 1rem;
   overflow: hidden;
-  background-color: var(--cream);
-  margin-bottom: 16px;
 }
 
 .leader-photo img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .leader-card .tag {
-  align-self: flex-start;
+  display: inline-block;
   font-size: 0.75rem;
-  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  background-color: var(--cream);
-  color: var(--red);
-  padding: 4px 10px;
-  border-radius: 4px;
-  margin-bottom: 12px;
-  border: 1px solid var(--line);
+  color: #b91c1c;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
 }
 
-.leader-card h2 {
-  font-size: 1.3rem;
-  color: var(--ink);
-  margin: 0 0 8px 0;
-  font-weight: 800;
-  line-height: 1.3;
-}
-
-.leader-card p {
-  font-size: 0.95rem;
-  color: var(--ink);
-  opacity: 0.85;
-  margin: 0;
-  line-height: 1.5;
-}
+.leader-card h2 { font-size: 1.25rem; margin: 0 0 0.5rem 0; line-height: 1.3; text-transform: uppercase; font-family: 'Arial Narrow', Impact, sans-serif; }
+.leader-card p { font-size: 0.9rem; color: #475569; line-height: 1.5; margin: 0; }
 
 /* ==========================================================================
-   PAGE MODULE: BLOCKQUOTE ACCENT BAND
+   PAGE MODULE: QUOTE BANDS STYLING RESETS
    ========================================================================== */
-.quote-band {
-  background-color: var(--nav);
-  color: var(--paper);
-  padding: 60px 0;
-  text-align: center;
-  border-top: 4px solid var(--gold);
-}
+.quote-band { background: var(--cream); border-block: 1px solid var(--line); padding: 72px 0; text-align: center; }
+blockquote { max-width: 950px; color: var(--ink); text-transform: uppercase; margin: 0 auto; font: 800 clamp(2rem, 4vw, 4rem)/1.05 'Arial Narrow', Impact, sans-serif; }
+.quote-band span { color: var(--red); text-transform: uppercase; letter-spacing: .12em; margin-top: 24px; font-size: .75rem; font-weight: 800; display: block; }
 
-.quote-band blockquote {
-  font-size: 1.5rem;
-  font-style: italic;
-  font-weight: 600;
-  max-width: 800px;
-  margin: 0 auto 16px auto;
-  line-height: 1.5;
-  color: var(--paper);
-}
-
-.quote-band span {
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--gold);
-  font-weight: 700;
-  display: block;
-}
-
-@media (max-width: 1024px) { .lead-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 640px) {
-  .lead-grid { grid-template-columns: 1fr; gap: 20px; }
-  .leader-photo { height: 300px; }
-  .quote-band blockquote { font-size: 1.25rem; }
-}
+@media (max-width: 1050px) { .lead-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 720px) { .lead-grid { grid-template-columns: 1fr; } }
