@@ -1,13 +1,13 @@
 {
   "kind": "calendar#events",
-  "etag": "\"p32vs9omolvjpa0o\"",
+  "etag": "\"p33volr6jt7k9a0o\"",
   "summary": "alr394fl@gmail.com",
   "description": "",
-  "updated": "2026-07-22T22:51:32.679Z",
+  "updated": "2026-07-23T12:43:31.344Z",
   "timeZone": "America/New_York",
   "accessRole": "reader",
   "defaultReminders": [],
-  "nextPageToken": "EiwKKhIoCgYI8Ly41AYSHgocChoyMjJvbjZiYWdwMWhzcWlibTJ0Zms2cjAwMsA-AQ==",
+  "nextPageToken": "EiwKKhIoCgYI8MeT1AYSHgocChoxdGFwMnFraGJiNDBmamk4OWRoaGgyazFlY8A-AQ==",
   "items": [
     {
       "kind": "calendar#event",
@@ -48,6 +48,39 @@
     },
     {
       "kind": "calendar#event",
+      "etag": "\"3569621221984222\"",
+      "id": "6sqjaeb56gojeb9i6oojcb9k64r34bb16lijab9j60o3cd1mc4pjge9i60",
+      "status": "confirmed",
+      "htmlLink": "https://www.google.com/calendar/event?eid=NnNxamFlYjU2Z29qZWI5aTZvb2pjYjlrNjRyMzRiYjE2bGlqYWI5ajYwbzNjZDFtYzRwamdlOWk2MCBhbHIzOTRmbEBt",
+      "created": "2026-07-23T12:43:30.000Z",
+      "updated": "2026-07-23T12:43:30.992Z",
+      "summary": "Memorial for Nancy",
+      "description": "An escort ride from the funeral home viewing to the National cemetery in Mims",
+      "location": "Beekman williams funeral home Vierra Florida",
+      "creator": {
+        "email": "alr394fl@gmail.com",
+        "self": true
+      },
+      "organizer": {
+        "email": "alr394fl@gmail.com",
+        "self": true
+      },
+      "start": {
+        "date": "2026-08-05"
+      },
+      "end": {
+        "date": "2026-08-06"
+      },
+      "transparency": "transparent",
+      "iCalUID": "6sqjaeb56gojeb9i6oojcb9k64r34bb16lijab9j60o3cd1mc4pjge9i60@google.com",
+      "sequence": 0,
+      "reminders": {
+        "useDefault": false
+      },
+      "eventType": "default"
+    },
+    {
+      "kind": "calendar#event",
       "etag": "\"3569374893808670\"",
       "id": "1tap2qkhbb40fji89dhhh2k1ec_20260818T230000Z",
       "status": "confirmed",
@@ -78,43 +111,6 @@
       },
       "iCalUID": "1tap2qkhbb40fji89dhhh2k1ec@google.com",
       "sequence": 1,
-      "reminders": {
-        "useDefault": true
-      },
-      "eventType": "default"
-    },
-    {
-      "kind": "calendar#event",
-      "etag": "\"3569374811788254\"",
-      "id": "222on6bagp1hsqibm2tfk6r002_20260825T230000Z",
-      "status": "confirmed",
-      "htmlLink": "https://www.google.com/calendar/event?eid=MjIyb242YmFncDFoc3FpYm0ydGZrNnIwMDJfMjAyNjA4MjVUMjMwMDAwWiBhbHIzOTRmbEBt",
-      "created": "2026-07-22T02:30:05.000Z",
-      "updated": "2026-07-22T02:30:05.894Z",
-      "summary": "Rider Meeting",
-      "creator": {
-        "email": "alr394fl@gmail.com",
-        "self": true
-      },
-      "organizer": {
-        "email": "alr394fl@gmail.com",
-        "self": true
-      },
-      "start": {
-        "dateTime": "2026-08-25T19:00:00-04:00",
-        "timeZone": "America/New_York"
-      },
-      "end": {
-        "dateTime": "2026-08-25T20:00:00-04:00",
-        "timeZone": "America/New_York"
-      },
-      "recurringEventId": "222on6bagp1hsqibm2tfk6r002",
-      "originalStartTime": {
-        "dateTime": "2026-08-25T19:00:00-04:00",
-        "timeZone": "America/New_York"
-      },
-      "iCalUID": "222on6bagp1hsqibm2tfk6r002@google.com",
-      "sequence": 0,
       "reminders": {
         "useDefault": true
       },
