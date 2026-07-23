@@ -2,10 +2,11 @@
    PAGE MODULE: LEADERSHIP HERO HEADER BANNER
    ========================================================================== */
 .page-hero {
-  background-color: #1a1a1a;
-  color: #ffffff;
+  background-color: var(--nav);
+  color: var(--paper);
   padding: 60px 0;
   text-align: left;
+  border-bottom: 2px solid var(--gold);
 }
 
 .eyebrow {
@@ -13,7 +14,7 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-weight: 700;
-  color: #ff3333; /* Standard red brand accent */
+  color: var(--red);
   margin-bottom: 8px;
   display: block;
 }
@@ -26,7 +27,7 @@
 
 .page-hero p {
   font-size: 1.1rem;
-  color: #d1d5db;
+  color: var(--cream);
   margin: 0;
   max-width: 600px;
 }
@@ -49,61 +50,60 @@
    ========================================================================== */
 .lead-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 explicit columns for desktop viewports */
+  grid-template-columns: repeat(3, 1fr);
   gap: 30px;
   padding: 20px 0;
   width: 100%;
 }
 
 .leader-card {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
+  background: var(--paper);
+  border: 1px solid var(--line);
   border-radius: 8px;
   padding: 20px;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
 .leader-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border-color: var(--gold);
 }
 
-/* Rigid image framing parameters forcing perfect aspect configurations */
 .leader-photo {
   width: 100%;
   height: 260px;
   border-radius: 6px;
   overflow: hidden;
-  background-color: #f3f4f6;
+  background-color: var(--cream);
   margin-bottom: 16px;
 }
 
 .leader-photo img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Crops officer portraits neatly without squeezing dimensions */
+  object-fit: cover;
 }
 
-/* Tag labels designating chapter job titles */
 .leader-card .tag {
   align-self: flex-start;
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  background-color: #fef2f2;
-  color: #b91c1c; /* Brand accent red colors */
+  background-color: var(--cream);
+  color: var(--red);
   padding: 4px 10px;
   border-radius: 4px;
   margin-bottom: 12px;
+  border: 1px solid var(--line);
 }
 
 .leader-card h2 {
   font-size: 1.3rem;
-  color: #111827;
+  color: var(--ink);
   margin: 0 0 8px 0;
   font-weight: 800;
   line-height: 1.3;
@@ -111,7 +111,8 @@
 
 .leader-card p {
   font-size: 0.95rem;
-  color: #4b5563;
+  color: var(--ink);
+  opacity: 0.85;
   margin: 0;
   line-height: 1.5;
 }
@@ -120,10 +121,11 @@
    PAGE MODULE: BLOCKQUOTE ACCENT BAND
    ========================================================================== */
 .quote-band {
-  background-color: #111827; /* Dark matching theme frames */
-  color: #ffffff;
+  background-color: var(--nav);
+  color: var(--paper);
   padding: 60px 0;
   text-align: center;
+  border-top: 4px solid var(--gold);
 }
 
 .quote-band blockquote {
@@ -133,38 +135,21 @@
   max-width: 800px;
   margin: 0 auto 16px auto;
   line-height: 1.5;
-  color: #f3f4f6;
+  color: var(--paper);
 }
 
 .quote-band span {
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: #9ca3af;
+  color: var(--gold);
   font-weight: 700;
   display: block;
 }
 
-/* ==========================================================================
-   RESPONSIVE DESIGN VIEWPORT SCALE HOOKS
-   ========================================================================== */
-@media (max-width: 1024px) {
-  .lead-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 columns on tablet monitors */
-  }
-}
-
+@media (max-width: 1024px) { .lead-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 640px) {
-  .lead-grid {
-    grid-template-columns: 1fr; /* 1 vertical column single layout list on mobile phone screens */
-    gap: 20px;
-  }
-  
-  .leader-photo {
-    height: 300px; /* Gives portrait blocks slightly more height visibility on mobile viewports */
-  }
-  
-  .quote-band blockquote {
-    font-size: 1.25rem;
-  }
+  .lead-grid { grid-template-columns: 1fr; gap: 20px; }
+  .leader-photo { height: 300px; }
+  .quote-band blockquote { font-size: 1.25rem; }
 }
