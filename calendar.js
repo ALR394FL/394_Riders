@@ -1,5 +1,5 @@
 // Centralized Chapter 394 Live Calendar Stream
-const API_KEY = 'AIzaSyB9b9rC17BEVuS-YIYLxBn2aYrAnwaVHQc';
+const API_KEY = '***********';
 const CALENDAR_ID = 'alr394fl@gmail.com';
 
 // Set up the live Google Calendar URL to fetch the next 3 upcoming events
