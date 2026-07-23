@@ -403,3 +403,27 @@
     gap: 16px;
   }
 }
+
+/* ==========================================
+   CHAPTER 394 CALENDAR GRID ISOLATION OVERRIDE 
+   ========================================== */
+.event-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 24px !important;
+  
+  /* Clears any accidental old restrictions hidden in the 2000 lines */
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  visibility: visible !important;
+  display: grid !important;
+}
+
+.event-card {
+  display: flex !important;
+  height: auto !important;
+  max-height: none !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
