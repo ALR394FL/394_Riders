@@ -1,29 +1,24 @@
 // Centralized Chapter 394 Local Cache Calendar Stream
-// Note: No API Keys or tokens are required here since we load a local tracking file!
-const CALENDAR_DATA_URL = './calendar.json';
+const CALENDAR_DATA_URL = './events.json';
 
-/**
- * Evaluates the title and details text to assign an operational tag.
- * Automatically aligns with your existing stylesheet layout targets.
- */
 function determineEventTag(titleText, detailsText) {
   const checkText = `${titleText} ${detailsText}`.toLowerCase();
   if (checkText.includes('meeting')) return 'MEETING';
   if (checkText.includes('ride') || checkText.includes('escort')) return 'RIDE';
   if (checkText.includes('service') || checkText.includes('volunteer') || checkText.includes('community')) return 'SERVICE';
   if (checkText.includes('fundraiser') || checkText.includes('event')) return 'EVENT';
-  return 'EVENT'; // Fallback default
+  return 'EVENT';
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-  // Target the container (updated name to reflect grid architecture)
   const container = document.querySelector(".event-grid") || document.querySelector(".event-list");
-  if (!container) return;
+  const modal = document.getElementById("event-modal");
+  const modalContent = document.getElementById("modal-content");
+  const modalClose = document.getElementById("modal-close");
 
-  // Convert old container class to the new grid class for safety
+  if (!container) return;
   container.className = "event-grid";
 
-  // Render a clean placeholder matching your structural spacing rules while loading files
   container.innerHTML = `
     <article class="event-card" style="opacity: 0.65; grid-column: 1 / -1; text-align: center;">
       <div class="event-info"><h3>🔄 Fetching upcoming scheduled activities...</h3></div>
@@ -36,10 +31,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     const data = await response.json();
     const events = data.items || [];
 
-    // Clear out the loading notice
     container.innerHTML = "";
 
-    // Fallback if your calendar timeline is currently completely empty
     if (events.length === 0) {
       container.innerHTML = `
         <article class="event-card" style="grid-column: 1 / -1; text-align: center;">
@@ -49,24 +42,18 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
-    // Process and inject all loaded events dynamically (9 to 12 events)
-    events.forEach(event => {
+    events.forEach((event, index) => {
       const title = event.summary || "Untitled Chapter Event";
-      const details = event.description || event.location || "No further details provided.";
-
-      // Resolve multi-day vs exact timezone hour fields
+      const details = event.description || "No further details provided.";
+      const location = event.location || "Location shared via organizer update.";
       const isAllDay = !event.start.dateTime;
       const rawDate = event.start.dateTime || event.start.date;
       const eventDate = new Date(rawDate);
 
-      // 1. Generate the 3-letter capital shortcode (e.g., "TUE", "SAT")
       const day = eventDate.toLocaleDateString(undefined, { weekday: 'short' }).toUpperCase();
-      
-      // 1b. Grab numeric calendar day and month for clean card layouts
       const dateNum = eventDate.getDate();
       const monthShort = eventDate.toLocaleDateString(undefined, { month: 'short' }).toUpperCase();
 
-      // 2. Format hours into a clear, unified 24h or 12h display string
       let time = "TBA";
       if (isAllDay) {
         time = "All Day";
@@ -74,12 +61,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         time = eventDate.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit', hour12: false });
       }
 
-      // 3. Process keyword tracking tag markers
       const tag = determineEventTag(title, details);
 
-      // Create the structural block element for the grid structure
+      // Create card element
       const card = document.createElement("article");
       card.className = "event-card";
+      card.setAttribute("role", "button");
+      card.setAttribute("tabindex", "0");
+      
       card.innerHTML = `
         <div class="event-card-header">
           <div class="event-badge">
@@ -91,20 +80,49 @@ document.addEventListener("DOMContentLoaded", async () => {
         <div class="event-info">
           <strong class="time-stamp">⏰ ${time}</strong>
           <h3>${title}</h3>
-          <p>${details}</p>
+          <p class="truncate-text">${details}</p>
         </div>
+        <div class="card-footer-action">View Full Details →</div>
       `;
+
+      // 💥 THE POP OUT CLICK EVENT
+      card.addEventListener("click", () => {
+        modalContent.innerHTML = `
+          <span class="modal-tag ${tag.toLowerCase()}">${tag}</span>
+          <h2 class="modal-title">${title}</h2>
+          <div class="modal-meta-grid">
+            <div><strong>📅 Date:</strong> ${eventDate.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</div>
+            <div><strong>⏰ Time:</strong> ${time}</div>
+            <div><strong>📍 Location:</strong> ${location}</div>
+          </div>
+          <hr class="modal-divider" />
+          <div class="modal-description">
+            <strong>📋 Description & Details:</strong>
+            <p>${details.replace(/\n/g, '<br>')}</p>
+          </div>
+          ${event.htmlLink ? `<a href="${event.htmlLink}" target="_blank" class="gcal-link-btn">🗓️ Open in Google Calendar</a>` : ''}
+        `;
+        
+        modal.classList.add("modal-open");
+        modal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden"; // Lock page background scroll
+      });
+
       container.appendChild(card);
     });
+
+    // Close Modal Functions
+    const closeModal = () => {
+      modal.classList.remove("modal-open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "auto"; // Restore background scrolling
+    };
+
+    modalClose.addEventListener("click", closeModal);
+    modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && modal.classList.contains("modal-open")) closeModal(); });
+
   } catch (error) {
-    console.error("CORS Bypass local execution block broken:", error);
-    container.innerHTML = `
-      <article class="event-card" style="border-top: 4px solid #ff3333; grid-column: 1 / -1;">
-        <div class="event-info">
-          <h3 style="color: #ff3333;">⚠️ Schedule Sync Initializing</h3>
-          <p>The events catalog is being prepared by our automated runner. Please refresh the page in a few minutes.</p>
-        </div>
-      </article>
-    `;
+    console.error("Calendar operational stream processing failure:", error);
   }
 });
