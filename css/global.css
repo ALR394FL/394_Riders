@@ -1,4 +1,39 @@
 /* ==========================================================================
+   CHAPTER 394 CORE Palettes & BASELINE RESETS
+   ========================================================================== */
+:root {
+  --charcoal: #151719;
+  --nav: #202326;
+  --cream: #f3ebdd;
+  --paper: #fff9ef;      /* ◄── Your site's soft cream paper background color */
+  --red: #9e2f2f;        /* ◄── Your standard deep brand red accent color */
+  --red-bright: #bc3531; /* ◄── Your interactive bright red hover accent */
+  --gold: #c4a15a;       /* ◄── Your official branch gold border accent line */
+  --muted: #a7aaac;
+  --ink: #24211d;        /* ◄── Your primary high contrast charcoal text color */
+  --line: #d9cdb9;       /* ◄── Your layout line separating items */
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--paper); /* Ensures your canvas is soft cream instead of white */
+  color: var(--ink);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: clip;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+/* ==========================================================================
    GLOBAL STRUCTURE: CSS HARD RESET RULES 
    ========================================================================== */
 *, *::before, *::after {
