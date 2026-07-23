@@ -186,7 +186,7 @@ if __name__ == "__main__":
             calendar_results = calendar_service.events().list(
                 calendarId=calendar_secret_id,
                 timeMin=now_iso,
-                maxResults=3,
+                maxResults=12,
                 singleEvents=True,
                 orderBy='startTime'
             ).execute()
