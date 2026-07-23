@@ -167,21 +167,6 @@ jobs:
           echo "}" >> documents.json
 
       # ==========================================
-      # STEP 3.5: FETCH PUBLIC GOOGLE CALENDAR
-      # ==========================================
-      - name: Fetch Live Google Calendar Events
-        env:
-          CALENDAR_ID: ${{ secrets.ALR_CALENDAR_ID }} # Uses your existing calendar email variable
-        run: |
-          # Encodes the email address cleanly for web transportation 
-          ENCODED_ID=$(echo -n "${{ secrets.ALR_CALENDAR_ID }}" | jq -s -R -r @uri)
-          
-          # Downloads the public full upcoming timeline without requiring an API Key
-          curl -s "https://google.com" > calendar.ics
-          
-          echo "Successfully cached calendar data local block."
-
-      # ==========================================
       # STEP 4: SINGLE UNIFIED GIT COMMIT AND PUSH
       # ==========================================
       - name: Commit and Push Changes back to Repository
