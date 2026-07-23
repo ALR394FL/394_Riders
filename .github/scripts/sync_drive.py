@@ -192,9 +192,9 @@ if __name__ == "__main__":
             ).execute()
             
             # 3. Save the data locally
-            with open('calendar.json', 'w', encoding='utf-8') as json_file:
+            with open('events.json', 'w', encoding='utf-8') as json_file:
                 json.dump(calendar_results, json_file, indent=2)
-            print("Successfully synchronized calendar.json mapping file via secondary credentials.")
+            print("Successfully synchronized events.json mapping file via secondary credentials.")
         else:
             print("Skipping calendar run: CALENDAR_ID or CALENDAR_CREDENTIALS environmental flags missing.")
         
