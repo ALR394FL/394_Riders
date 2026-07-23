@@ -1,0 +1,274 @@
+/* ==========================================================================
+   PAGE MODULE: MAIN HOMEPAGE HERO CONTAINER
+   ========================================================================== */
+.hero {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 100px 0;
+  overflow: hidden;
+  background-color: #1a1a1a; /* Fallback safe dark tone background */
+}
+
+/* Background image asset layer */
+.hero-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('images/hero-bg.jpg'); /* Ensure your image path matches this */
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+}
+
+/* Dark contrast overlay tint protection layer */
+.hero-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(17,24,39,0.95) 0%, rgba(17,24,39,0.4) 100%);
+  z-index: 2;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 3;
+  color: #ffffff;
+  max-width: 750px !important;
+}
+
+/* Typography elements treatments */
+.eyebrow {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+  color: #ff3333; /* Accent brand red color */
+  margin-bottom: 16px;
+  display: block;
+}
+
+.eyebrow span {
+  color: #4b5563;
+  margin: 0 6px;
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  font-weight: 900;
+  line-height: 1.1;
+  margin: 0 0 20px 0;
+  color: #ffffff;
+}
+
+.hero-copy {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: #e5e7eb;
+  margin: 0 0 32px 0;
+}
+
+/* Primary Button Configurations Group */
+.button-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.button {
+  display: inline-block;
+  padding: 14px 28px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.button-red {
+  background-color: #b91c1c;
+  color: #ffffff !important;
+}
+.button-red:hover { background-color: #991b1b; }
+
+.button-ghost {
+  background-color: transparent;
+  color: #ffffff !important;
+  border: 2px solid #ffffff;
+}
+.button-ghost:hover {
+  background-color: #ffffff;
+  color: #111827 !important;
+}
+
+/* ==========================================================================
+   PAGE MODULE: LIVE HERO ANNOUNCEMENT BANNER (.next-event)
+   ========================================================================== */
+.next-event {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: #ffffff;
+  color: #111827;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 30px;
+  border-radius: 12px 0 0 0;
+  text-decoration: none;
+  z-index: 4;
+  box-shadow: -4px -4px 15px rgba(0, 0, 0, 0.15);
+  max-width: 420px;
+  transition: background-color 0.2s;
+}
+.next-event:hover { background-color: #f9fafb; }
+
+.event-date {
+  font-size: 0.75rem;
+  line-height: 1.2;
+  text-align: center;
+  border-right: 2px solid #e5e7eb;
+  padding-right: 20px;
+  color: #4b5563;
+}
+.event-date strong {
+  font-size: 1.4rem;
+  color: #b91c1c;
+  display: block;
+}
+
+.next-event span strong {
+  display: block;
+  font-size: 1.05rem;
+  color: #111827;
+}
+.next-event span small {
+  display: block;
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-top: 2px;
+}
+.next-event .arrow {
+  color: #b91c1c;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* ==========================================================================
+   PAGE MODULE: SECONDARY NAVIGATION HIGHLIGHT DECK
+   ========================================================================== */
+.highlight-strip {
+  background-color: #f3f4f6;
+  padding: 0;
+}
+
+.highlight-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  transform: translateY(-30px); /* Overlaps content row cleanly onto the hero section */
+  position: relative;
+  z-index: 5;
+}
+
+.highlight {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 24px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.highlight:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.red-rule {
+  width: 40px;
+  height: 4px;
+  background-color: #b91c1c;
+  border-radius: 2px;
+}
+
+.highlight strong {
+  font-size: 1.2rem;
+  color: #111827;
+}
+.highlight span {
+  font-size: 0.95rem;
+  color: #4b5563;
+}
+.highlight span b { color: #b91c1c; }
+
+/* ==========================================================================
+   PAGE MODULE: BRIEF SPLIT INTRO SECTION
+   ========================================================================== */
+.wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+}
+
+.section {
+  padding: 80px 0;
+}
+
+.split-intro {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 60px;
+  align-items: flex-start;
+}
+
+.eyebrow.dark { color: #4b5563; }
+
+.split-intro h2 {
+  font-size: 2.25rem;
+  margin: 8px 0 0 0;
+  color: #111827;
+  font-weight: 800;
+}
+
+.split-intro p {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: #374151;
+  margin: 0 0 20px 0;
+}
+
+.text-link {
+  font-weight: 700;
+  color: #b91c1c;
+  text-decoration: none;
+  font-size: 1.05rem;
+}
+.text-link:hover { text-decoration: underline; }
+
+/* ==========================================================================
+   RESPONSIVE DESIGN VIEWPORT LAYOUT CHANGES
+   ========================================================================== */
+@media (max-width: 960px) {
+  .hero { min-height: auto; padding: 80px 0 140px 0; }
+  .hero h1 { font-size: 2.75rem; }
+  .next-event { width: 100%; max-width: none; border-radius: 0; }
+  .split-intro { grid-template-columns: 1fr; gap: 20px; }
+}
+
+@media (max-width: 768px) {
+  .highlight-grid { grid-template-columns: 1fr; transform: translateY(-15px); }
+  .hero { padding-bottom: 160px; }
+}
