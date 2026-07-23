@@ -288,3 +288,29 @@
   background: var(--charcoal);
   color: var(--cream);
 }
+
+/* The container wrapping all your event cards */
+.calendar-container {
+  display: grid;
+  /* Creates exactly 3 equal columns on desktop screens */
+  grid-template-columns: repeat(3, 1fr); 
+  /* Space between the event cards */
+  gap: 20px; 
+  padding: 20px;
+}
+
+/* Individual Event Card styling */
+.event-card {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* 📱 Responsive Mobile View: Stacks into 1 column on small screens */
+@media (max-width: 768px) {
+  .calendar-container {
+    grid-template-columns: 1fr;
+  }
+}
