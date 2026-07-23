@@ -1,0 +1,31 @@
+/* ==========================================================================
+   PAGE MODULE: FULL CALENDAR IFRAME CONTAINER
+   ========================================================================== */
+.calendar-iframe-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Make the iframe responsive so it scales neatly on smaller viewports */
+.calendar-iframe-container iframe {
+  width: 100%;
+  max-width: 800px;
+  height: 600px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e5e7eb !important;
+}
+
+/* 📱 Mobile Optimization: Reduce iframe height on small phone viewports */
+@media (max-width: 640px) {
+  .calendar-iframe-container {
+    margin: 20px auto;
+  }
+  .calendar-iframe-container iframe {
+    height: 450px; 
+  }
+}
