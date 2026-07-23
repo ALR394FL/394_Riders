@@ -1,0 +1,232 @@
+/* ==========================================================================
+   PAGE MODULE: FORMS & DOWNLOADS HERO HEADER
+   ========================================================================== */
+.page-hero {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  padding: 60px 0;
+  text-align: left;
+}
+
+.eyebrow {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  color: #ff3333; /* Standard red brand accent */
+  margin-bottom: 8px;
+  display: block;
+}
+
+.eyebrow.dark {
+  color: #4b5563;
+}
+
+.page-hero h1 {
+  font-size: 2.5rem;
+  margin: 0 0 12px 0;
+  line-height: 1.2;
+}
+
+.page-hero p {
+  font-size: 1.1rem;
+  color: #d1d5db;
+  margin: 0;
+  max-width: 600px;
+}
+
+/* ==========================================================================
+   PAGE MODULE: LAYOUT WRAPPERS & INTRO BLOCKS
+   ========================================================================== */
+.wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section {
+  padding: 60px 0;
+}
+
+.forms-intro {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 40px;
+  gap: 20px;
+}
+
+.forms-intro h2 {
+  font-size: 2rem;
+  margin: 4px 0 0 0;
+  color: #111827;
+}
+
+.forms-intro p {
+  color: #4b5563;
+  max-width: 500px;
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .forms-intro {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ==========================================================================
+   PAGE MODULE: DYNAMIC THUMBNAIL LIVE VIEWER GRID
+   ========================================================================== */
+.document-page-container {
+  margin-bottom: 40px;
+}
+
+.document-group {
+  margin-bottom: 40px;
+}
+
+.group-title {
+  font-size: 1.5rem;
+  border-bottom: 2px solid #eaeaea;
+  padding-bottom: 8px;
+  margin: 24px 0 16px 0;
+  color: #333333;
+}
+
+/* Responsive grid filling rows automatically based on display size */
+.thumbnail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 20px;
+}
+
+.document-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Bounding frame wrapper with specific aspects */
+.document-preview-box {
+  display: block;
+  width: 130px;
+  height: 170px;
+  border: 1px solid #dcdcdc;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  position: relative;
+  background: #ffffff;
+}
+
+/* Native embedded live viewer mapping dimensions */
+.document-preview-box embed {
+  width: 100%;
+  height: 100%;
+  border: none;
+  pointer-events: none;
+  display: block;
+}
+
+/* The invisible overlay action button link */
+.document-click-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  display: block;
+  cursor: pointer;
+}
+
+/* Descriptive labels typography */
+.document-item .doc-title {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: #333333;
+  word-break: break-word;
+  font-weight: bold;
+  max-width: 140px;
+}
+
+.document-item .doc-meta {
+  font-size: 0.75rem;
+  color: #888888;
+  margin-top: 2px;
+}
+
+/* ==========================================================================
+   PAGE MODULE: FALLBACK / PENDING STATE LAYOUT RULES
+   ========================================================================== */
+.document-group-pending .group-title {
+  color: #aaaaaa;
+}
+
+.form-row.fallback-disabled {
+  opacity: 0.6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 6px;
+  border: 1px dashed #cccccc;
+}
+
+.form-row.fallback-disabled h3 {
+  margin: 0 0 5px 0;
+  font-size: 1.1rem;
+  color: #666666;
+}
+
+.form-row.fallback-disabled p {
+  margin: 0 0 5px 0;
+  font-size: 0.9rem;
+  color: #888888;
+}
+
+.form-row.fallback-disabled small {
+  font-size: 0.75rem;
+  color: #999999;
+  font-weight: bold;
+}
+
+.button-dark-disabled {
+  cursor: not-allowed;
+  background: #e0e0e0;
+  color: #a0a0a0;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   PAGE MODULE: BOTTOM CALLOUT BANNER NOTICE
+   ========================================================================== */
+.notice {
+  background-color: #f3f4f6;
+  border-left: 4px solid #4b5563;
+  padding: 20px;
+  border-radius: 0 8px 8px 0;
+  margin-top: 40px;
+}
+
+.wide-notice strong {
+  display: block;
+  font-size: 1.1rem;
+  color: #111827;
+  margin-bottom: 6px;
+}
+
+.wide-notice p {
+  margin: 0;
+  color: #4b5563;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
