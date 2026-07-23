@@ -1,0 +1,245 @@
+/* ==========================================================================
+   PAGE MODULE: MEMBERSHIP HERO HEADER
+   ========================================================================== */
+.page-hero {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  padding: 60px 0;
+  text-align: left;
+}
+
+.eyebrow {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  color: #ff3333; /* Standard red brand accent */
+  margin-bottom: 8px;
+  display: block;
+}
+
+.eyebrow.dark {
+  color: #4b5563;
+}
+
+.page-hero h1 {
+  font-size: 2.5rem;
+  margin: 0 0 12px 0;
+  line-height: 1.2;
+}
+
+.page-hero p {
+  font-size: 1.1rem;
+  color: #d1d5db;
+  margin: 0;
+  max-width: 600px;
+}
+
+/* ==========================================================================
+   PAGE MODULE: MAIN SPLIT CONTENT GRID (.membership-grid)
+   ========================================================================== */
+.wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+}
+
+.section {
+  padding: 60px 0;
+}
+
+.membership-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr; /* Asymmetric grid giving main text more room */
+  gap: 60px;
+  align-items: flex-start;
+}
+
+.membership-grid h2 {
+  font-size: 2rem;
+  margin: 4px 0 16px 0;
+  color: #111827;
+  font-weight: 800;
+}
+
+.membership-grid p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #374151;
+  margin: 0 0 16px 0;
+}
+
+.text-link {
+  display: inline-block;
+  font-weight: 700;
+  color: #b91c1c;
+  text-decoration: none;
+  font-size: 1.05rem;
+  margin-bottom: 24px;
+}
+.text-link:hover {
+  text-decoration: underline;
+}
+
+/* Notice Callout Warning Frame */
+.notice {
+  background-color: #f3f4f6;
+  border-left: 4px solid #b91c1c; /* Accent red border alert line */
+  padding: 20px;
+  border-radius: 0 8px 8px 0;
+  margin-top: 24px;
+}
+
+.notice strong {
+  display: block;
+  font-size: 1.1rem;
+  color: #111827;
+  margin-bottom: 6px;
+}
+
+.notice p {
+  margin: 0;
+  color: #4b5563;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   PAGE MODULE: ASIDE STEP INDEX CARD (.join-steps)
+   ========================================================================== */
+.join-steps {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+}
+
+.join-steps h2 {
+  margin-bottom: 24px;
+}
+
+.join-steps ol {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.join-steps li {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+/* Rounded step counter badges */
+.join-steps li > span {
+  background: #b91c1c;
+  color: #ffffff;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.join-steps li strong {
+  display: block;
+  font-size: 1.1rem;
+  color: #111827;
+  margin-bottom: 4px;
+}
+
+.join-steps li p {
+  font-size: 0.95rem;
+  color: #4b5563;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Sidebar action button matching system standard shapes */
+.button {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 14px 24px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.button-red {
+  background-color: #b91c1c;
+  color: #ffffff !important;
+}
+.button-red:hover {
+  background-color: #991b1b;
+}
+
+/* ==========================================================================
+   PAGE MODULE: BOTTOM VALUES DECK (.values)
+   ========================================================================== */
+.values {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 column feature cards deck row */
+  gap: 30px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.value-card {
+  padding: 10px 0;
+}
+
+.value-card b {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #e5e7eb; /* Large muted gray background index tags */
+  display: block;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.value-card h3 {
+  font-size: 1.4rem;
+  color: #111827;
+  margin: 0 0 10px 0;
+  font-weight: 800;
+}
+
+.value-card p {
+  font-size: 1rem;
+  color: #4b5563;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN ADAPTIVE VIEWPORT SCALES
+   ========================================================================== */
+@media (max-width: 960px) {
+  .membership-grid {
+    grid-template-columns: 1fr; /* Collapses dual column grid into stacking items rows */
+    gap: 40px;
+  }
+  
+  .values {
+    grid-template-columns: repeat(2, 1fr); /* Drop down to 2 columns on tablet displays */
+  }
+}
+
+@media (max-width: 640px) {
+  .values {
+    grid-template-columns: 1fr; /* Single column stack rules for small phones viewports */
+    gap: 24px;
+  }
+}
