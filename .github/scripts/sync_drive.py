@@ -165,3 +165,38 @@ def process_folder_contents(folder_id):
 
 if __name__ == "__main__":
     process_folder_contents(root_folder_id)
+
+    # === APPEND THIS TO THE BOTTOM OF YOUR PYTHON SYNC FILE ===
+    import datetime
+    
+    print("Caching Calendar entries into repository tracking sheets...")
+    now_iso = datetime.datetime.utcnow().isoformat() + 'Z'
+    
+    calendar_secret_id = os.environ.get('CALENDAR_ID')
+    calendar_creds_json = os.environ.get('CALENDAR_CREDENTIALS') # ◄── Pull new secret
+    
+    try:
+        if calendar_secret_id and calendar_creds_json:
+            # 1. Authenticate independently using the second service account credentials
+            cal_creds_info = json.loads(calendar_creds_json)
+            cal_creds = Credentials.from_service_account_info(cal_creds_info)
+            calendar_service = build('calendar', 'v3', credentials=cal_creds) # ◄── Dedicated API hook
+            
+            # 2. Pull the next 3 events using the dedicated calendar service account connection
+            calendar_results = calendar_service.events().list(
+                calendarId=calendar_secret_id,
+                timeMin=now_iso,
+                maxResults=3,
+                singleEvents=True,
+                orderBy='startTime'
+            ).execute()
+            
+            # 3. Save the data locally
+            with open('calendar.json', 'w', encoding='utf-8') as json_file:
+                json.dump(calendar_results, json_file, indent=2)
+            print("Successfully synchronized calendar.json mapping file via secondary credentials.")
+        else:
+            print("Skipping calendar run: CALENDAR_ID or CALENDAR_CREDENTIALS environmental flags missing.")
+        
+    except Exception as cal_err:
+        print(f"Skipping calendar resource pull line: {cal_err}")

@@ -31,6 +31,8 @@ jobs:
         env:
           DRIVE_CREDENTIALS: ${{ secrets.DRIVE_CREDENTIALS }}
           FOLDER_ID: ${{ secrets.FOLDER_ID }} # <-- This line passes the secret into the python script
+          CALENDAR_CREDENTIALS: ${{ secrets.ALR_DRIVE_CEDENTIALS }} # ◄── ADDED THIS
+          CALENDAR_ID: ${{ secrets.ALR_CALENDAR_ID }}
         run: python .github/scripts/sync_drive.py
 
       # ==========================================
@@ -169,10 +171,10 @@ jobs:
       # ==========================================
       - name: Fetch Live Google Calendar Events
         env:
-          CALENDAR_ID: ${{ secrets.calendar_ID }} # Uses your existing calendar email variable
+          CALENDAR_ID: ${{ secrets.ALR_CALENDAR_ID }} # Uses your existing calendar email variable
         run: |
           # Encodes the email address cleanly for web transportation 
-          ENCODED_ID=$(echo -n "${{ secrets.calendar_ID }}" | jq -s -R -r @uri)
+          ENCODED_ID=$(echo -n "${{ secrets.ALR_CALENDAR_ID }}" | jq -s -R -r @uri)
           
           # Downloads the public full upcoming timeline without requiring an API Key
           curl -s "https://google.com" > calendar.ics
