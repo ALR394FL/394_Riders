@@ -5,13 +5,13 @@
   --charcoal: #151719;
   --nav: #202326;
   --cream: #f3ebdd;
-  --paper: #fff9ef;      /* ◄── Your site's soft cream paper background color */
-  --red: #9e2f2f;        /* ◄── Your standard deep brand red accent color */
-  --red-bright: #bc3531; /* ◄── Your interactive bright red hover accent */
-  --gold: #c4a15a;       /* ◄── Your official branch gold border accent line */
+  --paper: #fff9ef;
+  --red: #9e2f2f;
+  --red-bright: #bc3531;
+  --gold: #c4a15a;
   --muted: #a7aaac;
-  --ink: #24211d;        /* ◄── Your primary high contrast charcoal text color */
-  --line: #d9cdb9;       /* ◄── Your layout line separating items */
+  --ink: #24211d;
+  --line: #d9cdb9;
 }
 
 *, *::before, *::after {
@@ -25,7 +25,7 @@ html {
 }
 
 body {
-  background: var(--paper); /* Ensures your canvas is soft cream instead of white */
+  background: var(--paper);
   color: var(--ink);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   overflow-x: clip;
@@ -33,43 +33,27 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
-/* ==========================================================================
-   GLOBAL STRUCTURE: CSS HARD RESET RULES 
-   ========================================================================== */
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html, body {
-  height: 100%;
-  width: 100%;
-}
 
 /* ==========================================================================
-   GLOBAL STRUCTURE: CORPORATE TYPOGRAPHY & COLORS SYSTEM
+   ACCESSIBILITY & UTILITY ELEMENTS
    ========================================================================== */
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
-  background-color: #ffffff;
-  color: #111827; /* Dark grayish ink style color profile */
-  -webkit-font-smoothing: antialiased;
+:focus-visible {
+  outline: 3px solid var(--gold) !important;
+  outline-offset: 3px !important;
 }
 
-/* Global Content Element Overrides definitions */
-h1, h2, h3, h4, h5, h6 {
-  color: #111827;
-  font-weight: 800;
-  letter-spacing: -0.02em;
+.wrap {
+  width: min(1200px, 100% - 48px);
+  margin-inline: auto;
 }
 
-/* Formatted Links parameters limits */
-a {
-  color: inherit;
-  transition: color 0.15s ease;
+.section {
+  padding-block: 88px;
+}
+
+main {
+  display: block;
+  min-height: calc(100vh - 300px);
 }
 
 img, embed {
@@ -79,20 +63,19 @@ img, embed {
 }
 
 /* ==========================================================================
-   GLOBAL STRUCTURE: REUSABLE WEB COMPONENTS OVERRIDES
+   PREFERS REDUCED MOTION TRANSITIONS OVERRIDES
    ========================================================================== */
-/* Ensuring standard container margins loop consistently across injector hooks templates */
-#header-placeholder {
-  width: 100%;
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    transform: none !important;
+    animation: none !important;
+  }
 }
 
-#footer-placeholder {
-  width: 100%;
-  display: block;
-  background-color: #111827;
-}
-
-main {
-  display: block;
-  min-height: calc(100vh - 300px); /* Keeps footer locked down if a page layout text run is too short */
+/* Fluid Mobile wrappers resize rules */
+@media (max-width: 720px) {
+  .wrap { width: min(100% - 32px, 1200px); }
+  .section { padding-block: 60px; }
 }
