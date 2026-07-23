@@ -4,7 +4,7 @@ const CALENDAR_ID = 'alr394fl@gmail.com';
 
 // Set up the live Google Calendar URL to fetch the next 3 upcoming events
 const now = new Date().toISOString();
-const url = `https://googleapis.com{encodeURIComponent(CALENDAR_ID)}/events?key=${API_KEY}&timeMin=${now}&orderBy=startTime&singleEvents=true&maxResults=3`;
+const url = `https://googleapis.com/${encodeURIComponent(CALENDAR_ID)}/events?key=${API_KEY}&timeMin=${now}&orderBy=startTime&singleEvents=true&maxResults=3`;
 
 // Helper function to extract your specific tag classification rules from event text
 function determineEventTag(titleText, detailsText) {
