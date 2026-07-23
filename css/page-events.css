@@ -1,87 +1,56 @@
 /* ==========================================================================
-   PAGE MODULE: EVENTS & RIDES HERO BANNER CONTAINER
+   PAGE MODULE: EVENTS HERO GRID CONTROLLERS
    ========================================================================== */
 .page-hero {
-  background-color: var(--nav); /* Aligns dark header sections to your true dark tone */
-  color: var(--paper);         /* Soft cream text over dark backgrounds */
-  padding: 60px 0;
-  text-align: left;
-  border-bottom: 2px solid var(--gold); /* Subtle gold framing rule anchor */
+  background: var(--charcoal);
+  color: var(--paper);
+  border-bottom: 3px solid var(--red);
+  padding: 75px 0 80px;
+  position: relative;
+  overflow: hidden;
 }
 
-.eyebrow {
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-weight: 700;
-  color: var(--red); /* Official brand deep red */
-  margin-bottom: 8px;
-  display: block;
-}
-
-.eyebrow.dark {
-  color: var(--muted);
+.page-hero:after {
+  content: "394";
+  color: #ffffff06;
+  font: 800 15rem/1 'Arial Narrow', Impact, sans-serif;
+  position: absolute;
+  bottom: -55px;
+  right: 2vw;
+  pointer-events: none;
 }
 
 .page-hero h1 {
-  font-size: 2.5rem;
-  margin: 0 0 12px 0;
-  line-height: 1.2;
-  color: var(--paper);
+  font-family: 'Arial Narrow', Impact, sans-serif;
+  font-size: clamp(2.65rem, 12.5vw, 3.7rem);
+  line-height: .95;
+  text-transform: uppercase;
 }
 
-.page-hero p {
-  font-size: 1.1rem;
-  color: var(--cream); /* Soft secondary contrast text tint */
-  margin: 0;
-  max-width: 600px;
-}
-
-/* ==========================================================================
-   PAGE MODULE: CORE LAYOUT CONTAINER WRAPPERS & SECTION HEADINGS
-   ========================================================================== */
-.wrap {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.section {
-  padding: 60px 0;
+.page-hero .wrap > p:last-child {
+  color: #c8c7c3;
+  max-width: 700px;
+  margin: 24px 0 0;
+  font-size: 1.15rem;
+  line-height: 1.65;
 }
 
 .section-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 40px;
-  gap: 20px;
+  grid-template-columns: 1fr 1fr;
+  align-items: end;
+  gap: 10%;
+  margin-bottom: 42px;
+  display: grid;
 }
 
-.section-heading h2 {
-  font-size: 2rem;
-  margin: 4px 0 0 0;
-  color: var(--ink); /* Deep charcoal ink text output heading code */
-}
-
-.section-heading p {
-  color: var(--ink);
-  opacity: 0.8;
-  max-width: 450px;
+.section-heading > p {
+  color: #6a6257;
   margin: 0;
-  font-size: 0.95rem;
-  line-height: 1.5;
-}
-
-@media (max-width: 768px) {
-  .section-heading {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+  line-height: 1.7;
 }
 
 /* ==========================================================================
-   PAGE MODULE: 3-COLUMN DYNAMIC EVENTS GRID
+   PAGE MODULE: 3-COLUMN CALENDAR CARDS
    ========================================================================== */
 .event-grid {
   display: grid;
@@ -92,21 +61,18 @@
 }
 
 .event-card {
-  background: var(--paper); /* True signature paper cream background canvas */
-  border: 1px solid var(--line); /* Custom page separator layout bounding wires */
-  border-radius: 8px;
-  padding: 20px;
+  border: 1px solid var(--line);
+  background: #fffdf8;
+  padding: 25px;
+  transition: all .18s;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .event-card:hover {
-  transform: translateY(-2px);
-  border-color: var(--gold); /* Highlight card wireframes using legacy gold on mouse hover states */
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px #2e241817;
+  border-color: var(--gold);
 }
 
 .event-card-header {
@@ -118,46 +84,30 @@
   padding-bottom: 12px;
 }
 
-.event-badge {
-  display: flex;
-  flex-direction: column;
-}
+.event-badge { display: flex; flex-direction: column; }
 
 .day-text {
-  font-weight: 800;
-  color: var(--red); /* Bold 3 letter calendar caps lock text accents string */
-  font-size: 1.1rem;
+  letter-spacing: .14em;
+  font: 800 .9rem/1 'Arial Narrow', Impact, sans-serif;
+  color: var(--red);
 }
 
-.date-num {
-  font-size: 0.85rem;
-  color: var(--ink);
-  opacity: 0.7;
-}
-
-.time-stamp {
-  display: block;
-  font-size: 0.9rem;
-  color: var(--ink);
-  font-weight: 600;
-  margin-bottom: 8px;
-}
+.date-num { font-size: 0.85rem; color: #6b7280; }
+.time-stamp { display: block; font-size: 0.9rem; color: #4b5563; margin-bottom: 8px; font-weight: 800; }
 
 .event-info h3 {
-  margin: 4px 0 8px 0;
-  font-size: 1.2rem;
+  text-transform: uppercase;
+  margin: 7px 0 5px;
+  font: 800 1.55rem/1.1 'Arial Narrow', Impact, sans-serif;
   color: var(--ink);
-  line-height: 1.4;
 }
 
 .truncate-text {
   display: -webkit-box;
   -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;  
+  -webkit-box-orient: vertical;
   overflow: hidden;
-  font-size: 0.95rem;
-  color: var(--ink);
-  opacity: 0.85;
+  color: #6b645b;
   margin: 0;
   line-height: 1.5;
 }
@@ -168,35 +118,19 @@
   font-size: 0.85rem;
   font-weight: bold;
   color: var(--red);
-  border-top: 1px solid var(--cream);
+  border-top: 1px solid var(--line);
   text-align: right;
-  transition: color 0.2s;
-}
-.event-card:hover .card-footer-action {
-  color: var(--red-bright);
 }
 
-/* Operational Categorical Badge Tags */
 .tag {
-  font-size: 0.75rem;
-  font-weight: bold;
-  padding: 4px 8px;
-  border-radius: 4px;
+  color: var(--red);
+  letter-spacing: .16em;
   text-transform: uppercase;
-  border: 1px solid transparent;
+  font: 800 .7rem/1 'Arial Narrow', Impact, sans-serif;
 }
-/* Aligned utilizing your true custom color block map sets */
-.tag.meeting { background: var(--cream); color: var(--ink); border-color: var(--line); }
-.tag.ride { background: var(--red); color: var(--paper); }
-.tag.service { background: var(--nav); color: var(--gold); }
-.tag.event { background: var(--paper); color: var(--ink); border-color: var(--gold); }
-
-/* Responsive Grid Breakpoints scales */
-@media (max-width: 1024px) { .event-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 640px) { .event-grid { grid-template-columns: 1fr; gap: 16px; } }
 
 /* ==========================================================================
-   PAGE MODULE: INTERACTIVE POP-OUT LIGHTBOX MODAL OVERLAY
+   PAGE MODULE: MODAL LIGHTBOX SYSTEM
    ========================================================================== */
 .modal-overlay {
   position: fixed;
@@ -204,7 +138,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(21, 23, 25, 0.75); /* Fades background out via your --charcoal hex code parameter */
+  background: rgba(0, 0, 0, 0.75);
   backdrop-filter: blur(4px);
   display: flex;
   justify-content: center;
@@ -214,16 +148,15 @@
   pointer-events: none;
   transition: opacity 0.25s ease;
 }
-
 .modal-overlay.modal-open { opacity: 1; pointer-events: auto; }
 
 .modal-card {
-  background: var(--paper); /* Blends modal content window cleanly to your theme canvas profile */
-  border: 2px solid var(--gold); /* Gold framing borders wrap pop-out content details block */
+  background: #fffdf8;
+  border: 1px solid var(--gold);
   width: 90%;
   max-width: 600px;
   max-height: 85vh;
-  border-radius: 12px;
+  border-radius: 6px;
   padding: 30px;
   position: relative;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
@@ -231,101 +164,39 @@
   transform: scale(0.9);
   transition: transform 0.25s ease;
 }
-
 .modal-overlay.modal-open .modal-card { transform: scale(1); }
 
-.modal-close-btn {
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  background: none;
-  border: none;
-  font-size: 2rem;
-  cursor: pointer;
-  color: var(--muted);
-  transition: color 0.2s;
-}
-.modal-close-btn:hover { color: var(--red); }
-
-.modal-tag { display: inline-block; font-size: 0.8rem; font-weight: bold; padding: 4px 10px; border-radius: 4px; text-transform: uppercase; margin-top: 10px; }
-.modal-tag.meeting { background: var(--cream); color: var(--ink); }
-.modal-tag.ride { background: var(--red); color: var(--paper); }
-.modal-tag.service { background: var(--nav); color: var(--gold); }
-.modal-tag.event { background: var(--paper); color: var(--ink); border: 1px solid var(--gold); }
-
-.modal-title { margin: 10px 0 20px 0; font-size: 1.75rem; color: var(--ink); font-weight: 800; }
-.modal-meta-grid { display: flex; flex-direction: column; gap: 10px; font-size: 1rem; color: var(--ink); }
+.modal-close-btn { position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 2rem; cursor: pointer; color: #9ca3af; }
+.modal-title { margin: 10px 0 20px 0; font: 800 1.75rem/1.1 'Arial Narrow', Impact, sans-serif; text-transform: uppercase; color: var(--ink); }
+.modal-meta-grid { display: flex; flex-direction: column; gap: 10px; font-size: 1rem; color: #374151; }
 .modal-divider { border: 0; border-top: 1px solid var(--line); margin: 20px 0; }
-.modal-description p { margin-top: 8px; line-height: 1.6; color: var(--ink); opacity: 0.9; font-size: 1.05rem; }
+.modal-description p { margin-top: 8px; line-height: 1.6; color: #4b5563; font-size: 1.05rem; }
 
-/* Google Calendar Deep Link button components templates overrides styling elements */
 .gcal-link-btn {
   display: inline-block;
   margin-top: 25px;
   background: var(--red);
-  color: var(--paper) !important;
+  color: #ffffff !important;
   text-decoration: none !important;
-  padding: 10px 20px;
-  border-radius: 6px;
-  font-weight: bold;
-  font-size: 0.95rem;
-  transition: background-color 0.2s, transform 0.1s;
+  padding: 12px 24px;
+  font: 800 .95rem/1 'Arial Narrow', Impact, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .1em;
 }
-.gcal-link-btn:hover { background: var(--red-bright); }
-.gcal-link-btn:active { transform: scale(0.98); }
 
 /* ==========================================================================
-   PAGE MODULE: BOTTOM COMMUNITY PROJECT CALLOUT BANNER
+   PAGE MODULE: BOTTOM CALLOUT BANNER 
    ========================================================================== */
-.dark-section {
-  background-color: var(--nav); /* #202326 background theme sync */
-  color: var(--paper);
-  padding: 60px 0;
-  border-top: 4px solid var(--gold); /* Adds a complementary top gold accent row band */
-}
+.dark-section { background: var(--charcoal); color: var(--paper); }
+.service-callout { justify-content: space-between; align-items: center; gap: 50px; min-height: 360px; display: flex; }
+.service-callout h2 { max-width: 700px; }
+.service-callout p:not(.eyebrow) { color: #c2c1bd; max-width: 650px; line-height: 1.7; }
 
-.service-callout {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 40px;
-}
-
-.service-callout h2 {
-  font-size: 2rem;
-  margin: 4px 0 12px 0;
-  color: var(--paper);
-}
-
-.service-callout p {
-  color: var(--cream);
-  margin: 0;
-  font-size: 1.1rem;
-  max-width: 650px;
-}
-
-.button {
-  display: inline-block;
-  padding: 12px 24px;
-  border-radius: 6px;
-  font-weight: bold;
-  text-decoration: none;
-  transition: background-color 0.2s;
-  white-space: nowrap;
-}
-
-.button-red {
-  background-color: var(--red);
-  color: var(--paper) !important;
-}
-.button-red:hover {
-  background-color: var(--red-bright);
-}
-
-@media (max-width: 768px) {
-  .service-callout {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 24px;
-  }
+/* Responsive Scale adaptations viewports breaks overrides */
+@media (max-width: 1050px) { .event-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 720px) {
+  .page-hero { padding: 58px 0 62px; }
+  .split-intro, .section-heading, .membership-grid { grid-template-columns: 1fr; gap: 34px; }
+  .event-grid { grid-template-columns: 1fr; }
+  .service-callout { flex-direction: column; justify-content: center; align-items: flex-start; min-height: 430px; }
 }
