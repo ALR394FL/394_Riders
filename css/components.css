@@ -314,3 +314,92 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Core Layout Container Grid settings */
+.event-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 explicit, equal columns */
+  gap: 24px;                             /* Grid space spacing gaps */
+  padding: 20px 0;
+  width: 100%;
+}
+
+/* Individual Vertical Grid Cards styling */
+.event-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Internal Card Layout Details */
+.event-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  border-bottom: 1px dashed #e5e7eb;
+  padding-bottom: 12px;
+}
+
+/* Date Accent Badge Grouping */
+.event-badge {
+  display: flex;
+  flex-direction: column;
+}
+
+.day-text {
+  font-weight: 800;
+  color: #111827;
+  font-size: 1.1rem;
+}
+
+.date-num {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+/* Time element spacing rules */
+.time-stamp {
+  display: block;
+  font-size: 0.9rem;
+  color: #4b5563;
+  margin-bottom: 8px;
+}
+
+.event-info h3 {
+  margin: 4px 0 8px 0;
+  font-size: 1.2rem;
+  color: #1f2937;
+  line-height: 1.4;
+}
+
+.event-info p {
+  font-size: 0.95rem;
+  color: #4b5563;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Responsive Adaptive Scale Hooks */
+@media (max-width: 1024px) {
+  .event-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 Columns for small desktop/tablets */
+  }
+}
+
+@media (max-width: 640px) {
+  .event-grid {
+    grid-template-columns: 1fr;             /* 1 Column single list rule on phone viewports */
+    gap: 16px;
+  }
+}
