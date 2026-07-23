@@ -190,7 +190,7 @@ jobs:
           git config --global user.email "41898282+github-actions[bot]@://github.com"
           
           # Stage both asset folders and their new structural data list files simultaneously
-          git add documents/ images/ photos.json documents.json
+          git add documents/ images/ photos.json documents.json calendar.json
           
           # Safely check if files were modified before executing commit routines to prevent build errors
           git diff --quiet && git diff --staged --quiet || (git commit -m "chore: master update of media assets, document files, and catalogs [skip ci]" && git push)
