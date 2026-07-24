@@ -1,26 +1,92 @@
 /* ==========================================================================
    PAGE MODULE: FULL CALENDAR IFRAME CONTAINER
    ========================================================================== */
+.page-hero {
+  background: var(--charcoal);
+  color: var(--paper);
+  border-bottom: 3px solid var(--red);
+  padding: 75px 0 80px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Background layout decoration watermark */
+.page-hero:after {
+  content: "394";
+  color: #ffffff06;
+  font: 800 15rem/1 'Arial Narrow', Impact, sans-serif;
+  position: absolute;
+  bottom: -55px;
+  right: 2vw;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* "On the schedule" label configuration tracking */
+.page-hero .eyebrow {
+  color: var(--gold) !important;
+  text-transform: uppercase;
+  letter-spacing: .22em;
+  margin: 0 0 20px;
+  display: block;
+  font: 800 .95rem/1.3 'Arial Narrow', Impact, sans-serif;
+  position: relative;
+  z-index: 3;
+}
+
+/* Fluid display headline font engine layout scaling rules */
+.page-hero h1 {
+  text-transform: uppercase;
+  letter-spacing: .005em;
+  margin: 0;
+  font-family: 'Arial Narrow', Impact, sans-serif;
+  font-size: clamp(4rem, 7vw, 7rem);
+  line-height: .92;
+  position: relative;
+  z-index: 3;
+}
+
+.page-hero .wrap > p:last-child {
+  color: #c8c7c3;
+  max-width: 700px;
+  margin: 24px 0 0;
+  font-size: 1.15rem;
+  line-height: 1.65;
+  position: relative;
+  z-index: 3;
+}
+/* ==========================================================================
+   PAGE MODULE: EXTRACTED GOOGLE CALENDAR EMBED VIEW ENGINE
+   ========================================================================== */
 .calendar-iframe-container {
-  max-width: 1000px;
-  margin: 40px auto;
-  padding: 0 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.calendar-iframe-container iframe {
+  position: relative;
   width: 100%;
-  max-width: 800px;
-  height: 600px;
+  /* Creates a fluid aspect box ratio so the layout stays crisp across screen scales */
+  padding-bottom: 75%; 
+  height: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
   border-radius: 8px;
+  background: #ffffff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
-  border: 2px solid var(--gold) !important; /* Locks embedded calendar iframe to chapter gold borders */
-  background: var(--paper);
 }
 
-@media (max-width: 640px) {
-  .calendar-iframe-container { margin: 20px auto; }
-  .calendar-iframe-container iframe { height: 450px; }
+/* Forces the embedded window canvas layer to stretch flat inside our bounding box container frame */
+.calendar-iframe-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* ==========================================================================
+   RESPONSIVE LAYOUT CONSTRAINTS
+   ========================================================================== */
+@media (max-width: 720px) {
+  /* Modifies aspect proportions on narrow smartphone screen resolutions so grids stretch tall */
+  .calendar-iframe-container {
+    padding-bottom: 120%; 
+  }
 }

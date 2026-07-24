@@ -15,12 +15,30 @@
   <!-- 1. HEADER COMPONENT ENTRY PLACEHOLDER -->
   <div id="header-placeholder"></div>
 
-  <!-- Main Webpage Content (Stays unique per file) -->
-  <main>
-    <div class="calendar-iframe-container">
-      <iframe src="https://calendar.google.com/calendar/embed?src=alr394fl%40gmail.com&ctz=America%2FNew_York" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
-    </div>
-  </main>
+<!-- Main Webpage Content (Stays unique per file) --> 
+<main> 
+    <!-- 🌟 UNIFIED HERO BLOCK: Explicitly injected above your embedded grid frame -->
+    <section class="page-hero"> 
+        <div class="wrap"> 
+            <p class="eyebrow">Chapter schedule</p> 
+            <h1>Interactive Calendar</h1> 
+            <p>Plan ahead with the Chapter 394 interactive master calendar. Track monthly ride routes, state rallies, and local post assemblies.</p> 
+        </div> 
+    </section>
+
+    <!-- 🌟 WORKSPACE CONTAINER WRAPPER: Constrains the iframe width bounds nicely -->
+    <section class="section wrap">
+        <div class="calendar-iframe-container"> 
+            <iframe src="https://calendar.google.com/calendar/embed?src=alr394fl%40gmail.com&ctz=America%2FNew_York" 
+                    style="border: 0" 
+                    width="800" 
+                    height="600" 
+                    frameborder="0" 
+                    scrolling="no">
+            </iframe> 
+        </div> 
+    </section>
+</main>
 
     <!-- 2. FOOTER COMPONENT ENTRY PLACEHOLDER -->
     <footer id="footer-placeholder"></footer>
