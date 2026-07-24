@@ -29,8 +29,8 @@ jobs:
       # ==========================================
       - name: Run Sync Script
         env:
-          DRIVE_CREDENTIALS: ${{ secrets.DRIVE_CREDENTIALS }}
-          FOLDER_ID: ${{ secrets.FOLDER_ID }} # <-- This line passes the secret into the python script
+          DRIVE_CREDENTIALS: ${{ secrets.ALR_DRIVE_CEDENTIALS }}
+          FOLDER_ID: ${{ secrets.ALR_FOLDER_ID }} # <-- This line passes the secret into the python script
           CALENDAR_CREDENTIALS: ${{ secrets.ALR_DRIVE_CEDENTIALS }} # ◄── ADDED THIS
           CALENDAR_ID: ${{ secrets.ALR_CALENDAR_ID }}
         run: python .github/scripts/sync_drive.py
