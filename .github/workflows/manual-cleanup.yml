@@ -23,7 +23,7 @@ jobs:
       - name: Run Safe Cleanup Execution
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DRIVE_CREDENTIALS: ${{ secrets.DRIVE_CREDENTIALS }}
-          FOLDER_ID: ${{ secrets.FOLDER_ID }}
+          DRIVE_CREDENTIALS: ${{ secrets.ALR_DRIVE_CEDENTIALS }}
+          FOLDER_ID: ${{ secrets.ALR_FOLDER_ID }}
           GITHUB_REPOSITORY: ${{ github.repository }} # Provided automatically by GitHub
         run: python .github/scripts/cleanup.py
