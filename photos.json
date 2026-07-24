@@ -10,10 +10,18 @@
   ],
   "albums": {
     "chapter-rides": [
-
+      {
+        "path": "images/chapter-rides/coastal-ride.png",
+        "title": "Chapter Rides",
+        "caption": "Coastal Ride"
+      }
     ],
     "community-service": [
-
+      {
+        "path": "images/community-service/community-service.png",
+        "title": "Community Service",
+        "caption": "Community Service"
+      }
     ],
     "the-open-road": [
 
