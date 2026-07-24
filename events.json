@@ -1,13 +1,13 @@
 {
   "kind": "calendar#events",
-  "etag": "\"p33volr6jt7k9a0o\"",
+  "etag": "\"p32fvne7lnrlpa0o\"",
   "summary": "alr394fl@gmail.com",
   "description": "",
-  "updated": "2026-07-23T12:43:31.344Z",
+  "updated": "2026-07-24T14:10:18.300Z",
   "timeZone": "America/New_York",
   "accessRole": "reader",
   "defaultReminders": [],
-  "nextPageToken": "EiwKKhIoCgYIgKmH2QYSHgocChoxdGFwMnFraGJiNDBmamk4OWRoaGgyazFlY8A-AQ==",
+  "nextPageToken": "EiwKKhIoCgYIgMqY2AYSHgocChoyMjJvbjZiYWdwMWhzcWlibTJ0Zms2cjAwMsA-AQ==",
   "items": [
     {
       "kind": "calendar#event",
@@ -151,6 +151,48 @@
       "reminders": {
         "useDefault": true
       },
+      "eventType": "default"
+    },
+    {
+      "kind": "calendar#event",
+      "etag": "\"3569804433136382\"",
+      "id": "c9hjcdph68sjcbb1cco3cb9k71i32b9p6cq3ib9o70pmcopo6tj68pb56s",
+      "status": "confirmed",
+      "htmlLink": "https://www.google.com/calendar/event?eid=YzloamNkcGg2OHNqY2JiMWNjbzNjYjlrNzFpMzJiOXA2Y3EzaWI5bzcwcG1jb3BvNnRqNjhwYjU2cyBhbHIzOTRmbEBt",
+      "created": "2026-07-24T14:10:16.000Z",
+      "updated": "2026-07-24T14:10:16.568Z",
+      "summary": "Overdose vigil",
+      "location": "Space Coast Harley-Davidson, 1440 Sportsman Ln NE, Palm Bay, FL 32905, USA",
+      "creator": {
+        "email": "alr394fl@gmail.com",
+        "self": true
+      },
+      "organizer": {
+        "email": "alr394fl@gmail.com",
+        "self": true
+      },
+      "start": {
+        "dateTime": "2026-08-28T17:30:00-04:00",
+        "timeZone": "America/New_York"
+      },
+      "end": {
+        "dateTime": "2026-08-28T18:30:00-04:00",
+        "timeZone": "America/New_York"
+      },
+      "iCalUID": "c9hjcdph68sjcbb1cco3cb9k71i32b9p6cq3ib9o70pmcopo6tj68pb56s@google.com",
+      "sequence": 0,
+      "reminders": {
+        "useDefault": true
+      },
+      "attachments": [
+        {
+          "fileUrl": "https://drive.google.com/file/d/1ZnYb7RLTm82EKxW5YM-HpDN7ak2-QY-N/view?usp=drivesdk",
+          "title": "overdose.vigil.jpg",
+          "mimeType": "image/jpeg",
+          "iconLink": "https://drive-thirdparty.googleusercontent.com/64/type/image",
+          "fileId": "1ZnYb7RLTm82EKxW5YM-HpDN7ak2-QY-N"
+        }
+      ],
       "eventType": "default"
     },
     {
@@ -402,43 +444,6 @@
       },
       "iCalUID": "222on6bagp1hsqibm2tfk6r002@google.com",
       "sequence": 0,
-      "reminders": {
-        "useDefault": true
-      },
-      "eventType": "default"
-    },
-    {
-      "kind": "calendar#event",
-      "etag": "\"3569374893808670\"",
-      "id": "1tap2qkhbb40fji89dhhh2k1ec_20261216T000000Z",
-      "status": "confirmed",
-      "htmlLink": "https://www.google.com/calendar/event?eid=MXRhcDJxa2hiYjQwZmppODlkaGhoMmsxZWNfMjAyNjEyMTZUMDAwMDAwWiBhbHIzOTRmbEBt",
-      "created": "2026-07-22T02:13:22.000Z",
-      "updated": "2026-07-22T02:30:46.904Z",
-      "summary": "Legionare Meeting",
-      "creator": {
-        "email": "alr394fl@gmail.com",
-        "self": true
-      },
-      "organizer": {
-        "email": "alr394fl@gmail.com",
-        "self": true
-      },
-      "start": {
-        "dateTime": "2026-12-15T19:00:00-05:00",
-        "timeZone": "America/New_York"
-      },
-      "end": {
-        "dateTime": "2026-12-15T20:00:00-05:00",
-        "timeZone": "America/New_York"
-      },
-      "recurringEventId": "1tap2qkhbb40fji89dhhh2k1ec",
-      "originalStartTime": {
-        "dateTime": "2026-12-15T19:00:00-05:00",
-        "timeZone": "America/New_York"
-      },
-      "iCalUID": "1tap2qkhbb40fji89dhhh2k1ec@google.com",
-      "sequence": 1,
       "reminders": {
         "useDefault": true
       },
