@@ -8,6 +8,10 @@
   padding: 75px 0 80px;
   position: relative;
   overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: .005em;
+  margin: 0;
+  font-family: Arial Narrow, Impact, sans-serif;
 }
 
 .page-hero:after {

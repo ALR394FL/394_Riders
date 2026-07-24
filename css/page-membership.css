@@ -2,236 +2,258 @@
    PAGE MODULE: MEMBERSHIP HERO HEADER
    ========================================================================== */
 .page-hero {
-  background-color: var(--nav);
+  background: var(--charcoal);
   color: var(--paper);
-  padding: 60px 0;
-  text-align: left;
-  border-bottom: 2px solid var(--gold);
+  border-bottom: 3px solid var(--red);
+  padding: 75px 0 80px;
+  position: relative;
+  overflow: hidden;
 }
 
-.eyebrow {
-  font-size: 0.85rem;
+/* Restores the transparent dynamic background numerical watermark decoration */
+.page-hero:after {
+  content: "394";
+  color: #ffffff06;
+  font: 800 15rem/1 Arial Narrow,Impact,sans-serif;
+  position: absolute;
+  bottom: -55px;
+  right: 2vw;
+}
+
+/* ✅ FIX: Forces "Ride with us" text to render as gold in the hero banner layout */
+.page-hero .eyebrow {
+  color: var(--gold) !important;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-weight: 700;
-  color: var(--red);
-  margin-bottom: 8px;
+  letter-spacing: .22em;
+  margin: 0 0 20px;
   display: block;
+  font: 800 .95rem/1.3 Arial Narrow,Impact,sans-serif;
 }
 
-.eyebrow.dark {
-  color: var(--muted);
-}
-
+/* Fluid display headline font engine layout scaling rules */
 .page-hero h1 {
-  font-size: 2.5rem;
-  margin: 0 0 12px 0;
-  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: .005em;
+  margin: 0;
+  font-family: Arial Narrow,Impact,sans-serif;
+  font-size: clamp(4rem, 7vw, 7rem);
+  line-height: .92;
 }
 
-.page-hero p {
-  font-size: 1.1rem;
-  color: var(--cream);
-  margin: 0;
-  max-width: 600px;
+.page-hero .wrap > p:last-child {
+  color: #c8c7c3;
+  max-width: 700px;
+  margin: 24px 0 0;
+  font-size: 1.15rem;
+  line-height: 1.65;
 }
 
 /* ==========================================================================
    PAGE MODULE: MAIN SPLIT CONTENT GRID (.membership-grid)
    ========================================================================== */
 .wrap {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-  width: 100%;
+  width: min(1200px, 100% - 48px);
+  margin-inline: auto;
 }
 
 .section {
-  padding: 60px 0;
+  padding-block: 88px;
 }
 
 .membership-grid {
+  grid-template-columns: 1.15fr .85fr;
+  align-items: start;
+  gap: 9%;
   display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 60px;
-  align-items: flex-start;
 }
 
 .membership-grid h2 {
-  font-size: 2rem;
-  margin: 4px 0 16px 0;
-  color: var(--ink);
-  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .015em;
+  margin: 0;
+  font: 800 clamp(2.4rem, 4vw, 4.3rem)/.98 Arial Narrow,Impact,sans-serif;
 }
 
-.membership-grid p {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: var(--ink);
-  opacity: 0.9;
-  margin: 0 0 16px 0;
+.membership-grid > div > p:not(.eyebrow),
+.join-steps p,
+.value-card p {
+  color: #655e54;
+  line-height: 1.75;
+  font-size: 1.13rem;
+}
+
+.eyebrow.dark {
+  color: var(--red);
+  text-transform: uppercase;
+  letter-spacing: .22em;
+  font: 800 .95rem/1.3 Arial Narrow,Impact,sans-serif;
+  margin-bottom: 20px;
+  display: block;
 }
 
 .text-link {
-  display: inline-block;
-  font-weight: 700;
   color: var(--red);
-  text-decoration: none;
-  font-size: 1.05rem;
-  margin-bottom: 24px;
-}
-.text-link:hover {
-  color: var(--red-bright);
-  text-decoration: underline;
+  border-bottom: 1px solid #9e2f2f73;
+  padding-bottom: 4px;
+  font-weight: 800;
+  display: inline-block;
 }
 
 .notice {
-  background-color: var(--cream);
   border-left: 4px solid var(--gold);
-  padding: 20px;
-  border-radius: 0 8px 8px 0;
-  margin-top: 24px;
+  background: var(--cream);
+  margin-top: 35px;
+  padding: 22px 24px;
 }
 
 .notice strong {
-  display: block;
-  font-size: 1.1rem;
-  color: var(--ink);
-  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  font-family: Arial Narrow,Impact,sans-serif;
 }
 
 .notice p {
-  margin: 0;
-  color: var(--ink);
-  opacity: 0.85;
-  font-size: 0.95rem;
-  line-height: 1.5;
+  font-size: .92rem;
+  margin: 7px 0 0 !important;
 }
 
 /* ==========================================================================
    PAGE MODULE: ASIDE STEP INDEX CARD (.join-steps)
    ========================================================================== */
 .join-steps {
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 30px;
-  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.01);
+  background: var(--charcoal);
+  color: var(--paper);
+  border-top: 4px solid var(--gold);
+  padding: 42px;
 }
 
 .join-steps h2 {
-  margin-bottom: 24px;
-  color: var(--ink);
+  text-transform: uppercase;
+  margin: 0;
+  font-family: Arial Narrow,Impact,sans-serif;
+  font-size: 3.3rem;
+  line-height: 0.95;
 }
 
 .join-steps ol {
-  list-style: none;
+  margin: 30px 0;
   padding: 0;
-  margin: 0 0 24px 0;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  list-style: none;
 }
 
 .join-steps li {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
+  grid-template-columns: 42px 1fr;
+  gap: 15px;
+  margin-bottom: 25px;
+  display: grid;
 }
 
 .join-steps li > span {
-  background: var(--red);
-  color: var(--paper);
-  width: 28px;
-  height: 28px;
+  border: 1px solid var(--gold);
+  width: 34px;
+  height: 34px;
+  color: var(--gold);
   border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 0.9rem;
-  flex-shrink: 0;
-  margin-top: 2px;
+  place-items: center;
+  font-weight: 800;
+  display: grid;
 }
 
 .join-steps li strong {
-  display: block;
-  font-size: 1.1rem;
-  color: var(--ink);
-  margin-bottom: 4px;
-}
-
-.join-steps li p {
-  font-size: 0.95rem;
-  color: var(--ink);
-  opacity: 0.8;
-  margin: 0;
-  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  font-family: Arial Narrow,Impact,sans-serif;
 }
 
 .button {
-  display: block;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  border: 1px solid #0000;
+  justify-content: center;
+  align-items: center;
+  min-height: 52px;
+  padding: 0 30px;
+  font: 800 .95rem/1 Arial Narrow,Impact,sans-serif;
+  transition: transform .16s, box-shadow .16s, background .16s;
+  display: inline-flex;
   width: 100%;
-  text-align: center;
-  padding: 14px 24px;
-  border-radius: 6px;
-  font-weight: 700;
-  font-size: 0.95rem;
-  text-decoration: none;
-  transition: background 0.2s;
 }
 
 .button-red {
-  background-color: var(--red);
-  color: var(--paper) !important;
+  background: var(--red);
+  color: #fff !important;
 }
+
 .button-red:hover {
-  background-color: var(--red-bright);
+  background: var(--red-bright);
 }
 
 /* ==========================================================================
    PAGE MODULE: BOTTOM VALUES DECK (.values)
    ========================================================================== */
 .values {
-  display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
+  gap: 25px;
+  padding-top: 0;
   border-top: 1px solid var(--line);
+  display: grid;
 }
 
 .value-card {
-  padding: 10px 0;
+  border-top: 3px solid var(--red);
+  background: var(--cream);
+  padding: 30px;
 }
 
 .value-card b {
+  color: var(--gold);
+  letter-spacing: .12em;
+  font-family: Arial Narrow,Impact,sans-serif;
   font-size: 2rem;
-  font-weight: 900;
-  color: var(--cream);
   display: block;
-  line-height: 1;
-  margin-bottom: 8px;
 }
 
 .value-card h3 {
-  font-size: 1.4rem;
-  color: var(--ink);
-  margin: 0 0 10px 0;
-  font-weight: 800;
+  text-transform: uppercase;
+  margin: 16px 0 8px;
+  font: 800 1.7rem/1 Arial Narrow,Impact,sans-serif;
 }
 
-.value-card p {
-  font-size: 1rem;
-  color: var(--ink);
-  opacity: 0.8;
-  line-height: 1.5;
-  margin: 0;
-}
-
+/* ==========================================================================
+   RESPONSIVE LAYOUT RESPONSIVE BREAKPOINT QUERY OVERRIDES
+   ========================================================================== */
 @media (max-width: 960px) {
-  .membership-grid { grid-template-columns: 1fr; gap: 40px; }
-  .values { grid-template-columns: repeat(2, 1fr); }
+  .membership-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
 }
 
-@media (max-width: 640px) {
-  .values { grid-template-columns: 1fr; gap: 24px; }
+@media (max-width: 720px) {
+  .wrap {
+    width: min(100% - 32px, 1200px);
+  }
+  .section {
+    padding-block: 60px;
+  }
+  .split-intro, .section-heading, .forms-intro, .membership-grid {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+  .page-hero {
+    padding: 58px 0 62px;
+  }
+  .page-hero h1 {
+    letter-spacing: -.015em;
+    overflow-wrap: anywhere;
+    max-width: 100%;
+    font-size: clamp(2.65rem, 12.5vw, 3.7rem);
+    line-height: .95;
+  }
+  .lead-grid, .values, .folder-grid, .gallery-photo-grid {
+    grid-template-columns: 1fr;
+  }
+  .join-steps {
+    padding: 30px 24px;
+  }
 }
