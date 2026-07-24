@@ -24,7 +24,11 @@
       }
     ],
     "the-open-road": [
-
+      {
+        "path": "images/the-open-road/hero-road.png",
+        "title": "The Open Road",
+        "caption": "Hero Road"
+      }
     ],
     "leadership": [
       {
