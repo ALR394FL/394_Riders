@@ -183,7 +183,7 @@
 }
 
 .folder-cover img {
-  object-fit: cover;
+  object-fit: contain;
   width: 100%;
   height: 100%;
 }
@@ -230,7 +230,7 @@
 
 /* 🌟 COMPRESSION 4: Hard-locked inside image display limits from 300px down to 140px */
 .gallery-photo img {
-  object-fit: cover;
+  object-fit: contain;
   width: 100%;
   height: 140px; 
   border-radius: 2px;
