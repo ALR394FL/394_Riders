@@ -180,6 +180,7 @@
   height: 150px; 
   margin: 16px 16px 0;
   position: relative;
+  overflow: hidden;
 }
 
 .folder-cover img {
@@ -226,6 +227,7 @@
   margin: 0;
   padding: 8px; /* Tightly margins image frames */
   border-radius: 4px;
+  overflow: hidden;
 }
 
 /* 🌟 COMPRESSION 4: Hard-locked inside image display limits from 300px down to 140px */
