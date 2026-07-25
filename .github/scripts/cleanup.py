@@ -17,14 +17,20 @@ if not root_folder_id:
     print("FATAL ERROR: The FOLDER_ID environment secret is completely missing!")
     exit(1)
 
-# Pass explicit drive scope to resolve authorization crash
-# Pass explicit drive scope to resolve authorization crash
+# ==========================================================================
+# REPAIRED AUTHENTICATION LAYER
+# ==========================================================================
+from google.auth.transport.requests import AuthorizedSession
+
 SCOPES = ['https://googleapis.com']
 DRIVE_CREDENTIALS = json.loads(os.environ['DRIVE_CREDENTIALS'])
 
-# Programmatic Service Accounts authenticate natively with scopes included
+# 1. Parse the service account credentials natively with scopes explicitly linked
 creds = Credentials.from_service_account_info(DRIVE_CREDENTIALS, scopes=SCOPES)
-service = build('drive', 'v3', credentials=creds)
+
+# 2. 🌟 CRITICAL FIX: Force an Authorized Session transport wrapper to bind tokens automatically
+auth_session = AuthorizedSession(creds)
+service = build('drive', 'v3', session=auth_session)
 
 active_paths = set()
 
