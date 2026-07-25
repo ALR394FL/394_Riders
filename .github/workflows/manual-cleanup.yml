@@ -6,7 +6,10 @@ on:
 jobs:
   cleanup-assets:
     runs-on: ubuntu-latest
-    steps:
+     # 🌟 CRITICAL FIX: Grants the workflow server write access to push API commits back to main
+    permissions:
+      contents: write
+   steps:
       - name: Checkout Repository Code
         uses: actions/checkout@v4
 
