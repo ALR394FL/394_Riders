@@ -44,7 +44,12 @@
 
     ],
     "uncategorized": [
-
+      {
+        "path": "documents/uncategorized/test 1.docx",
+        "title": "Test 1",
+        "type": "DOCX",
+        "label": "General / Uncategorized"
+      }
     ]
   }
 }
