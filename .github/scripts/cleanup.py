@@ -257,7 +257,7 @@ def compile_frontend_json_databases():
 
 def upload_json_to_github(filename, json_string_data):
     """Checks for existing files and pushes structural database commits straight to GitHub"""
-    url = f"https://github.com{REPO}/contents/{filename}"
+    url = f"https://github.com/repos/{REPO}/contents/{filename}"
     headers = {
         "Authorization": f"token {GITHUB_TOKEN}",
         "Accept": "application/vnd.github.v3+json"
