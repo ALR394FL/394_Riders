@@ -10,7 +10,12 @@
   ],
   "archives": {
     "membership-applications": [
-
+      {
+        "path": "documents/membership-applications/ 1-13-19-ALR-Membership-Application-Fillable.pdf",
+        "title": "1 13 19 ALR Membership Application Fillable",
+        "type": "PDF",
+        "label": "Membership Form"
+      }
     ],
     "ride-waivers": [
       {
