@@ -18,18 +18,14 @@ if not root_folder_id:
     exit(1)
 
 # Pass explicit drive scope to resolve authorization crash
+# Pass explicit drive scope to resolve authorization crash
 SCOPES = ['https://googleapis.com']
 DRIVE_CREDENTIALS = json.loads(os.environ['DRIVE_CREDENTIALS'])
+
+# Programmatic Service Accounts authenticate natively with scopes included
 creds = Credentials.from_service_account_info(DRIVE_CREDENTIALS, scopes=SCOPES)
-
-# 🌟 FIX: Force a fresh authentication handshake before building the client
-from google.auth.transport.requests import Request
-try:
-    creds.refresh(Request())
-except Exception as auth_err:
-    print(f"Warning: Preliminary credential token refresh skipped: {auth_err}")
-
 service = build('drive', 'v3', credentials=creds)
+
 active_paths = set()
 
 def clean_slug(folder_name):
@@ -139,17 +135,21 @@ def process_and_upload_file(file_id, github_path, mime_type, md5_checksum=None):
             drive_download_url = f"https://googleapis.com{file_id}/export?mimeType={export_mime}"
         else:
             drive_download_url = f"https://googleapis.com{file_id}?alt=media"
-         # 🌟 FIX: Pull the active token directly from the refreshed credential object
-        active_token = creds.token
-        drive_response = requests.get(
-            drive_download_url, 
-            headers={"Authorization": f"Bearer {active_token}"}
-        )
-        if drive_response.status_code != 200:
-            return
-        file_bytes = drive_response.content
+            
+        # Natively authorized download extraction method
+        from googleapiclient.http import MediaIoBaseDownload
+        import io
+        
+        request = service.files().get_media(fileId=file_id) if 'vnd.google-apps' not in mime_type else service.files().export(fileId=file_id, mimeType=export_mime)
+        fh = io.BytesIO()
+        downloader = MediaIoBaseDownload(fh, request)
+        done = False
+        while done is False:
+            status, done = downloader.next_chunk()
+        file_bytes = fh.getvalue()
+        
     except Exception as e:
-        print(f"Failed asset extraction for {github_path}: {e}")
+        print(f"Failed asset extraction downloading for {github_path}: {e}")
         return
 
     sha = None
