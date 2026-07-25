@@ -104,7 +104,7 @@ def sync_google_drive_folder(drive_folder_id, current_github_base=""):
             active_paths.add(target_github_path)
             
             # Content Hash Skipping Optimization pass
-            url = f"https://github.com{REPO}/contents/{target_github_path}"
+            url = f"https://github.com/repos/{REPO}/contents/{target_github_path}"
             headers = {"Authorization": f"token {GITHUB_TOKEN}", "Accept": "application/vnd.github.v3+json"}
             
             get_response = requests.get(url, headers=headers)
@@ -121,7 +121,7 @@ def sync_google_drive_folder(drive_folder_id, current_github_base=""):
             break
 def process_and_upload_file(file_id, github_path, mime_type, md5_checksum=None):
     """Downloads files using MediaIoBaseDownload and pushes commits cleanly to GitHub"""
-    url = f"https://github.com{REPO}/contents/{github_path}"
+    url = f"https://github.com/repos/{REPO}/contents/{github_path}"
     headers = {"Authorization": f"token {GITHUB_TOKEN}", "Accept": "application/vnd.github.v3+json"}
     
     try:
@@ -162,7 +162,7 @@ def process_and_upload_file(file_id, github_path, mime_type, md5_checksum=None):
 
 def purge_orphaned_github_files(github_folder_path):
     """Scans repository tracks recursively and purges assets missing from Drive"""
-    url = f"https://github.com{REPO}/contents/{github_folder_path}"
+    url = f"https://github.com/repos/{REPO}/contents/{github_folder_path}"
     headers = {"Authorization": f"token {GITHUB_TOKEN}", "Accept": "application/vnd.github.v3+json"}
     
     response = requests.get(url, headers=headers)
@@ -184,7 +184,7 @@ def purge_orphaned_github_files(github_folder_path):
                 continue
                 
             print(f"Purging orphaned asset: {github_file_path}")
-            delete_url = f"https://github.com{REPO}/contents/{github_file_path}"
+            delete_url = f"https://github.com/repos/{REPO}/contents/{github_file_path}"
             delete_payload = {
                 "message": f"chore: cleaning up expired resource file ({item['name']})",
                 "sha": item['sha']
