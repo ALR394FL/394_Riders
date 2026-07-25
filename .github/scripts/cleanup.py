@@ -159,7 +159,7 @@ def process_and_upload_file(file_id, github_path, mime_type, md5_checksum=None):
     put_response = requests.put(url, headers=headers, json=payload)
     
     # ✅ FIX: Checking against valid array parameters restores the syntax engine
-    if put_response.status_code in:
+    if put_response.status_code in [200, 201]:
         action_type = "Updated" if sha else "Created fresh"
         print(f"Successfully sync'd: [{action_type}] -> {github_path}")
     else:
