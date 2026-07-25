@@ -6,7 +6,9 @@ import base64
 from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
 
-# 1. INITIALIZATION & CREDENTIALS CHECK
+# ==========================================================================
+# 1. INITIALIZATION & REPAIRED AUTHENTICATION LAYER
+# ==========================================================================
 GITHUB_TOKEN = os.environ.get('GITHUB_TOKEN')
 REPO = os.environ.get('GITHUB_REPOSITORY')
 
@@ -17,25 +19,13 @@ if not root_folder_id:
     print("FATAL ERROR: The FOLDER_ID environment secret is completely missing!")
     exit(1)
 
-# ==========================================================================
-# REPAIRED AUTHENTICATION LAYER
-# ==========================================================================
-from google.auth.transport.requests import AuthorizedSession
-
+# Pass the standard programmatic credentials directly to the discovery build engine
 SCOPES = ['https://googleapis.com']
 DRIVE_CREDENTIALS = json.loads(os.environ['DRIVE_CREDENTIALS'])
-
-# 1. Parse the service account credentials natively with scopes explicitly linked
 creds = Credentials.from_service_account_info(DRIVE_CREDENTIALS, scopes=SCOPES)
-
-# 2. Force an Authorized Session transport wrapper to bind tokens automatically
-auth_session = AuthorizedSession(creds)
-
-# ✅ FIX: Changing 'session' to 'http' correctly configures the API connection handler
-service = build('drive', 'v3', http=auth_session)
+service = build('drive', 'v3', credentials=creds)
 
 active_paths = set()
-
 
 def clean_slug(folder_name):
     slug = folder_name.lower().strip()
