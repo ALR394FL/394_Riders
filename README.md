@@ -56,35 +56,45 @@ To allow your workflow container to execute without exposing private tokens, cre
 
 ---
 
-## 📂 File Routing & Index Matrix
+## 📁 Content Management Instructions
 
-The Python script scans item titles (case-insensitive) and evaluates their file extension types to distribute them into categorical production directories:
+This repository automatically syncs files from our shared Google Drive folder using a recursive directory tree. You no longer need to rename files or use keyword prefixes to categorize them. The directory folder structure itself handles 100% of the sorting on the website.
 
-### 📸 Images File Pipeline
-Applies to targets matching: `.png`, `.jpg`, `.jpeg`, `.gif`, `.svg`, `.webp`.
+### 1. Main Directory Layout Map
+To ensure your files appear on the correct pages, they must be uploaded into one of the two primary parent folders on Google Drive:
 
-| Filename Keyword Match | Target Directory Destination | JSON Album Map Identifier |
-| :--- | :--- | :--- |
-| `ride` | images/chapter-rides/ | Chapter Rides |
-| `escort` | images/veteran-escorts/ | Veteran Escorts |
-| `fundraiser \| event` | images/fundraisers/ | Fundraisers |
-| `leader \| officer` | images/leadership/ | Leadership |
-| `community` | images/community-service/ | Community Service |
-| `road` | images/the-open-road/ | The Open Road |
-| *No Rule Match* | images/uncategorized/ | Uncategorized Media |
+📂 Shared Google Drive Root
+├── 📁 Documents  <-- Files uploaded here populate the "Forms & Resources" page
+└── 📁 Images     <-- Files uploaded here populate the "Photo Galleries" page
 
-### 📄 Documents File Pipeline
-Applies to textual layouts and native office packages. Powered on the frontend by `forms.js` within `documents.html`.
+---
 
-| Filename Keyword Match | Target Directory Destination | JSON Archive Label Output |
-| :--- | :--- | :--- |
-| `waiver` | documents/ride-waivers/ | Ride Liability Waiver |
-| `application` | documents/membership-applications/ | Membership Form |
-| `request` | documents/event-requests/ | Community Support Request |
-| `invoice \| receipt` | documents/financials/ | Finance |
-| `minutes` | documents/meeting-minutes/ | Meeting Minutes |
-| `agenda` | documents/meeting-agendas/ | Meeting Agendas |
-| *No Rule Match* | documents/uncategorized/ | General / Uncategorized |
+### 2. Photo Gallery Album Uploads (`/Images`)
+To create a new photo album or add images to an existing gallery grid, place your images inside a subfolder under the main `Images` directory. 
+* **Folder Name = Website Album Title**: The exact name you give the folder on Google Drive will be cleaned into a web-safe URL slug and displayed as the headline title for that album on the live site.
+
+**Example Folder Paths:**
+* `Images/Chapter Rides/` -> Creates a "Chapter Rides" gallery category card.
+* `Images/Veteran Escorts/` -> Creates a "Veteran Escorts" gallery category card.
+
+*Note: Any image files dropped loosely into the root or directly inside the top-level `Images/` folder without being tucked inside a subfolder category will be automatically skipped and ignored.*
+
+---
+
+### 3. Resource Documents Uploads (`/Documents`)
+To group PDFs, Word documents, or spreadsheets into structured download categories on our Forms page, organize them into named subfolders inside the main `Documents` directory.
+
+**Example Folder Paths:**
+* `Documents/Meeting Minutes/` -> Groups downloads under a "Meeting Minutes" webpage header.
+* `Documents/Ride Waivers/` -> Groups downloads under a "Ride Waivers" webpage header.
+* `Documents/Financial Records/` -> Groups downloads under a "Financial Records" webpage header.
+
+---
+
+### 4. Automatic Conflict Resolution & Built-In Safeguards
+* **Duplicate Protection Layer:** If separate folders contain files sharing the exact same name (e.g., `flyer.pdf`), our synchronization script detects the collision and appends a short unique identifier code to the end of the filename on GitHub. This prevents file overwrite conflicts.
+* **Content Hash Skipping:** The synchronization system checks the cryptographic MD5 hash of your files. If an asset has not changed, the script fast-bypasses downloading or uploading it, reducing site build times to under 10 seconds.
+* **Instructional Safeguard:** Loose documentation files named `README.md` or `instructions.txt` placed within repository directories to guide editors are whitelisted and will never be removed by the automated cleanup purge engine.
 
 ---
 
@@ -92,7 +102,7 @@ Applies to textual layouts and native office packages. Powered on the frontend b
 
 The events engine handles calendar data locally to deliver a rapid, interactive user experience:
 
-* **File Tracking:** `events.html` fetches raw event payloads directly from `calendar.json` using the logic inside `events.js`. 
+* **File Tracking:** `events.html` fetches raw event payloads directly from `events.json` using the logic inside `events.js`. 
 * **The 3-Column Layout Grid:** Upcoming entries are formatted dynamically into a clear, card-based column grid layout that automatically collapses safely to 2 columns on tablets and a single column list on mobile screens.
 * **The Detail Pop-out Module:** Clicking an individual event card isolates data elements to render an animated lightbox modal window displaying complete locations, 24h formatted timetables, custom text descriptions, and a deep direct link out button to add the item directly to a user's Google Calendar.
 
