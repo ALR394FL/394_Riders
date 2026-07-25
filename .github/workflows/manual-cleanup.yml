@@ -10,7 +10,7 @@ jobs:
     permissions:
       contents: write
  
- steps:
+    steps:
       - name: Checkout Repository Code
         uses: actions/checkout@v4
 
