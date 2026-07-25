@@ -157,7 +157,7 @@ def process_and_upload_file(file_id, github_path, mime_type, md5_checksum=None):
         payload["sha"] = sha
 
     put_response = requests.put(url, headers=headers, json=payload)
-    if put_response.status_code in:
+    if put_response.status_code in [200, 201]:
         print(f"Successfully sync'd -> {github_path}")
 
 def purge_orphaned_github_files(github_folder_path):
