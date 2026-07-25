@@ -28,11 +28,14 @@ DRIVE_CREDENTIALS = json.loads(os.environ['DRIVE_CREDENTIALS'])
 # 1. Parse the service account credentials natively with scopes explicitly linked
 creds = Credentials.from_service_account_info(DRIVE_CREDENTIALS, scopes=SCOPES)
 
-# 2. 🌟 CRITICAL FIX: Force an Authorized Session transport wrapper to bind tokens automatically
+# 2. Force an Authorized Session transport wrapper to bind tokens automatically
 auth_session = AuthorizedSession(creds)
-service = build('drive', 'v3', session=auth_session)
+
+# ✅ FIX: Changing 'session' to 'http' correctly configures the API connection handler
+service = build('drive', 'v3', http=auth_session)
 
 active_paths = set()
+
 
 def clean_slug(folder_name):
     slug = folder_name.lower().strip()
