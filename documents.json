@@ -1,54 +1,31 @@
 {
   "documentOrder": [
-    "membership-applications",
     "ride-waivers",
-    "event-requests",
-    "financials",
-    "meeting-minutes",
-    "meeting-agendas",
-    "uncategorized"
+    "uncategorized",
+    "membership-applications"
   ],
   "archives": {
-    "membership-applications": [
-      {
-        "path": "documents/membership-applications/ 1-13-19-ALR-Membership-Application-Fillable.pdf",
-        "title": "1 13 19 ALR Membership Application Fillable",
-        "type": "PDF",
-        "label": "Membership Form"
-      }
-    ],
     "ride-waivers": [
       {
-        "path": "documents/ride-waivers/Florida-Waiver-1-30-23.pdf",
-        "title": "Florida Waiver 1 30 23",
+        "path": "documents/ride-waivers/Florida-Waiver-1-30-23_1.pdf",
+        "title": "Florida Waiver 1 30 23 1",
         "type": "PDF",
-        "label": "Ride Liability Waiver"
+        "label": "Ride Waivers"
       },
       {
-        "path": "documents/ride-waivers/Waiver-Liability-Signature-Page-for-Events.pdf",
-        "title": "Waiver Liability Signature Page For Events",
+        "path": "documents/ride-waivers/Waiver-Liability-Signature-Page-for-Events_1.pdf",
+        "title": "Waiver Liability Signature Page For Events 1",
         "type": "PDF",
-        "label": "Ride Liability Waiver"
+        "label": "Ride Waivers"
       }
     ],
-    "event-requests": [
-
-    ],
-    "financials": [
-
-    ],
-    "meeting-minutes": [
-
-    ],
-    "meeting-agendas": [
-
-    ],
-    "uncategorized": [
+    "uncategorized": [],
+    "membership-applications": [
       {
-        "path": "documents/uncategorized/test 1.docx",
-        "title": "Test 1",
-        "type": "DOCX",
-        "label": "General / Uncategorized"
+        "path": "documents/membership-applications/ 1-13-19-ALR-Membership-Application-Fillable_1.pdf",
+        "title": "1 13 19 Alr Membership Application Fillable 1",
+        "type": "PDF",
+        "label": "Membership Applications"
       }
     ]
   }

@@ -1,107 +1,93 @@
 {
   "categoryOrder": [
-    "chapter-rides",
-    "community-service",
-    "the-open-road",
     "leadership",
-    "veteran-escorts",
     "fundraisers",
-    "uncategorized"
+    "chapter-rides",
+    "uncategorized",
+    "community-service",
+    "the-open-road"
   ],
   "albums": {
-    "chapter-rides": [
-      {
-        "path": "images/chapter-rides/coastal-ride.png",
-        "title": "Chapter Rides",
-        "caption": "Coastal Ride"
-      }
-    ],
-    "community-service": [
-      {
-        "path": "images/community-service/community-service.png",
-        "title": "Community Service",
-        "caption": "Community Service"
-      }
-    ],
-    "the-open-road": [
-      {
-        "path": "images/the-open-road/hero-road.png",
-        "title": "The Open Road",
-        "caption": "Hero Road"
-      }
-    ],
     "leadership": [
       {
-        "path": "images/leadership/leader_angelina-scianimanico.jpg",
+        "path": "images/leadership/leader_angelina-scianimanico_1.jpg",
         "title": "Leadership",
-        "caption": "Leader Angelina Scianimanico"
+        "caption": "Leader Angelina Scianimanico 1"
       },
       {
-        "path": "images/leadership/leader_bill-draper.jpg",
+        "path": "images/leadership/leader_bill-draper_1.jpg",
         "title": "Leadership",
-        "caption": "Leader Bill Draper"
+        "caption": "Leader Bill Draper 1"
       },
       {
-        "path": "images/leadership/leader_danielle-terranova.jpg",
+        "path": "images/leadership/leader_danielle-terranova_1.jpg",
         "title": "Leadership",
-        "caption": "Leader Danielle Terranova"
+        "caption": "Leader Danielle Terranova 1"
       },
       {
-        "path": "images/leadership/leader_david-luzader.jpg",
+        "path": "images/leadership/leader_david-luzader_1.jpg",
         "title": "Leadership",
-        "caption": "Leader David Luzader"
+        "caption": "Leader David Luzader 1"
       },
       {
-        "path": "images/leadership/leader_frank-scianimanico.jpg",
+        "path": "images/leadership/leader_frank-scianimanico_1.jpg",
         "title": "Leadership",
-        "caption": "Leader Frank Scianimanico"
+        "caption": "Leader Frank Scianimanico 1"
       },
       {
-        "path": "images/leadership/leader_haley-luzader.jpg",
+        "path": "images/leadership/leader_haley-luzader_1.jpg",
         "title": "Leadership",
-        "caption": "Leader Haley Luzader"
+        "caption": "Leader Haley Luzader 1"
       },
       {
-        "path": "images/leadership/leader_jay-cherland.jpg",
+        "path": "images/leadership/leader_jay-cherland_1.jpg",
         "title": "Leadership",
-        "caption": "Leader Jay Cherland"
+        "caption": "Leader Jay Cherland 1"
       },
       {
-        "path": "images/leadership/leader_jon-scannell.jpg",
+        "path": "images/leadership/leader_jon-scannell_1.jpg",
         "title": "Leadership",
-        "caption": "Leader Jon Scannell"
+        "caption": "Leader Jon Scannell 1"
       }
-    ],
-    "veteran-escorts": [
-
     ],
     "fundraisers": [
       {
-        "path": "images/fundraisers/ event_brevard_angels_poker_run.jpg",
+        "path": "images/fundraisers/ event_brevard_angels_poker_run_1.jpg",
         "title": "Fundraisers",
-        "caption": "Event Brevard Angels Poker Run"
+        "caption": "Event Brevard Angels Poker Run 1"
+      },
+      {
+        "path": "images/fundraisers/overdose.vigil.jpg",
+        "title": "Fundraisers",
+        "caption": "Overdose.vigil"
+      }
+    ],
+    "chapter-rides": [
+      {
+        "path": "images/chapter-rides/coastal-ride_1.png",
+        "title": "Chapter Rides",
+        "caption": "Coastal Ride 1"
       }
     ],
     "uncategorized": [
       {
-        "path": "images/uncategorized/overdose.vigil.jpg",
-        "title": "Uncategorized Media",
-        "caption": "Overdose.vigil"
-      },
+        "path": "images/uncategorized/new miles qrcode_1.png",
+        "title": "Uncategorized",
+        "caption": "New Miles Qrcode 1"
+      }
+    ],
+    "community-service": [
       {
-        "path": "images/uncategorized/45-tee shirt.png",
-        "title": "Uncategorized Media",
-        "caption": "45 Tee Shirt"
-      },
+        "path": "images/community-service/community-service_1.png",
+        "title": "Community Service",
+        "caption": "Community Service 1"
+      }
+    ],
+    "the-open-road": [
       {
-        "path": "images/uncategorized/QR Code For Miles.png",
-        "title": "Uncategorized Media",
-        "caption": "QR Code For Miles"
-      },
-      {
-        "path": "images/uncategorized/new miles qrcode.png",
-        "title": "Uncategorized Media",
-        "caption": "New Miles Qrcode"
+        "path": "images/the-open-road/hero-road_1.png",
+        "title": "The Open Road",
+        "caption": "Hero Road 1"
       }
     ]
   }
