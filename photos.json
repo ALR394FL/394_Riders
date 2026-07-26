@@ -10,51 +10,51 @@
   "albums": {
     "leadership": [
       {
-        "path": "images/leadership/leader_angelina-scianimanico_1.jpg",
+        "path": "images/leadership/leader_angelina-scianimanico.jpg",
         "title": "Leadership",
-        "caption": "Leader Angelina Scianimanico 1"
+        "caption": "Leader Angelina Scianimanico"
       },
       {
-        "path": "images/leadership/leader_bill-draper_1.jpg",
+        "path": "images/leadership/leader_bill-draper.jpg",
         "title": "Leadership",
-        "caption": "Leader Bill Draper 1"
+        "caption": "Leader Bill Draper"
       },
       {
-        "path": "images/leadership/leader_danielle-terranova_1.jpg",
+        "path": "images/leadership/leader_danielle-terranova.jpg",
         "title": "Leadership",
-        "caption": "Leader Danielle Terranova 1"
+        "caption": "Leader Danielle Terranova"
       },
       {
-        "path": "images/leadership/leader_david-luzader_1.jpg",
+        "path": "images/leadership/leader_david-luzader.jpg",
         "title": "Leadership",
-        "caption": "Leader David Luzader 1"
+        "caption": "Leader David Luzader"
       },
       {
-        "path": "images/leadership/leader_frank-scianimanico_1.jpg",
+        "path": "images/leadership/leader_frank-scianimanico.jpg",
         "title": "Leadership",
-        "caption": "Leader Frank Scianimanico 1"
+        "caption": "Leader Frank Scianimanico"
       },
       {
-        "path": "images/leadership/leader_haley-luzader_1.jpg",
+        "path": "images/leadership/leader_haley-luzader.jpg",
         "title": "Leadership",
-        "caption": "Leader Haley Luzader 1"
+        "caption": "Leader Haley Luzader"
       },
       {
-        "path": "images/leadership/leader_jay-cherland_1.jpg",
+        "path": "images/leadership/leader_jay-cherland.jpg",
         "title": "Leadership",
-        "caption": "Leader Jay Cherland 1"
+        "caption": "Leader Jay Cherland"
       },
       {
-        "path": "images/leadership/leader_jon-scannell_1.jpg",
+        "path": "images/leadership/leader_jon-scannell.jpg",
         "title": "Leadership",
-        "caption": "Leader Jon Scannell 1"
+        "caption": "Leader Jon Scannell"
       }
     ],
     "fundraisers": [
       {
-        "path": "images/fundraisers/ event_brevard_angels_poker_run_1.jpg",
+        "path": "images/fundraisers/ event_brevard_angels_poker_run.jpg",
         "title": "Fundraisers",
-        "caption": "Event Brevard Angels Poker Run 1"
+        "caption": "Event Brevard Angels Poker Run"
       },
       {
         "path": "images/fundraisers/overdose.vigil.jpg",
@@ -64,30 +64,30 @@
     ],
     "chapter-rides": [
       {
-        "path": "images/chapter-rides/coastal-ride_1.png",
+        "path": "images/chapter-rides/coastal-ride.png",
         "title": "Chapter Rides",
-        "caption": "Coastal Ride 1"
+        "caption": "Coastal Ride"
       }
     ],
     "uncategorized": [
       {
-        "path": "images/uncategorized/new miles qrcode_1.png",
+        "path": "images/uncategorized/new miles qrcode.png",
         "title": "Uncategorized",
-        "caption": "New Miles Qrcode 1"
+        "caption": "New Miles Qrcode"
       }
     ],
     "community-service": [
       {
-        "path": "images/community-service/community-service_1.png",
+        "path": "images/community-service/community-service.png",
         "title": "Community Service",
-        "caption": "Community Service 1"
+        "caption": "Community Service"
       }
     ],
     "the-open-road": [
       {
-        "path": "images/the-open-road/hero-road_1.png",
+        "path": "images/the-open-road/hero-road.png",
         "title": "The Open Road",
-        "caption": "Hero Road 1"
+        "caption": "Hero Road"
       }
     ]
   }
