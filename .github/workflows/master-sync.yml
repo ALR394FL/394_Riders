@@ -1,7 +1,8 @@
 name: Master Google Drive & Repository Synchronization
+
 on:
-  #schedule:
-   # - cron: '23 */6 * * *' # every 6 hours at minute 23 (e.g., 12:23, 6:23, etc.).
+  # schedule:
+  #   - cron: '23 */6 * * *' # every 6 hours at minute 23 (e.g., 12:23, 6:23, etc.).
   workflow_dispatch: # Allows manual one-click execution from the GitHub Actions tab
 
 permissions:
@@ -30,18 +31,31 @@ jobs:
       - name: Run Sync Script
         env:
           DRIVE_CREDENTIALS: ${{ secrets.ALR_DRIVE_CEDENTIALS }}
-          FOLDER_ID: ${{ secrets.ALR_FOLDER_ID }} # <-- This line passes the secret into the python script
-          CALENDAR_CREDENTIALS: ${{ secrets.ALR_DRIVE_CEDENTIALS }} # ◄── ADDED THIS
+          FOLDER_ID: ${{ secrets.ALR_FOLDER_ID }}
+          CALENDAR_CREDENTIALS: ${{ secrets.ALR_DRIVE_CEDENTIALS }}
           CALENDAR_ID: ${{ secrets.ALR_CALENDAR_ID }}
         run: python .github/scripts/sync_drive.py
 
       # ==========================================
-      # STEP 2: SCAN PHOTOS & REGENERATE ALBUMS INDEX
+      # STEP 2: DYNAMICALLY REGENERATE ALBUMS INDEX
       # ==========================================
       - name: Scan Categorized Folders and Build Photos JSON
         run: |
           shopt -s nullglob
-          categories=("chapter-rides" "community-service" "the-open-road" "leadership" "veteran-escorts" "fundraisers" "uncategorized")
+          
+          # Dynamically discover all directories inside images/
+          categories=()
+          if [ -d "images" ]; then
+            for d in images/*/; do
+              categories+=("$(basename "$d")")
+            fi
+          fi
+          
+          # Fallback if images directory is completely empty
+          if [ ${#categories[@]} -eq 0 ]; then
+            categories+=("uncategorized")
+          fi
+
           cat_count=${#categories[@]}
 
           echo "{" > photos.json
@@ -54,24 +68,17 @@ jobs:
             fi
           done
           echo "  ]," >> photos.json
-
           echo "  \"albums\": {" >> photos.json
+
           for ((i=0; i<cat_count; i++)); do
             cat_slug="${categories[$i]}"
             
-            case "$cat_slug" in
-              "chapter-rides")     cat_title="Chapter Rides" ;;
-              "community-service")  cat_title="Community Service" ;;
-              "the-open-road")      cat_title="The Open Road" ;;
-              "leadership")         cat_title="Leadership" ;;
-              "veteran-escorts")    cat_title="Veteran Escorts" ;;
-              "fundraisers")        cat_title="Fundraisers" ;;
-              "uncategorized")      cat_title="Uncategorized Media" ;;
-            esac
+            # Format display title cleanly from folder slug name
+            cat_title=$(echo "$cat_slug" | sed 's/[-_]/ /g' | awk '{for(i=1;i<=NF;i++)sub(/./,toupper(substr($i,1,1)),$i)}1')
 
             echo "    \"$cat_slug\": [" >> photos.json
             first_file=true
-
+            
             for file in images/$cat_slug/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}; do
               filename=$(basename "$file")
               clean_caption=$(echo "${filename%.*}" | sed 's/[-_]/ /g' | awk '{for(i=1;i<=NF;i++)sub(/./,toupper(substr($i,1,1)),$i)}1')
@@ -81,15 +88,14 @@ jobs:
               else
                 echo "," >> photos.json
               fi
-              
               echo "      {" >> photos.json
               echo "        \"path\": \"images/$cat_slug/$filename\"," >> photos.json
               echo "        \"title\": \"$cat_title\"," >> photos.json
               echo "        \"caption\": \"$clean_caption\"" >> photos.json
               echo -n "      }" >> photos.json
             done
-
-            echo "" >> photos.json # This outputs an empty line padding block for clean array formatting structure rows
+            echo "" >> photos.json
+            
             if [ $i -lt $((cat_count - 1)) ]; then
               echo "    ]," >> photos.json
             else
@@ -100,12 +106,25 @@ jobs:
           echo "}" >> photos.json
 
       # ==========================================
-      # STEP 3: SCAN DOCUMENTS & REGENERATE ARCHIVES INDEX
+      # STEP 3: DYNAMICALLY REGENERATE ARCHIVES INDEX
       # ==========================================
       - name: Scan Folders and Build Documents JSON
         run: |
           shopt -s nullglob
-          folders=("membership-applications" "ride-waivers" "event-requests" "financials" "meeting-minutes" "meeting-agendas" "uncategorized")
+          
+          # Dynamically discover all directories inside documents/
+          folders=()
+          if [ -d "documents" ]; then
+            for d in documents/*/; do
+              folders+=("$(basename "$d")")
+            fi
+          fi
+
+          # Fallback if documents directory is completely empty
+          if [ ${#folders[@]} -eq 0 ]; then
+            folders+=("uncategorized")
+          fi
+
           fold_count=${#folders[@]}
 
           echo "{" > documents.json
@@ -118,28 +137,21 @@ jobs:
             fi
           done
           echo "  ]," >> documents.json
-
           echo "  \"archives\": {" >> documents.json
+
           for ((i=0; i<fold_count; i++)); do
             fold_slug="${folders[$i]}"
             
-            case "$fold_slug" in
-              "membership-applications") label="Membership Form" ;;
-              "ride-waivers")            label="Ride Liability Waiver" ;;
-              "event-requests")          label="Community Support Request" ;;
-              "financials")              label="Finance" ;;
-              "meeting-minutes")         label="Meeting Minutes" ;;
-              "meeting-agendas")         label="Meeting Agendas" ;;
-              "uncategorized")           label="General / Uncategorized" ;;
-            esac
+            # Format display label cleanly from folder slug name
+            label=$(echo "$fold_slug" | sed 's/[-_]/ /g' | awk '{for(i=1;i<=NF;i++)sub(/./,toupper(substr($i,1,1)),$i)}1')
 
             echo "    \"$fold_slug\": [" >> documents.json
             first_file=true
-
-            for file in documents/$fold_slug/*.{pdf,docx,txt,PDF,DOCX,TXT}; do
+            
+            for file in documents/$fold_slug/*.{pdf,docx,xlsx,txt,PDF,DOCX,XLSX,TXT}; do
               filename=$(basename "$file")
               ext="${filename##*.}"
-              ext_upper=$(echo "$ext" | tr '[:lower:]' '[:upper:]')
+              ext_upper=$(echo "$ext" | tr '[:lower:]' '[:upper:]' )
               clean_title=$(echo "${filename%.*}" | sed 's/[-_]/ /g' | awk '{for(i=1;i<=NF;i++)sub(/./,toupper(substr($i,1,1)),$i)}1')
               
               if [ "$first_file" = true ]; then
@@ -147,7 +159,6 @@ jobs:
               else
                 echo "," >> documents.json
               fi
-              
               echo "      {" >> documents.json
               echo "        \"path\": \"documents/$fold_slug/$filename\"," >> documents.json
               echo "        \"title\": \"$clean_title\"," >> documents.json
@@ -155,8 +166,8 @@ jobs:
               echo "        \"label\": \"$label\"" >> documents.json
               echo -n "      }" >> documents.json
             done
-
-            echo "" >> documents.json # This outputs an empty line padding block for clean array formatting structure rows
+            echo "" >> documents.json
+            
             if [ $i -lt $((fold_count - 1)) ]; then
               echo "    ]," >> documents.json
             else
@@ -172,10 +183,10 @@ jobs:
       - name: Commit and Push Changes back to Repository
         run: |
           git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@://github.com"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           
-          # Stage both asset folders and their new structural data list files simultaneously
+          # Stage asset directories, deletions, and structural metadata files
           git add documents/ images/ photos.json documents.json events.json
           
-          # Safely check if files were modified before executing commit routines to prevent build errors
+          # Safely verify workspace changes to bypass failure routines if no updates occurred
           git diff --quiet && git diff --staged --quiet || (git commit -m "chore: master update of media assets, document files, and catalogs [skip ci]" && git push)
