@@ -84,49 +84,28 @@ def sync_google_drive_folder(drive_folder_id, current_github_base=""):
             if not current_github_base or '/' not in current_github_base:
                 continue
 
-            # 📄 FILE PROCESSING: SPLIT DISCOVERY CHANNELS
+                  # ==========================================================================
+            # STRIPPED BASELINE LOOP: SCANS, ADDS, AND MARKS ACTIVE FOR DELETION PASSES
+            # ==========================================================================
             filename_base, file_extension = os.path.splitext(file_name)
-            clean_ext = file_extension.lower()
             
-            # Channel A: Handle explicit Google Workspace Cloud Document Exports
+            # Map standard cloud office files to regular extensions
             if mime_type == 'application/vnd.google-apps.document':
                 file_extension = '.docx'
             elif mime_type == 'application/vnd.google-apps.spreadsheet':
                 file_extension = '.xlsx'
             elif 'vnd.google-apps' in mime_type:
-                continue # Safely skip unexportable cloud slides/forms
+                continue # Skip unexportable forms or presentations
 
-            # Re-compile absolute targeted path mapping destination
+            # Assemble direct path based strictly on the current folder slug
             target_github_path = f"{current_github_base}/{filename_base}{file_extension}".replace("\\", "/")
 
-            # Strategy 2: Duplicate Name Path Collision Protection Layer
-            if target_github_path in active_paths:
-                short_id = file_id[-6:]
-                target_github_path = f"{current_github_base}/{filename_base}_{short_id}{file_extension}".replace("\\", "/")
-                print(f"⚠️ Duplicate collision protected: Remapped to {target_github_path}")
-
-            # Register the path in the memory database inventory
+            # Track this path so the cleanup function at the end knows it is still active
             active_paths.add(target_github_path)
             
-            # Strategy 3: Fast-Bypass Content Hash Verification Pass
-            url = f"https://github.com/repos/{REPO}/contents/{target_github_path}"
-            headers = {"Authorization": f"token {GITHUB_TOKEN}", "Accept": "application/vnd.github.v3+json"}
-            
-            get_response = requests.get(url, headers=headers)
-            if get_response.status_code == 200:
-                github_item_data = get_response.json()
-                drive_fingerprint = md5_checksum if md5_checksum else file_id
-                
-                # If content hash tags match completely, trigger the performance bypass loop
-                if github_item_data.get('message', '').endswith(f"[{drive_fingerprint}]"):
-                    # ✅ MOVED PHOTO PROTECTION: If the file was moved to a NEW folder, 
-                    # target_github_path won't exist there on GitHub yet, returning a 404.
-                    # If it returns a 200, it means it's an identical duplicate, safe to skip.
-                    print(f"⚡ Fast-Bypass: {target_github_path} is unchanged. Skipping download.")
-                    continue
-
-            # EXECUTE SYNC ACTIONS: Runs cleanly for new documents, new photos, and moved files!
-            process_and_upload_file(file_id, target_github_path, mime_type, md5_checksum)
+            # Send the file straight to the download and upload handler
+            print(f"Syncing asset target: {target_github_path}")
+            process_and_upload_file(file_id, target_github_path, mime_type)
 
         page_token = results.get('nextPageToken')
         if not page_token:
