@@ -2,7 +2,6 @@ import os
 import json
 
 def clean_text(slug):
-    # Replaces dashes/underscores with spaces and capitalizes each word
     words = slug.replace('-', ' ').replace('_', ' ').split()
     return ' '.join([w.capitalize() for w in words])
 
@@ -21,7 +20,7 @@ photos_data = {
     "albums": {}
 }
 
-image_extensions = ('.jpg', '.jpeg', '.png', '.webp', '.jpg', '.jpeg', '.png', '.webp')
+image_extensions = ('.jpg', '.jpeg', '.png', '.webp')
 
 for cat in categories:
     photos_data["albums"][cat] = []
@@ -29,7 +28,7 @@ for cat in categories:
     if os.path.exists(cat_dir):
         for file in sorted(os.listdir(cat_dir)):
             if file.lower().endswith(image_extensions):
-                base_name = os.path.splitext(file)[0]
+                base_name, _ = os.path.splitext(file)
                 photos_data["albums"][cat].append({
                     "path": f"images/{cat}/{file}",
                     "title": clean_text(cat),
@@ -64,8 +63,8 @@ for fold in folders:
     if os.path.exists(fold_dir):
         for file in sorted(os.listdir(fold_dir)):
             if file.lower().endswith(doc_extensions):
-                base_name = os.path.splitext(file)[0]
-                ext_upper = os.path.splitext(file)[1].replace('.', '').upper()
+                base_name, ext = os.path.splitext(file)
+                ext_upper = ext.replace('.', '').upper()
                 documents_data["archives"][fold].append({
                     "path": f"documents/{fold}/{file}",
                     "title": clean_text(base_name),
