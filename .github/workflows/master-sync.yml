@@ -43,7 +43,6 @@ jobs:
         run: |
           shopt -s nullglob
           
-          # Dynamically discover all directories inside images/
           categories=()
           if [ -d "images" ]; then
             for d in images/*/; do
@@ -51,7 +50,6 @@ jobs:
             fi
           fi
           
-          # Fallback if images directory is completely empty
           if [ ${#categories[@]} -eq 0 ]; then
             categories+=("uncategorized")
           fi
@@ -72,16 +70,15 @@ jobs:
 
           for ((i=0; i<cat_count; i++)); do
             cat_slug="${categories[$i]}"
-            
-            # Format display title cleanly from folder slug name
-            cat_title=$(echo "$cat_slug" | sed 's/[-_]/ /g' | awk '{for(i=1;i<=NF;i++)sub(/./,toupper(substr($i,1,1)),$i)}1')
+            cat_title=$(echo "$cat_slug" | sed 's/[-_]/ /g' | awk '{for(j=1;j<=NF;j++)sub(/./,toupper(substr($j,1,1)),$j)}1')
 
             echo "    \"$cat_slug\": [" >> photos.json
             first_file=true
             
+            # CRITICAL FIX: Wrap extensions inside curly braces for correct expansion
             for file in images/$cat_slug/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}; do
               filename=$(basename "$file")
-              clean_caption=$(echo "${filename%.*}" | sed 's/[-_]/ /g' | awk '{for(i=1;i<=NF;i++)sub(/./,toupper(substr($i,1,1)),$i)}1')
+              clean_caption=$(echo "${filename%.*}" | sed 's/[-_]/ /g' | awk '{for(k=1;k<=NF;k++)sub(/./,toupper(substr($k,1,1)),$k)}1')
               
               if [ "$first_file" = true ]; then
                 first_file=false
@@ -112,7 +109,6 @@ jobs:
         run: |
           shopt -s nullglob
           
-          # Dynamically discover all directories inside documents/
           folders=()
           if [ -d "documents" ]; then
             for d in documents/*/; do
@@ -120,7 +116,6 @@ jobs:
             fi
           fi
 
-          # Fallback if documents directory is completely empty
           if [ ${#folders[@]} -eq 0 ]; then
             folders+=("uncategorized")
           fi
@@ -141,18 +136,17 @@ jobs:
 
           for ((i=0; i<fold_count; i++)); do
             fold_slug="${folders[$i]}"
-            
-            # Format display label cleanly from folder slug name
-            label=$(echo "$fold_slug" | sed 's/[-_]/ /g' | awk '{for(i=1;i<=NF;i++)sub(/./,toupper(substr($i,1,1)),$i)}1')
+            label=$(echo "$fold_slug" | sed 's/[-_]/ /g' | awk '{for(j=1;j<=NF;j++)sub(/./,toupper(substr($j,1,1)),$j)}1')
 
             echo "    \"$fold_slug\": [" >> documents.json
             first_file=true
             
+            # CRITICAL FIX: Wrap extensions inside curly braces for correct expansion
             for file in documents/$fold_slug/*.{pdf,docx,xlsx,txt,PDF,DOCX,XLSX,TXT}; do
               filename=$(basename "$file")
               ext="${filename##*.}"
-              ext_upper=$(echo "$ext" | tr '[:lower:]' '[:upper:]' )
-              clean_title=$(echo "${filename%.*}" | sed 's/[-_]/ /g' | awk '{for(i=1;i<=NF;i++)sub(/./,toupper(substr($i,1,1)),$i)}1')
+              ext_upper=$(echo "$ext" | tr '[:lower:]' '[:upper:]')
+              clean_title=$(echo "${filename%.*}" | sed 's/[-_]/ /g' | awk '{for(k=1;k<=NF;k++)sub(/./,toupper(substr($k,1,1)),$k)}1')
               
               if [ "$first_file" = true ]; then
                 first_file=false
