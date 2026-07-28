@@ -1,9 +1,19 @@
 {
   "documentOrder": [
+    "Meeting_Agenda",
     "ride-waivers",
+    "Meeting_minutes",
     "membership-applications"
   ],
   "archives": {
+    "Meeting_Agenda": [
+      {
+        "path": "documents/Meeting_Agenda/July 2026 Meeting Agenda.pdf",
+        "title": "July 2026 Meeting Agenda",
+        "type": "PDF",
+        "label": "Meeting Agenda"
+      }
+    ],
     "ride-waivers": [
       {
         "path": "documents/ride-waivers/Florida-Waiver-1-30-23.pdf",
@@ -16,6 +26,14 @@
         "title": "Waiver Liability Signature Page For Events",
         "type": "PDF",
         "label": "Ride Waivers"
+      }
+    ],
+    "Meeting_minutes": [
+      {
+        "path": "documents/Meeting_minutes/minutes_June_2026.pdf",
+        "title": "Minutes June 2026",
+        "type": "PDF",
+        "label": "Meeting Minutes"
       }
     ],
     "membership-applications": [
