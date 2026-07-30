@@ -1,5 +1,6 @@
 {
   "categoryOrder": [
+    "Celebration ",
     "leadership",
     "fundraisers",
     "chapter-rides",
@@ -8,6 +9,13 @@
     "the-open-road"
   ],
   "albums": {
+    "Celebration ": [
+      {
+        "path": "images/Celebration /PXL_20260726_015521523.MP.jpg",
+        "title": "Celebration",
+        "caption": "Pxl 20260726 015521523.mp"
+      }
+    ],
     "leadership": [
       {
         "path": "images/leadership/leader_angelina-scianimanico.jpg",
