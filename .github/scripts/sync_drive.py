@@ -99,6 +99,7 @@ def process_folder_contents(folder_id, parent_folder_name="uncategorized", is_ro
 
             # Determine path based on file type and category folder name
             top_level = "images" if is_image else "documents"
+            clean_parent_name = parent_folder_name.strip()
             subfolder = os.path.join(top_level, parent_folder_name)
 
             is_exportable = False
