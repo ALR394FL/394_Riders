@@ -38,9 +38,10 @@ def get_unique_filepath(calculated_path, file_id):
     current_run_assignments.add(new_path)
     return new_path
 
-def process_folder_contents(folder_id, parent_folder_name="uncategorized"):
+def process_folder_contents(folder_id, parent_folder_name="uncategorized", is_root_level=False):
     """
     Deep searches the connected folder ID for real files and follows shortcuts.
+    Treats shortcut folders as root environments containing 'images' and 'documents'.
     """
     page_token = None
     while True:
@@ -74,7 +75,8 @@ def process_folder_contents(folder_id, parent_folder_name="uncategorized"):
                 target_mime = shortcut.get('targetMimeType')
 
                 if target_mime == 'application/vnd.google-apps.folder':
-                    process_folder_contents(target_id, parent_folder_name=file_name)
+                    # CRITICAL FIX: Treat the target folder as a new root level
+                    process_folder_contents(target_id, parent_folder_name=parent_folder_name, is_root_level=True)
                     continue
                 else:
                     file_id = target_id
@@ -82,7 +84,11 @@ def process_folder_contents(folder_id, parent_folder_name="uncategorized"):
 
             # Handle subfolders
             if mime_type == 'application/vnd.google-apps.folder':
-                process_folder_contents(file_id, parent_folder_name=file_name)
+                # If we are at root level and see folders named 'images' or 'documents', skip nesting them
+                if is_root_level and file_name.lower() in ['images', 'documents']:
+                    process_folder_contents(file_id, parent_folder_name="uncategorized", is_root_level=False)
+                else:
+                    process_folder_contents(file_id, parent_folder_name=file_name, is_root_level=False)
                 continue
 
             if not file_name:
@@ -91,6 +97,7 @@ def process_folder_contents(folder_id, parent_folder_name="uncategorized"):
             image_extensions = ('.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp')
             is_image = file_name.lower().endswith(image_extensions)
 
+            # Determine path based on file type and category folder name
             top_level = "images" if is_image else "documents"
             subfolder = os.path.join(top_level, parent_folder_name)
 
@@ -128,7 +135,7 @@ def process_folder_contents(folder_id, parent_folder_name="uncategorized"):
 
             try:
                 # If it already exists on disk from a previous run, skip downloading to save actions time
-                if os.path.exists(local_path):
+               if os.path.exists(local_path):
                     print(f"File safely preserved without suffix updates: {local_path}")
                     continue
 
@@ -181,7 +188,7 @@ if __name__ == "__main__":
     except Exception:
         root_name = "uncategorized"
 
-    process_folder_contents(root_folder_id, parent_folder_name=root_name)
+    process_folder_contents(root_folder_id, parent_folder_name=root_name, is_root_level=True)
     cleanup_deleted_files()
 
 # === CALENDAR CACHING ===
