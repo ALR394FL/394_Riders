@@ -7,7 +7,7 @@ from googleapiclient.discovery import build
 from googleapiclient.http import MediaIoBaseDownload
 
 # SET TO TRUE TO TEST PATHS WITHOUT DOWNLOADING OR DELETING FILES
-DRY_RUN = false 
+DRY_RUN = False 
 
 # 1. Authenticate using GitHub Secrets
 creds_json = json.loads(os.environ['DRIVE_CREDENTIALS'])
