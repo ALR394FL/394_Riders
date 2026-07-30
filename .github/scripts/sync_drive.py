@@ -17,25 +17,23 @@ tracked_local_paths = set()
 # Tracks file assignments made STRICTLY during this specific execution to catch true same-folder collisions
 current_run_assignments = set()
 
-def get_unique_filepath(calculated_path):
+def get_unique_filepath(calculated_path, file_id):
     """
-    Requirement 2: True Collision Safeguard.
-    Only renames a file if another file from Google Drive has ALREADY claimed 
+    Requirement 2: True Collision Safeguard using Google Drive File ID.
+    Only modifies the filename if another file from Google Drive has ALREADY claimed 
     this exact path during this current script execution.
     """
     if calculated_path not in current_run_assignments:
         current_run_assignments.add(calculated_path)
         return calculated_path
     
-    # If the path was already claimed during THIS run, a true collision occurred
+    # If the path was already claimed during THIS run, a true collision occurred.
+    # We append the unique Google Drive File ID to guarantee a permanent, stable filename.
     base, extension = os.path.splitext(calculated_path)
-    counter = 1
-    while True:
-        new_path = f"{base}_{counter}{extension}"
-        if new_path not in current_run_assignments:
-            current_run_assignments.add(new_path)
-            return new_path
-        counter += 1
+    new_path = f"{base}_{file_id}{extension}"
+    
+    current_run_assignments.add(new_path)
+    return new_path
 
 def process_folder_contents(folder_id, parent_folder_name="uncategorized"):
     """
@@ -114,7 +112,7 @@ def process_folder_contents(folder_id, parent_folder_name="uncategorized"):
                 calculated_path = os.path.join(subfolder, file_name)
 
             # Route through our smart execution collision check
-            local_path = get_unique_filepath(calculated_path)
+            local_path = get_unique_filepath(calculated_path, file_id)
             tracked_local_paths.add(local_path)
 
             dir_name = os.path.dirname(local_path)
