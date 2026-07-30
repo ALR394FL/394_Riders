@@ -135,7 +135,7 @@ def process_folder_contents(folder_id, parent_folder_name="uncategorized", is_ro
 
             try:
                 # If it already exists on disk from a previous run, skip downloading to save actions time
-               if os.path.exists(local_path):
+                if os.path.exists(local_path):
                     print(f"File safely preserved without suffix updates: {local_path}")
                     continue
 
