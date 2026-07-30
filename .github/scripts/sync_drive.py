@@ -6,6 +6,9 @@ from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaIoBaseDownload
 
+# SET TO TRUE TO TEST PATHS WITHOUT DOWNLOADING OR DELETING FILES
+DRY_RUN = True 
+
 # 1. Authenticate using GitHub Secrets
 creds_json = json.loads(os.environ['DRIVE_CREDENTIALS'])
 creds = Credentials.from_service_account_info(creds_json)
@@ -115,6 +118,10 @@ def process_folder_contents(folder_id, parent_folder_name="uncategorized"):
             local_path = get_unique_filepath(calculated_path, file_id)
             tracked_local_paths.add(local_path)
 
+            if DRY_RUN:
+                print(f"[DRY-RUN] Target Path: {local_path} (From: {file_name})")
+                continue # Skip directory creation and downloading
+
             dir_name = os.path.dirname(local_path)
             if dir_name and not os.path.exists(dir_name):
                 os.makedirs(dir_name, exist_ok=True)
@@ -147,7 +154,12 @@ def cleanup_deleted_files():
     """
     Requirement 1: Deletion Safeguard.
     """
+    if DRY_RUN:
+        print("[DRY-RUN] Skipping deletion cleanup phase.")
+        return
+
     print("Checking for files deleted from Google Drive to sync removal...")
+    # ... (rest of your cleanup code remains exactly the same)
     for target_dir in ["images", "documents"]:
         if not os.path.exists(target_dir):
             continue
