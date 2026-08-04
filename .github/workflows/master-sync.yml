@@ -1,8 +1,8 @@
 name: Master Google Drive & Repository Synchronization
 
 on:
-   schedule:
-     - cron: '23 */6 * * *' # every 6 hours at minute 23 (e.g., 12:23, 6:23, etc.).
+  schedule:
+    - cron: '23 */6 * * *' # every 6 hours at minute 23 (e.g., 12:23, 6:23, etc.).
   workflow_dispatch: # Allows manual one-click execution from the GitHub Actions tab
 
 permissions:
