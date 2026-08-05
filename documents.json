@@ -3,7 +3,8 @@
     "Meeting_Agenda",
     "ride-waivers",
     "Meeting_minutes",
-    "membership-applications"
+    "membership-applications",
+    "community-service"
   ],
   "archives": {
     "Meeting_Agenda": [
@@ -43,6 +44,7 @@
         "type": "PDF",
         "label": "Membership Applications"
       }
-    ]
+    ],
+    "community-service": []
   }
 }
