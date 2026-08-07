@@ -1,14 +1,62 @@
 {
   "kind": "calendar#events",
-  "etag": "\"p32fvne7lnrlpa0o\"",
+  "etag": "\"p33ntj0tkom79c0o\"",
   "summary": "alr394fl@gmail.com",
   "description": "",
-  "updated": "2026-07-24T14:10:18.300Z",
+  "updated": "2026-08-07T12:42:31.004Z",
   "timeZone": "America/New_York",
   "accessRole": "reader",
   "defaultReminders": [],
-  "nextPageToken": "EiwKKhIoCgYIgJ6s2QYSHgocChoyMjJvbjZiYWdwMWhzcWlibTJ0Zms2cjAwMsA-AQ==",
+  "nextPageToken": "EkwKShJICgYIyKTa1wYSPgo8Cjo2OHBqOGUzNWNncTM4YjlpNnBpM2NiOWs2bGozY2I5b2Njcmo4YjlqYzhwMzhjMWtjcGkzZ29objZvwD4B",
   "items": [
+    {
+      "kind": "calendar#event",
+      "etag": "\"3572213100112062\"",
+      "id": "68pj8e35cgq38b9i6pi3cb9k6lj3cb9occrj8b9jc8p38c1kcpi3gohn6o_20260814T033000Z",
+      "status": "confirmed",
+      "htmlLink": "https://www.google.com/calendar/event?eid=NjhwajhlMzVjZ3EzOGI5aTZwaTNjYjlrNmxqM2NiOW9jY3JqOGI5amM4cDM4YzFrY3BpM2dvaG42b18yMDI2MDgxNFQwMzMwMDBaIGFscjM5NGZsQG0",
+      "created": "2026-08-07T12:42:29.000Z",
+      "updated": "2026-08-07T12:42:30.056Z",
+      "summary": "Senior Support System",
+      "description": "Valuable information for aging individuals.\nBring a notebook and potluck dish for lunch\n\nPlay a game of Bunko after .\nBring a friend Open to the Public",
+      "location": "American Legion Post 394, 396 Cogan Dr, Palm Bay, FL 32909, USA",
+      "creator": {
+        "email": "alr394fl@gmail.com",
+        "self": true
+      },
+      "organizer": {
+        "email": "alr394fl@gmail.com",
+        "self": true
+      },
+      "start": {
+        "dateTime": "2026-08-13T23:30:00-04:00",
+        "timeZone": "America/New_York"
+      },
+      "end": {
+        "dateTime": "2026-08-14T00:30:00-04:00",
+        "timeZone": "America/New_York"
+      },
+      "recurringEventId": "68pj8e35cgq38b9i6pi3cb9k6lj3cb9occrj8b9jc8p38c1kcpi3gohn6o",
+      "originalStartTime": {
+        "dateTime": "2026-08-13T23:30:00-04:00",
+        "timeZone": "America/New_York"
+      },
+      "iCalUID": "68pj8e35cgq38b9i6pi3cb9k6lj3cb9occrj8b9jc8p38c1kcpi3gohn6o@google.com",
+      "sequence": 0,
+      "reminders": {
+        "useDefault": true
+      },
+      "attachments": [
+        {
+          "fileUrl": "https://drive.google.com/file/d/16CPSW6E174FtoL5NAggmX0nFpvuyvpZi/view?usp=drivesdk",
+          "title": "Senior support system.pdf",
+          "mimeType": "application/pdf",
+          "iconLink": "https://drive-thirdparty.googleusercontent.com/64/type/application/pdf",
+          "fileId": "16CPSW6E174FtoL5NAggmX0nFpvuyvpZi"
+        }
+      ],
+      "eventType": "default"
+    },
     {
       "kind": "calendar#event",
       "etag": "\"3569374893808670\"",
@@ -159,6 +207,54 @@
     },
     {
       "kind": "calendar#event",
+      "etag": "\"3572213100112062\"",
+      "id": "68pj8e35cgq38b9i6pi3cb9k6lj3cb9occrj8b9jc8p38c1kcpi3gohn6o_20260911T033000Z",
+      "status": "confirmed",
+      "htmlLink": "https://www.google.com/calendar/event?eid=NjhwajhlMzVjZ3EzOGI5aTZwaTNjYjlrNmxqM2NiOW9jY3JqOGI5amM4cDM4YzFrY3BpM2dvaG42b18yMDI2MDkxMVQwMzMwMDBaIGFscjM5NGZsQG0",
+      "created": "2026-08-07T12:42:29.000Z",
+      "updated": "2026-08-07T12:42:30.056Z",
+      "summary": "Senior Support System",
+      "description": "Valuable information for aging individuals.\nBring a notebook and potluck dish for lunch\n\nPlay a game of Bunko after .\nBring a friend Open to the Public",
+      "location": "American Legion Post 394, 396 Cogan Dr, Palm Bay, FL 32909, USA",
+      "creator": {
+        "email": "alr394fl@gmail.com",
+        "self": true
+      },
+      "organizer": {
+        "email": "alr394fl@gmail.com",
+        "self": true
+      },
+      "start": {
+        "dateTime": "2026-09-10T23:30:00-04:00",
+        "timeZone": "America/New_York"
+      },
+      "end": {
+        "dateTime": "2026-09-11T00:30:00-04:00",
+        "timeZone": "America/New_York"
+      },
+      "recurringEventId": "68pj8e35cgq38b9i6pi3cb9k6lj3cb9occrj8b9jc8p38c1kcpi3gohn6o",
+      "originalStartTime": {
+        "dateTime": "2026-09-10T23:30:00-04:00",
+        "timeZone": "America/New_York"
+      },
+      "iCalUID": "68pj8e35cgq38b9i6pi3cb9k6lj3cb9occrj8b9jc8p38c1kcpi3gohn6o@google.com",
+      "sequence": 0,
+      "reminders": {
+        "useDefault": true
+      },
+      "attachments": [
+        {
+          "fileUrl": "https://drive.google.com/file/d/16CPSW6E174FtoL5NAggmX0nFpvuyvpZi/view?usp=drivesdk",
+          "title": "Senior support system.pdf",
+          "mimeType": "application/pdf",
+          "iconLink": "https://drive-thirdparty.googleusercontent.com/64/type/application/pdf",
+          "fileId": "16CPSW6E174FtoL5NAggmX0nFpvuyvpZi"
+        }
+      ],
+      "eventType": "default"
+    },
+    {
+      "kind": "calendar#event",
       "etag": "\"3569374893808670\"",
       "id": "1tap2qkhbb40fji89dhhh2k1ec_20260915T230000Z",
       "status": "confirmed",
@@ -229,6 +325,54 @@
       "reminders": {
         "useDefault": true
       },
+      "eventType": "default"
+    },
+    {
+      "kind": "calendar#event",
+      "etag": "\"3572213100112062\"",
+      "id": "68pj8e35cgq38b9i6pi3cb9k6lj3cb9occrj8b9jc8p38c1kcpi3gohn6o_20261009T033000Z",
+      "status": "confirmed",
+      "htmlLink": "https://www.google.com/calendar/event?eid=NjhwajhlMzVjZ3EzOGI5aTZwaTNjYjlrNmxqM2NiOW9jY3JqOGI5amM4cDM4YzFrY3BpM2dvaG42b18yMDI2MTAwOVQwMzMwMDBaIGFscjM5NGZsQG0",
+      "created": "2026-08-07T12:42:29.000Z",
+      "updated": "2026-08-07T12:42:30.056Z",
+      "summary": "Senior Support System",
+      "description": "Valuable information for aging individuals.\nBring a notebook and potluck dish for lunch\n\nPlay a game of Bunko after .\nBring a friend Open to the Public",
+      "location": "American Legion Post 394, 396 Cogan Dr, Palm Bay, FL 32909, USA",
+      "creator": {
+        "email": "alr394fl@gmail.com",
+        "self": true
+      },
+      "organizer": {
+        "email": "alr394fl@gmail.com",
+        "self": true
+      },
+      "start": {
+        "dateTime": "2026-10-08T23:30:00-04:00",
+        "timeZone": "America/New_York"
+      },
+      "end": {
+        "dateTime": "2026-10-09T00:30:00-04:00",
+        "timeZone": "America/New_York"
+      },
+      "recurringEventId": "68pj8e35cgq38b9i6pi3cb9k6lj3cb9occrj8b9jc8p38c1kcpi3gohn6o",
+      "originalStartTime": {
+        "dateTime": "2026-10-08T23:30:00-04:00",
+        "timeZone": "America/New_York"
+      },
+      "iCalUID": "68pj8e35cgq38b9i6pi3cb9k6lj3cb9occrj8b9jc8p38c1kcpi3gohn6o@google.com",
+      "sequence": 0,
+      "reminders": {
+        "useDefault": true
+      },
+      "attachments": [
+        {
+          "fileUrl": "https://drive.google.com/file/d/16CPSW6E174FtoL5NAggmX0nFpvuyvpZi/view?usp=drivesdk",
+          "title": "Senior support system.pdf",
+          "mimeType": "application/pdf",
+          "iconLink": "https://drive-thirdparty.googleusercontent.com/64/type/application/pdf",
+          "fileId": "16CPSW6E174FtoL5NAggmX0nFpvuyvpZi"
+        }
+      ],
       "eventType": "default"
     },
     {
@@ -307,13 +451,15 @@
     },
     {
       "kind": "calendar#event",
-      "etag": "\"3569374893808670\"",
-      "id": "1tap2qkhbb40fji89dhhh2k1ec_20261118T000000Z",
+      "etag": "\"3572213100112062\"",
+      "id": "68pj8e35cgq38b9i6pi3cb9k6lj3cb9occrj8b9jc8p38c1kcpi3gohn6o_20261113T043000Z",
       "status": "confirmed",
-      "htmlLink": "https://www.google.com/calendar/event?eid=MXRhcDJxa2hiYjQwZmppODlkaGhoMmsxZWNfMjAyNjExMThUMDAwMDAwWiBhbHIzOTRmbEBt",
-      "created": "2026-07-22T02:13:22.000Z",
-      "updated": "2026-07-22T02:30:46.904Z",
-      "summary": "Legionare Meeting",
+      "htmlLink": "https://www.google.com/calendar/event?eid=NjhwajhlMzVjZ3EzOGI5aTZwaTNjYjlrNmxqM2NiOW9jY3JqOGI5amM4cDM4YzFrY3BpM2dvaG42b18yMDI2MTExM1QwNDMwMDBaIGFscjM5NGZsQG0",
+      "created": "2026-08-07T12:42:29.000Z",
+      "updated": "2026-08-07T12:42:30.056Z",
+      "summary": "Senior Support System",
+      "description": "Valuable information for aging individuals.\nBring a notebook and potluck dish for lunch\n\nPlay a game of Bunko after .\nBring a friend Open to the Public",
+      "location": "American Legion Post 394, 396 Cogan Dr, Palm Bay, FL 32909, USA",
       "creator": {
         "email": "alr394fl@gmail.com",
         "self": true
@@ -323,134 +469,32 @@
         "self": true
       },
       "start": {
-        "dateTime": "2026-11-17T19:00:00-05:00",
+        "dateTime": "2026-11-12T23:30:00-05:00",
         "timeZone": "America/New_York"
       },
       "end": {
-        "dateTime": "2026-11-17T20:00:00-05:00",
+        "dateTime": "2026-11-13T00:30:00-05:00",
         "timeZone": "America/New_York"
       },
-      "recurringEventId": "1tap2qkhbb40fji89dhhh2k1ec",
+      "recurringEventId": "68pj8e35cgq38b9i6pi3cb9k6lj3cb9occrj8b9jc8p38c1kcpi3gohn6o",
       "originalStartTime": {
-        "dateTime": "2026-11-17T19:00:00-05:00",
+        "dateTime": "2026-11-12T23:30:00-05:00",
         "timeZone": "America/New_York"
       },
-      "iCalUID": "1tap2qkhbb40fji89dhhh2k1ec@google.com",
-      "sequence": 1,
-      "reminders": {
-        "useDefault": true
-      },
-      "eventType": "default"
-    },
-    {
-      "kind": "calendar#event",
-      "etag": "\"3569374811788254\"",
-      "id": "222on6bagp1hsqibm2tfk6r002_20261125T000000Z",
-      "status": "confirmed",
-      "htmlLink": "https://www.google.com/calendar/event?eid=MjIyb242YmFncDFoc3FpYm0ydGZrNnIwMDJfMjAyNjExMjVUMDAwMDAwWiBhbHIzOTRmbEBt",
-      "created": "2026-07-22T02:30:05.000Z",
-      "updated": "2026-07-22T02:30:05.894Z",
-      "summary": "Rider Meeting",
-      "creator": {
-        "email": "alr394fl@gmail.com",
-        "self": true
-      },
-      "organizer": {
-        "email": "alr394fl@gmail.com",
-        "self": true
-      },
-      "start": {
-        "dateTime": "2026-11-24T19:00:00-05:00",
-        "timeZone": "America/New_York"
-      },
-      "end": {
-        "dateTime": "2026-11-24T20:00:00-05:00",
-        "timeZone": "America/New_York"
-      },
-      "recurringEventId": "222on6bagp1hsqibm2tfk6r002",
-      "originalStartTime": {
-        "dateTime": "2026-11-24T19:00:00-05:00",
-        "timeZone": "America/New_York"
-      },
-      "iCalUID": "222on6bagp1hsqibm2tfk6r002@google.com",
+      "iCalUID": "68pj8e35cgq38b9i6pi3cb9k6lj3cb9occrj8b9jc8p38c1kcpi3gohn6o@google.com",
       "sequence": 0,
       "reminders": {
         "useDefault": true
       },
-      "eventType": "default"
-    },
-    {
-      "kind": "calendar#event",
-      "etag": "\"3569374893808670\"",
-      "id": "1tap2qkhbb40fji89dhhh2k1ec_20261216T000000Z",
-      "status": "confirmed",
-      "htmlLink": "https://www.google.com/calendar/event?eid=MXRhcDJxa2hiYjQwZmppODlkaGhoMmsxZWNfMjAyNjEyMTZUMDAwMDAwWiBhbHIzOTRmbEBt",
-      "created": "2026-07-22T02:13:22.000Z",
-      "updated": "2026-07-22T02:30:46.904Z",
-      "summary": "Legionare Meeting",
-      "creator": {
-        "email": "alr394fl@gmail.com",
-        "self": true
-      },
-      "organizer": {
-        "email": "alr394fl@gmail.com",
-        "self": true
-      },
-      "start": {
-        "dateTime": "2026-12-15T19:00:00-05:00",
-        "timeZone": "America/New_York"
-      },
-      "end": {
-        "dateTime": "2026-12-15T20:00:00-05:00",
-        "timeZone": "America/New_York"
-      },
-      "recurringEventId": "1tap2qkhbb40fji89dhhh2k1ec",
-      "originalStartTime": {
-        "dateTime": "2026-12-15T19:00:00-05:00",
-        "timeZone": "America/New_York"
-      },
-      "iCalUID": "1tap2qkhbb40fji89dhhh2k1ec@google.com",
-      "sequence": 1,
-      "reminders": {
-        "useDefault": true
-      },
-      "eventType": "default"
-    },
-    {
-      "kind": "calendar#event",
-      "etag": "\"3569374811788254\"",
-      "id": "222on6bagp1hsqibm2tfk6r002_20261223T000000Z",
-      "status": "confirmed",
-      "htmlLink": "https://www.google.com/calendar/event?eid=MjIyb242YmFncDFoc3FpYm0ydGZrNnIwMDJfMjAyNjEyMjNUMDAwMDAwWiBhbHIzOTRmbEBt",
-      "created": "2026-07-22T02:30:05.000Z",
-      "updated": "2026-07-22T02:30:05.894Z",
-      "summary": "Rider Meeting",
-      "creator": {
-        "email": "alr394fl@gmail.com",
-        "self": true
-      },
-      "organizer": {
-        "email": "alr394fl@gmail.com",
-        "self": true
-      },
-      "start": {
-        "dateTime": "2026-12-22T19:00:00-05:00",
-        "timeZone": "America/New_York"
-      },
-      "end": {
-        "dateTime": "2026-12-22T20:00:00-05:00",
-        "timeZone": "America/New_York"
-      },
-      "recurringEventId": "222on6bagp1hsqibm2tfk6r002",
-      "originalStartTime": {
-        "dateTime": "2026-12-22T19:00:00-05:00",
-        "timeZone": "America/New_York"
-      },
-      "iCalUID": "222on6bagp1hsqibm2tfk6r002@google.com",
-      "sequence": 0,
-      "reminders": {
-        "useDefault": true
-      },
+      "attachments": [
+        {
+          "fileUrl": "https://drive.google.com/file/d/16CPSW6E174FtoL5NAggmX0nFpvuyvpZi/view?usp=drivesdk",
+          "title": "Senior support system.pdf",
+          "mimeType": "application/pdf",
+          "iconLink": "https://drive-thirdparty.googleusercontent.com/64/type/application/pdf",
+          "fileId": "16CPSW6E174FtoL5NAggmX0nFpvuyvpZi"
+        }
+      ],
       "eventType": "default"
     }
   ]
