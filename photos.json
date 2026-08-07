@@ -1,33 +1,19 @@
 {
   "categoryOrder": [
-    "community-service",
     "Celebration",
-    "uncategorized",
     "leadership",
     "fundraisers",
-    "the-open-road",
-    "chapter-rides"
+    "chapter-rides",
+    "uncategorized",
+    "community-service",
+    "the-open-road"
   ],
   "albums": {
-    "community-service": [
-      {
-        "path": "images/community-service/community-service.png",
-        "title": "Community Service",
-        "caption": "Community Service"
-      }
-    ],
     "Celebration": [
       {
         "path": "images/Celebration/PXL_20260726_015521523.MP.jpg",
         "title": "Celebration",
         "caption": "Pxl 20260726 015521523.mp"
-      }
-    ],
-    "uncategorized": [
-      {
-        "path": "images/uncategorized/new miles qrcode.png",
-        "title": "Uncategorized",
-        "caption": "New Miles Qrcode"
       }
     ],
     "leadership": [
@@ -84,18 +70,32 @@
         "caption": "Overdose.vigil"
       }
     ],
-    "the-open-road": [
-      {
-        "path": "images/the-open-road/hero-road.png",
-        "title": "The Open Road",
-        "caption": "Hero Road"
-      }
-    ],
     "chapter-rides": [
       {
         "path": "images/chapter-rides/coastal-ride.png",
         "title": "Chapter Rides",
         "caption": "Coastal Ride"
+      }
+    ],
+    "uncategorized": [
+      {
+        "path": "images/uncategorized/new miles qrcode.png",
+        "title": "Uncategorized",
+        "caption": "New Miles Qrcode"
+      }
+    ],
+    "community-service": [
+      {
+        "path": "images/community-service/community-service.png",
+        "title": "Community Service",
+        "caption": "Community Service"
+      }
+    ],
+    "the-open-road": [
+      {
+        "path": "images/the-open-road/hero-road.png",
+        "title": "The Open Road",
+        "caption": "Hero Road"
       }
     ]
   }
