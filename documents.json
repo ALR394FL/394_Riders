@@ -45,6 +45,13 @@
         "label": "Membership Applications"
       }
     ],
-    "community-service": []
+    "community-service": [
+      {
+        "path": "documents/community-service/Senior support system.pdf",
+        "title": "Senior Support System",
+        "type": "PDF",
+        "label": "Community Service"
+      }
+    ]
   }
 }
