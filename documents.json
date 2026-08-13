@@ -1,18 +1,26 @@
 {
   "documentOrder": [
-    "Meeting_Agenda",
-    "ride-waivers",
     "Meeting_minutes",
     "membership-applications",
+    "ride-waivers",
+    "Meeting_Agenda",
     "community-service"
   ],
   "archives": {
-    "Meeting_Agenda": [
+    "Meeting_minutes": [
       {
-        "path": "documents/Meeting_Agenda/July 2026 Meeting Agenda.pdf",
-        "title": "July 2026 Meeting Agenda",
+        "path": "documents/Meeting_minutes/minutes_June_2026.pdf",
+        "title": "Minutes June 2026",
         "type": "PDF",
-        "label": "Meeting Agenda"
+        "label": "Meeting Minutes"
+      }
+    ],
+    "membership-applications": [
+      {
+        "path": "documents/membership-applications/ 1-13-19-ALR-Membership-Application-Fillable.pdf",
+        "title": "1 13 19 Alr Membership Application Fillable",
+        "type": "PDF",
+        "label": "Membership Applications"
       }
     ],
     "ride-waivers": [
@@ -29,20 +37,12 @@
         "label": "Ride Waivers"
       }
     ],
-    "Meeting_minutes": [
+    "Meeting_Agenda": [
       {
-        "path": "documents/Meeting_minutes/minutes_June_2026.pdf",
-        "title": "Minutes June 2026",
+        "path": "documents/Meeting_Agenda/July 2026 Meeting Agenda.pdf",
+        "title": "July 2026 Meeting Agenda",
         "type": "PDF",
-        "label": "Meeting Minutes"
-      }
-    ],
-    "membership-applications": [
-      {
-        "path": "documents/membership-applications/ 1-13-19-ALR-Membership-Application-Fillable.pdf",
-        "title": "1 13 19 Alr Membership Application Fillable",
-        "type": "PDF",
-        "label": "Membership Applications"
+        "label": "Meeting Agenda"
       }
     ],
     "community-service": [
