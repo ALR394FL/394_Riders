@@ -2,11 +2,11 @@
   "categoryOrder": [
     "Celebration",
     "leadership",
-    "fundraisers",
     "chapter-rides",
+    "fundraisers",
+    "the-open-road",
     "uncategorized",
-    "community-service",
-    "the-open-road"
+    "community-service"
   ],
   "albums": {
     "Celebration": [
@@ -58,6 +58,13 @@
         "caption": "Leader Jon Scannell"
       }
     ],
+    "chapter-rides": [
+      {
+        "path": "images/chapter-rides/coastal-ride.png",
+        "title": "Chapter Rides",
+        "caption": "Coastal Ride"
+      }
+    ],
     "fundraisers": [
       {
         "path": "images/fundraisers/ event_brevard_angels_poker_run.jpg",
@@ -70,11 +77,11 @@
         "caption": "Overdose.vigil"
       }
     ],
-    "chapter-rides": [
+    "the-open-road": [
       {
-        "path": "images/chapter-rides/coastal-ride.png",
-        "title": "Chapter Rides",
-        "caption": "Coastal Ride"
+        "path": "images/the-open-road/hero-road.png",
+        "title": "The Open Road",
+        "caption": "Hero Road"
       }
     ],
     "uncategorized": [
@@ -89,13 +96,6 @@
         "path": "images/community-service/community-service.png",
         "title": "Community Service",
         "caption": "Community Service"
-      }
-    ],
-    "the-open-road": [
-      {
-        "path": "images/the-open-road/hero-road.png",
-        "title": "The Open Road",
-        "caption": "Hero Road"
       }
     ]
   }
