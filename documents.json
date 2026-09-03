@@ -1,26 +1,12 @@
 {
   "documentOrder": [
-    "ride-waivers",
     "Meeting_minutes",
     "membership-applications",
-    "community-service",
-    "Meeting_Agenda"
+    "ride-waivers",
+    "Meeting_Agenda",
+    "community-service"
   ],
   "archives": {
-    "ride-waivers": [
-      {
-        "path": "documents/ride-waivers/Florida-Waiver-1-30-23.pdf",
-        "title": "Florida Waiver 1 30 23",
-        "type": "PDF",
-        "label": "Ride Waivers"
-      },
-      {
-        "path": "documents/ride-waivers/Waiver-Liability-Signature-Page-for-Events.pdf",
-        "title": "Waiver Liability Signature Page For Events",
-        "type": "PDF",
-        "label": "Ride Waivers"
-      }
-    ],
     "Meeting_minutes": [
       {
         "path": "documents/Meeting_minutes/minutes_June_2026.pdf",
@@ -37,12 +23,18 @@
         "label": "Membership Applications"
       }
     ],
-    "community-service": [
+    "ride-waivers": [
       {
-        "path": "documents/community-service/Senior support system.pdf",
-        "title": "Senior Support System",
+        "path": "documents/ride-waivers/Florida-Waiver-1-30-23.pdf",
+        "title": "Florida Waiver 1 30 23",
         "type": "PDF",
-        "label": "Community Service"
+        "label": "Ride Waivers"
+      },
+      {
+        "path": "documents/ride-waivers/Waiver-Liability-Signature-Page-for-Events.pdf",
+        "title": "Waiver Liability Signature Page For Events",
+        "type": "PDF",
+        "label": "Ride Waivers"
       }
     ],
     "Meeting_Agenda": [
@@ -51,6 +43,14 @@
         "title": "July 2026 Meeting Agenda",
         "type": "PDF",
         "label": "Meeting Agenda"
+      }
+    ],
+    "community-service": [
+      {
+        "path": "documents/community-service/Senior support system.pdf",
+        "title": "Senior Support System",
+        "type": "PDF",
+        "label": "Community Service"
       }
     ]
   }
