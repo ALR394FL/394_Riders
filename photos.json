@@ -1,19 +1,19 @@
 {
   "categoryOrder": [
-    "the-open-road",
-    "fundraisers",
-    "Celebration",
-    "community-service",
     "chapter-rides",
+    "fundraisers",
+    "leadership",
+    "the-open-road",
     "uncategorized",
-    "leadership"
+    "Celebration",
+    "community-service"
   ],
   "albums": {
-    "the-open-road": [
+    "chapter-rides": [
       {
-        "path": "images/the-open-road/hero-road.png",
-        "title": "The Open Road",
-        "caption": "Hero Road"
+        "path": "images/chapter-rides/coastal-ride.png",
+        "title": "Chapter Rides",
+        "caption": "Coastal Ride"
       }
     ],
     "fundraisers": [
@@ -26,34 +26,6 @@
         "path": "images/fundraisers/overdose.vigil.jpg",
         "title": "Fundraisers",
         "caption": "Overdose.vigil"
-      }
-    ],
-    "Celebration": [
-      {
-        "path": "images/Celebration/PXL_20260726_015521523.MP.jpg",
-        "title": "Celebration",
-        "caption": "Pxl 20260726 015521523.mp"
-      }
-    ],
-    "community-service": [
-      {
-        "path": "images/community-service/community-service.png",
-        "title": "Community Service",
-        "caption": "Community Service"
-      }
-    ],
-    "chapter-rides": [
-      {
-        "path": "images/chapter-rides/coastal-ride.png",
-        "title": "Chapter Rides",
-        "caption": "Coastal Ride"
-      }
-    ],
-    "uncategorized": [
-      {
-        "path": "images/uncategorized/new miles qrcode.png",
-        "title": "Uncategorized",
-        "caption": "New Miles Qrcode"
       }
     ],
     "leadership": [
@@ -96,6 +68,34 @@
         "path": "images/leadership/leader_jon-scannell.jpg",
         "title": "Leadership",
         "caption": "Leader Jon Scannell"
+      }
+    ],
+    "the-open-road": [
+      {
+        "path": "images/the-open-road/hero-road.png",
+        "title": "The Open Road",
+        "caption": "Hero Road"
+      }
+    ],
+    "uncategorized": [
+      {
+        "path": "images/uncategorized/new miles qrcode.png",
+        "title": "Uncategorized",
+        "caption": "New Miles Qrcode"
+      }
+    ],
+    "Celebration": [
+      {
+        "path": "images/Celebration/PXL_20260726_015521523.MP.jpg",
+        "title": "Celebration",
+        "caption": "Pxl 20260726 015521523.mp"
+      }
+    ],
+    "community-service": [
+      {
+        "path": "images/community-service/community-service.png",
+        "title": "Community Service",
+        "caption": "Community Service"
       }
     ]
   }
