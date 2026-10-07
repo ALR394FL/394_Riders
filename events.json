@@ -1,46 +1,14 @@
 {
   "kind": "calendar#events",
-  "etag": "\"p32nu9puun219e0o\"",
+  "etag": "\"p33vrpq4mhak9e0o\"",
   "summary": "alr394fl@gmail.com",
   "description": "",
-  "updated": "2026-09-22T14:54:40.714Z",
+  "updated": "2026-10-07T14:07:31.757Z",
   "timeZone": "America/New_York",
   "accessRole": "reader",
   "defaultReminders": [],
   "nextPageToken": "EiwKKhIoCgYIgPK_2gYSHgocChoxdGFwMnFraGJiNDBmamk4OWRoaGgyazFlY8A-AQ==",
   "items": [
-    {
-      "kind": "calendar#event",
-      "etag": "\"3580177759543230\"",
-      "id": "6som8p1i70q6cbb374qj0b9kcoq36bb16cr30bb5cgsm4chn60r68opnc8",
-      "status": "confirmed",
-      "htmlLink": "https://www.google.com/calendar/event?eid=NnNvbThwMWk3MHE2Y2JiMzc0cWowYjlrY29xMzZiYjE2Y3IzMGJiNWNnc200Y2huNjByNjhvcG5jOCBhbHIzOTRmbEBt",
-      "created": "2026-09-22T14:54:39.000Z",
-      "updated": "2026-09-22T14:54:39.771Z",
-      "summary": "Foot dr",
-      "creator": {
-        "email": "alr394fl@gmail.com",
-        "self": true
-      },
-      "organizer": {
-        "email": "alr394fl@gmail.com",
-        "self": true
-      },
-      "start": {
-        "dateTime": "2026-10-07T09:45:00-04:00",
-        "timeZone": "America/New_York"
-      },
-      "end": {
-        "dateTime": "2026-10-07T10:45:00-04:00",
-        "timeZone": "America/New_York"
-      },
-      "iCalUID": "6som8p1i70q6cbb374qj0b9kcoq36bb16cr30bb5cgsm4chn60r68opnc8@google.com",
-      "sequence": 0,
-      "reminders": {
-        "useDefault": true
-      },
-      "eventType": "default"
-    },
     {
       "kind": "calendar#event",
       "etag": "\"3572213100112062\"",
@@ -157,6 +125,38 @@
         "timeZone": "America/New_York"
       },
       "iCalUID": "222on6bagp1hsqibm2tfk6r002@google.com",
+      "sequence": 0,
+      "reminders": {
+        "useDefault": true
+      },
+      "eventType": "default"
+    },
+    {
+      "kind": "calendar#event",
+      "etag": "\"3582764097559422\"",
+      "id": "6gsm4pb364r62b9k74rmcb9k68r3ib9p64s30bb46hhj2e9m6pi6ae9kc8",
+      "status": "confirmed",
+      "htmlLink": "https://www.google.com/calendar/event?eid=NmdzbTRwYjM2NHI2MmI5azc0cm1jYjlrNjhyM2liOXA2NHMzMGJiNDZoaGoyZTltNnBpNmFlOWtjOCBhbHIzOTRmbEBt",
+      "created": "2026-10-07T14:07:28.000Z",
+      "updated": "2026-10-07T14:07:28.779Z",
+      "summary": "Dr app foot",
+      "creator": {
+        "email": "alr394fl@gmail.com",
+        "self": true
+      },
+      "organizer": {
+        "email": "alr394fl@gmail.com",
+        "self": true
+      },
+      "start": {
+        "dateTime": "2026-11-04T10:00:00-05:00",
+        "timeZone": "America/New_York"
+      },
+      "end": {
+        "dateTime": "2026-11-04T11:00:00-05:00",
+        "timeZone": "America/New_York"
+      },
+      "iCalUID": "6gsm4pb364r62b9k74rmcb9k68r3ib9p64s30bb46hhj2e9m6pi6ae9kc8@google.com",
       "sequence": 0,
       "reminders": {
         "useDefault": true
