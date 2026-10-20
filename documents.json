@@ -1,34 +1,26 @@
 {
   "documentOrder": [
-    "Meeting_minutes",
-    "Meeting_Agenda",
     "community-service",
+    "Meeting_minutes",
     "membership-applications",
-    "ride-waivers"
+    "ride-waivers",
+    "Meeting_Agenda"
   ],
   "archives": {
-    "Meeting_minutes": [
-      {
-        "path": "documents/Meeting_minutes/minutes_June_2026.pdf",
-        "title": "Minutes June 2026",
-        "type": "PDF",
-        "label": "Meeting Minutes"
-      }
-    ],
-    "Meeting_Agenda": [
-      {
-        "path": "documents/Meeting_Agenda/July 2026 Meeting Agenda.pdf",
-        "title": "July 2026 Meeting Agenda",
-        "type": "PDF",
-        "label": "Meeting Agenda"
-      }
-    ],
     "community-service": [
       {
         "path": "documents/community-service/Senior support system.pdf",
         "title": "Senior Support System",
         "type": "PDF",
         "label": "Community Service"
+      }
+    ],
+    "Meeting_minutes": [
+      {
+        "path": "documents/Meeting_minutes/minutes_June_2026.pdf",
+        "title": "Minutes June 2026",
+        "type": "PDF",
+        "label": "Meeting Minutes"
       }
     ],
     "membership-applications": [
@@ -51,6 +43,14 @@
         "title": "Waiver Liability Signature Page For Events",
         "type": "PDF",
         "label": "Ride Waivers"
+      }
+    ],
+    "Meeting_Agenda": [
+      {
+        "path": "documents/Meeting_Agenda/July 2026 Meeting Agenda.pdf",
+        "title": "July 2026 Meeting Agenda",
+        "type": "PDF",
+        "label": "Meeting Agenda"
       }
     ]
   }
