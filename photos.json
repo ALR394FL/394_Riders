@@ -1,12 +1,12 @@
 {
   "categoryOrder": [
     "uncategorized",
-    "fundraisers",
-    "leadership",
-    "the-open-road",
+    "chapter-rides",
     "community-service",
+    "leadership",
+    "fundraisers",
     "Celebration",
-    "chapter-rides"
+    "the-open-road"
   ],
   "albums": {
     "uncategorized": [
@@ -16,16 +16,18 @@
         "caption": "New Miles Qrcode"
       }
     ],
-    "fundraisers": [
+    "chapter-rides": [
       {
-        "path": "images/fundraisers/ event_brevard_angels_poker_run.jpg",
-        "title": "Fundraisers",
-        "caption": "Event Brevard Angels Poker Run"
-      },
+        "path": "images/chapter-rides/coastal-ride.png",
+        "title": "Chapter Rides",
+        "caption": "Coastal Ride"
+      }
+    ],
+    "community-service": [
       {
-        "path": "images/fundraisers/overdose.vigil.jpg",
-        "title": "Fundraisers",
-        "caption": "Overdose.vigil"
+        "path": "images/community-service/community-service.png",
+        "title": "Community Service",
+        "caption": "Community Service"
       }
     ],
     "leadership": [
@@ -70,18 +72,16 @@
         "caption": "Leader Jon Scannell"
       }
     ],
-    "the-open-road": [
+    "fundraisers": [
       {
-        "path": "images/the-open-road/hero-road.png",
-        "title": "The Open Road",
-        "caption": "Hero Road"
-      }
-    ],
-    "community-service": [
+        "path": "images/fundraisers/ event_brevard_angels_poker_run.jpg",
+        "title": "Fundraisers",
+        "caption": "Event Brevard Angels Poker Run"
+      },
       {
-        "path": "images/community-service/community-service.png",
-        "title": "Community Service",
-        "caption": "Community Service"
+        "path": "images/fundraisers/overdose.vigil.jpg",
+        "title": "Fundraisers",
+        "caption": "Overdose.vigil"
       }
     ],
     "Celebration": [
@@ -91,11 +91,11 @@
         "caption": "Pxl 20260726 015521523.mp"
       }
     ],
-    "chapter-rides": [
+    "the-open-road": [
       {
-        "path": "images/chapter-rides/coastal-ride.png",
-        "title": "Chapter Rides",
-        "caption": "Coastal Ride"
+        "path": "images/the-open-road/hero-road.png",
+        "title": "The Open Road",
+        "caption": "Hero Road"
       }
     ]
   }
