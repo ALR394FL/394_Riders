@@ -1,31 +1,19 @@
 {
   "categoryOrder": [
-    "community-service",
-    "fundraisers",
-    "chapter-rides",
-    "the-open-road",
     "uncategorized",
+    "chapter-rides",
+    "community-service",
+    "leadership",
+    "fundraisers",
     "Celebration",
-    "leadership"
+    "the-open-road"
   ],
   "albums": {
-    "community-service": [
+    "uncategorized": [
       {
-        "path": "images/community-service/community-service.png",
-        "title": "Community Service",
-        "caption": "Community Service"
-      }
-    ],
-    "fundraisers": [
-      {
-        "path": "images/fundraisers/ event_brevard_angels_poker_run.jpg",
-        "title": "Fundraisers",
-        "caption": "Event Brevard Angels Poker Run"
-      },
-      {
-        "path": "images/fundraisers/overdose.vigil.jpg",
-        "title": "Fundraisers",
-        "caption": "Overdose.vigil"
+        "path": "images/uncategorized/new miles qrcode.png",
+        "title": "Uncategorized",
+        "caption": "New Miles Qrcode"
       }
     ],
     "chapter-rides": [
@@ -35,25 +23,11 @@
         "caption": "Coastal Ride"
       }
     ],
-    "the-open-road": [
+    "community-service": [
       {
-        "path": "images/the-open-road/hero-road.png",
-        "title": "The Open Road",
-        "caption": "Hero Road"
-      }
-    ],
-    "uncategorized": [
-      {
-        "path": "images/uncategorized/new miles qrcode.png",
-        "title": "Uncategorized",
-        "caption": "New Miles Qrcode"
-      }
-    ],
-    "Celebration": [
-      {
-        "path": "images/Celebration/PXL_20260726_015521523.MP.jpg",
-        "title": "Celebration",
-        "caption": "Pxl 20260726 015521523.mp"
+        "path": "images/community-service/community-service.png",
+        "title": "Community Service",
+        "caption": "Community Service"
       }
     ],
     "leadership": [
@@ -96,6 +70,32 @@
         "path": "images/leadership/leader_jon-scannell.jpg",
         "title": "Leadership",
         "caption": "Leader Jon Scannell"
+      }
+    ],
+    "fundraisers": [
+      {
+        "path": "images/fundraisers/ event_brevard_angels_poker_run.jpg",
+        "title": "Fundraisers",
+        "caption": "Event Brevard Angels Poker Run"
+      },
+      {
+        "path": "images/fundraisers/overdose.vigil.jpg",
+        "title": "Fundraisers",
+        "caption": "Overdose.vigil"
+      }
+    ],
+    "Celebration": [
+      {
+        "path": "images/Celebration/PXL_20260726_015521523.MP.jpg",
+        "title": "Celebration",
+        "caption": "Pxl 20260726 015521523.mp"
+      }
+    ],
+    "the-open-road": [
+      {
+        "path": "images/the-open-road/hero-road.png",
+        "title": "The Open Road",
+        "caption": "Hero Road"
       }
     ]
   }

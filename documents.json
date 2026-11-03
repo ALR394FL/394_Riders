@@ -1,36 +1,12 @@
 {
   "documentOrder": [
-    "community-service",
-    "Meeting_Agenda",
-    "membership-applications",
     "Meeting_minutes",
-    "ride-waivers"
+    "ride-waivers",
+    "community-service",
+    "membership-applications",
+    "Meeting_Agenda"
   ],
   "archives": {
-    "community-service": [
-      {
-        "path": "documents/community-service/Senior support system.pdf",
-        "title": "Senior Support System",
-        "type": "PDF",
-        "label": "Community Service"
-      }
-    ],
-    "Meeting_Agenda": [
-      {
-        "path": "documents/Meeting_Agenda/July 2026 Meeting Agenda.pdf",
-        "title": "July 2026 Meeting Agenda",
-        "type": "PDF",
-        "label": "Meeting Agenda"
-      }
-    ],
-    "membership-applications": [
-      {
-        "path": "documents/membership-applications/ 1-13-19-ALR-Membership-Application-Fillable.pdf",
-        "title": "1 13 19 Alr Membership Application Fillable",
-        "type": "PDF",
-        "label": "Membership Applications"
-      }
-    ],
     "Meeting_minutes": [
       {
         "path": "documents/Meeting_minutes/minutes_June_2026.pdf",
@@ -51,6 +27,30 @@
         "title": "Waiver Liability Signature Page For Events",
         "type": "PDF",
         "label": "Ride Waivers"
+      }
+    ],
+    "community-service": [
+      {
+        "path": "documents/community-service/Senior support system.pdf",
+        "title": "Senior Support System",
+        "type": "PDF",
+        "label": "Community Service"
+      }
+    ],
+    "membership-applications": [
+      {
+        "path": "documents/membership-applications/ 1-13-19-ALR-Membership-Application-Fillable.pdf",
+        "title": "1 13 19 Alr Membership Application Fillable",
+        "type": "PDF",
+        "label": "Membership Applications"
+      }
+    ],
+    "Meeting_Agenda": [
+      {
+        "path": "documents/Meeting_Agenda/July 2026 Meeting Agenda.pdf",
+        "title": "July 2026 Meeting Agenda",
+        "type": "PDF",
+        "label": "Meeting Agenda"
       }
     ]
   }
