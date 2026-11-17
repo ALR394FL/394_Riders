@@ -1,42 +1,14 @@
 {
   "categoryOrder": [
-    "community-service",
-    "chapter-rides",
-    "the-open-road",
-    "Celebration",
     "fundraisers",
-    "leadership",
-    "uncategorized"
+    "uncategorized",
+    "Celebration",
+    "the-open-road",
+    "chapter-rides",
+    "community-service",
+    "leadership"
   ],
   "albums": {
-    "community-service": [
-      {
-        "path": "images/community-service/community-service.png",
-        "title": "Community Service",
-        "caption": "Community Service"
-      }
-    ],
-    "chapter-rides": [
-      {
-        "path": "images/chapter-rides/coastal-ride.png",
-        "title": "Chapter Rides",
-        "caption": "Coastal Ride"
-      }
-    ],
-    "the-open-road": [
-      {
-        "path": "images/the-open-road/hero-road.png",
-        "title": "The Open Road",
-        "caption": "Hero Road"
-      }
-    ],
-    "Celebration": [
-      {
-        "path": "images/Celebration/PXL_20260726_015521523.MP.jpg",
-        "title": "Celebration",
-        "caption": "Pxl 20260726 015521523.mp"
-      }
-    ],
     "fundraisers": [
       {
         "path": "images/fundraisers/ event_brevard_angels_poker_run.jpg",
@@ -47,6 +19,41 @@
         "path": "images/fundraisers/overdose.vigil.jpg",
         "title": "Fundraisers",
         "caption": "Overdose.vigil"
+      }
+    ],
+    "uncategorized": [
+      {
+        "path": "images/uncategorized/new miles qrcode.png",
+        "title": "Uncategorized",
+        "caption": "New Miles Qrcode"
+      }
+    ],
+    "Celebration": [
+      {
+        "path": "images/Celebration/PXL_20260726_015521523.MP.jpg",
+        "title": "Celebration",
+        "caption": "Pxl 20260726 015521523.mp"
+      }
+    ],
+    "the-open-road": [
+      {
+        "path": "images/the-open-road/hero-road.png",
+        "title": "The Open Road",
+        "caption": "Hero Road"
+      }
+    ],
+    "chapter-rides": [
+      {
+        "path": "images/chapter-rides/coastal-ride.png",
+        "title": "Chapter Rides",
+        "caption": "Coastal Ride"
+      }
+    ],
+    "community-service": [
+      {
+        "path": "images/community-service/community-service.png",
+        "title": "Community Service",
+        "caption": "Community Service"
       }
     ],
     "leadership": [
@@ -89,13 +96,6 @@
         "path": "images/leadership/leader_jon-scannell.jpg",
         "title": "Leadership",
         "caption": "Leader Jon Scannell"
-      }
-    ],
-    "uncategorized": [
-      {
-        "path": "images/uncategorized/new miles qrcode.png",
-        "title": "Uncategorized",
-        "caption": "New Miles Qrcode"
       }
     ]
   }
